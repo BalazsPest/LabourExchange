@@ -29,10 +29,8 @@ public class Controller {
 
     public static ModelAndView renderAdvertisement(Request req, Response res){
 
-        thisController.populateDb();
+        //thisController.populateDb();
         List<Advertisement> advertisements = thisController.getAllAdverts();
-
-
 
         Map<String, Object> params = new HashMap<>();
         params.put("advertisement", advertisements);
@@ -42,7 +40,7 @@ public class Controller {
     public static ModelAndView getAdvertWithCity(Request req, Response res){
         System.out.println(req.params("city"));
         String city = req.params("city");
-        thisController.populateDb();
+        //thisController.populateDb();
         List<Advertisement> advertisementsWithCity = thisController.getAdvertsWithCities(city);
 
 

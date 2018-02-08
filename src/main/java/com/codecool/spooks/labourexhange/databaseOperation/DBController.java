@@ -24,6 +24,9 @@ public class DBController {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabourExchange");
         EntityManager em = emf.createEntityManager();
 
+    public DBController() {
+        this.populateDb();
+    }
 
 
     public void populateDb() {
@@ -76,9 +79,9 @@ public class DBController {
 
     public List<Advertisement> getAdvertsWithCities(String city) {
         EntityTransaction trans = em.getTransaction();
+        //long id = thisCity.getId();
         City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
         System.out.println(thisCity);
-        //long id = thisCity.getId();
         if (!trans.isActive()) {
             trans.begin();
         }
