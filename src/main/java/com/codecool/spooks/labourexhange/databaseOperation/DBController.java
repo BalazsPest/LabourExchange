@@ -25,12 +25,13 @@ public class DBController {
         EntityManager em = emf.createEntityManager();
 
 
+
     public void populateDb() {
 
         Language ger = new Language("german", Language.LanguageLevel.BASIC);
         Language eng = new Language("english", Language.LanguageLevel.HIGH);
-        City Bp = new City("Budapest");
-        City Ms = new City("Miskolc");
+        City Bp = new City("budapest");
+        City Ms = new City("miskolc");
         Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
         Company comp1 = new Company("procter", "procter@gmail.com", "proki");
         Field catering = new Field("catering");
@@ -73,12 +74,16 @@ public class DBController {
         return adverts;
     }
 
-    public List<Advertisement> getAdvertsWithCities() {
+    public List<Advertisement> getAdvertsWithCities(String city) {
         EntityTransaction trans = em.getTransaction();
+        City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
+        System.out.println(thisCity);
+        //long id = thisCity.getId();
         if (!trans.isActive()) {
             trans.begin();
         }
-        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).getResultList();
+        //List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).setParameter("city", thisCity).getResultList();
         return advWithCity;
     }
 }

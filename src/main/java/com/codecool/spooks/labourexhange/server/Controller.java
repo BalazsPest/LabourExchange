@@ -40,9 +40,10 @@ public class Controller {
     }
 
     public static ModelAndView getAdvertWithCity(Request req, Response res){
-
+        System.out.println(req.params("city"));
+        String city = req.params("city");
         thisController.populateDb();
-        List<Advertisement> advertisementsWithCity = thisController.getAdvertsWithCities();
+        List<Advertisement> advertisementsWithCity = thisController.getAdvertsWithCities(city);
 
 
 

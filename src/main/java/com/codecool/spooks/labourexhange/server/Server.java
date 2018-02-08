@@ -40,7 +40,7 @@ public class Server {
 
 
 
-        get("/filter/budapest", Controller::getAdvertWithCity, new ThymeleafTemplateEngine());
+        get("/filter/:city", Controller::getAdvertWithCity, new ThymeleafTemplateEngine());
 
         //get("/companys", //ProductController::renderProducts, new ThymeleafTemplateEngine());
 

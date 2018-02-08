@@ -5,7 +5,7 @@ import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@NamedQuery(name = "selectCities", query = "SELECT c FROM City c WHERE c.name = :name")
 @Entity
 @Table(name = "CITY")
 public class City {
@@ -17,6 +17,7 @@ public class City {
     private String name;
 
     //other place declared obj variable name
+
     @OneToMany(mappedBy = "city")
     private List<Student> students = new ArrayList<>();
 
@@ -61,7 +62,12 @@ public class City {
     /*public void setAdverts(List<Advertisement> adverts) {
         this.adverts = adverts;
     }*/
+
     public void addAdverts(Advertisement adv) {
         this.adverts.add(adv);
+    }
+
+    public long getId() {
+        return id;
     }
 }

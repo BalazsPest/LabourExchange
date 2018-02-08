@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 @NamedQueries({@NamedQuery(name= "selectAllAdvert", query = "SELECT a FROM Advertisement a"),
-@NamedQuery(name = "selectAdvertWhithCity", query ="SELECT a FROM Advertisement a WHERE a.cityOfWorking = 1")})
+@NamedQuery(name = "selectAdvertWhithCity", query ="SELECT a FROM Advertisement a WHERE a.cityOfWorking = :city")})
 @Entity
 @Table(name = "ADVERTISEMENT")
 public class Advertisement {
@@ -23,25 +23,6 @@ public class Advertisement {
 
     @ManyToOne
     private Student student;
-
-    @Override
-
-    public String toString() {
-        return "Advertisement{" +
-                "id=" + id +
-                ", student=" + student +
-                ", status=" + status +
-                ", fieldOfWork=" + fieldOfWork +
-                ", tagsOfAdvert=" + tagsOfAdvert +
-                ", titleOfAdvert='" + titleOfAdvert + '\'' +
-                ", descriptionOfAdvert='" + descriptionOfAdvert + '\'' +
-                ", creationTime=" + creationTime +
-                ", weeklyCapacity=" + weeklyCapacity +
-                ", requestedMoneyPerHour=" + requestedMoneyPerHour +
-                ", spokenLanguages=" + spokenLanguages +
-                ", cityOfWorking=" + cityOfWorking +
-                '}';
-    }
 
     @Enumerated(value= EnumType.STRING)
     private Status status;
@@ -65,10 +46,10 @@ public class Advertisement {
 
     @Column(name = "money_per_hour")
     private int requestedMoneyPerHour;
+
     //nincs feltöltve
     @ManyToMany
     private List<Language> spokenLanguages;
-
     @ManyToOne
     private City cityOfWorking;
 
@@ -92,8 +73,8 @@ public class Advertisement {
         //student.addStudentsAdverts(this);
         fieldOfWork.addAdvertisements(this);
         addTagsOfAdvert(tagsOfAdvert);
-        city.addAdverts(this);
         this.cityOfWorking = city;
+        city.addAdverts(this);
     }
 
     public long getId() {
@@ -116,6 +97,24 @@ public class Advertisement {
         return fieldOfWork;
     }
 
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id=" + id +
+                ", student=" + student +
+                ", status=" + status +
+                ", fieldOfWork=" + fieldOfWork +
+                ", tagsOfAdvert=" + tagsOfAdvert +
+                ", titleOfAdvert='" + titleOfAdvert + '\'' +
+                ", descriptionOfAdvert='" + descriptionOfAdvert + '\'' +
+                ", creationTime=" + creationTime +
+                ", weeklyCapacity=" + weeklyCapacity +
+                ", requestedMoneyPerHour=" + requestedMoneyPerHour +
+                ", spokenLanguages=" + spokenLanguages +
+                ", cityOfWorking=" + cityOfWorking +
+                '}';
+    }
+
     public void setFieldOfWork(Field fieldOfWork) {
         this.fieldOfWork = fieldOfWork;
     }
@@ -124,18 +123,10 @@ public class Advertisement {
         return tagsOfAdvert;
     }
 
-
-    //define how to add to lists like these
-    /*public void setTagForField(List<Tag> tagsForField) {
-        this.tagsForField = new ArrayList<>();
-        for (Tag tag : tagsForField) {
-            this.tagsForField.add(tag);
-        }
-    }*/
-
     public void addTagsOfAdvert(List<Tag> tagsOfAdv) {
         this.tagsOfAdvert = tagsOfAdv;
     }
+
     public String getTitleOfAdvert() {
         return titleOfAdvert;
     }
@@ -180,20 +171,9 @@ public class Advertisement {
         return spokenLanguages;
     }
 
-    //define how to set Lists like these
-
     public void setSpokenLanguages(List<Language> languages) {
         this.spokenLanguages = languages;
     }
-
-    /*public Shire getShireOfWorking() {
-        return shireOfWorking;
-    }
-
-    public void setShireOfWorking(Shire shireOfWorking) {
-        this.shireOfWorking = shireOfWorking;
-    }*/
-
 
     public void setCityOfWorking(City cityOfWorking) {
         this.cityOfWorking = cityOfWorking;
