@@ -28,35 +28,17 @@ public class Controller {
 
 
     public static ModelAndView renderAdvertisement(Request req, Response res){
-
-        //thisController.populateDb();
         List<Advertisement> advertisements = thisController.getAllAdverts();
-
         Map<String, Object> params = new HashMap<>();
         params.put("advertisement", advertisements);
         return new ModelAndView(params, "index");
     }
 
     public static ModelAndView getAdvertWithCity(Request req, Response res){
-        System.out.println(req.params("city"));
         String city = req.params("city");
-        //thisController.populateDb();
         List<Advertisement> advertisementsWithCity = thisController.getAdvertsWithCities(city);
-
-
-
         Map<String, Object> params = new HashMap<>();
         params.put("advertisement", advertisementsWithCity);
         return new ModelAndView(params, "index");
     }
-
-
-
-
-
-
-
-
-
-
 }

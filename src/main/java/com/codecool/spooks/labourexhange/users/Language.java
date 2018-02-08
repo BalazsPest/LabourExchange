@@ -22,6 +22,23 @@ public class Language {
         this.level = level;
     }
 
+    public LanguageLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(LanguageLevel level) {
+        this.level = level;
+    }
+
+    public long getId() {
+
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Language{" +

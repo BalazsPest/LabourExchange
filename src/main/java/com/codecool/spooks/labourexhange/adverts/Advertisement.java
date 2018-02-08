@@ -50,6 +50,7 @@ public class Advertisement {
     //nincs feltöltve
     @ManyToMany
     private List<Language> spokenLanguages;
+
     @ManyToOne
     private City cityOfWorking;
 
@@ -95,24 +96,6 @@ public class Advertisement {
 
     public Field getFieldOfWork() {
         return fieldOfWork;
-    }
-
-    @Override
-    public String toString() {
-        return "Advertisement{" +
-                "id=" + id +
-                ", student=" + student +
-                ", status=" + status +
-                ", fieldOfWork=" + fieldOfWork +
-                ", tagsOfAdvert=" + tagsOfAdvert +
-                ", titleOfAdvert='" + titleOfAdvert + '\'' +
-                ", descriptionOfAdvert='" + descriptionOfAdvert + '\'' +
-                ", creationTime=" + creationTime +
-                ", weeklyCapacity=" + weeklyCapacity +
-                ", requestedMoneyPerHour=" + requestedMoneyPerHour +
-                ", spokenLanguages=" + spokenLanguages +
-                ", cityOfWorking=" + cityOfWorking +
-                '}';
     }
 
     public void setFieldOfWork(Field fieldOfWork) {
@@ -185,5 +168,23 @@ public class Advertisement {
 
     public Student getStudent(){
         return student;
+    }
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id=" + id +
+                ", student=" + student +
+                ", status=" + status +
+                ", fieldOfWork=" + fieldOfWork +
+                ", tagsOfAdvert=" + tagsOfAdvert +
+                ", titleOfAdvert='" + titleOfAdvert + '\'' +
+                ", descriptionOfAdvert='" + descriptionOfAdvert + '\'' +
+                ", creationTime=" + creationTime +
+                ", weeklyCapacity=" + weeklyCapacity +
+                ", requestedMoneyPerHour=" + requestedMoneyPerHour +
+                ", spokenLanguages=" + spokenLanguages +
+                ", cityOfWorking=" + cityOfWorking +
+                '}';
     }
 }

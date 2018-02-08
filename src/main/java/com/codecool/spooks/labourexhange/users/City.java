@@ -17,7 +17,6 @@ public class City {
     private String name;
 
     //other place declared obj variable name
-
     @OneToMany(mappedBy = "city")
     private List<Student> students = new ArrayList<>();
 
@@ -30,6 +29,9 @@ public class City {
 
     public City() { }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -47,21 +49,9 @@ public class City {
         this.students.add(student);
     }
 
-    @Override
-    public String toString() {
-        return "City{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
     public List<Advertisement> getAdverts() {
         return adverts;
     }
-
-    /*public void setAdverts(List<Advertisement> adverts) {
-        this.adverts = adverts;
-    }*/
 
     public void addAdverts(Advertisement adv) {
         this.adverts.add(adv);
@@ -69,5 +59,13 @@ public class City {
 
     public long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

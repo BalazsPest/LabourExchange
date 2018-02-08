@@ -1,13 +1,12 @@
 package com.codecool.spooks.labourexhange.users;
 
 
-
 import com.codecool.spooks.labourexhange.adverts.Advertisement;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+
 @Entity
 @Table(name = "STUDENT")
 public class Student extends User {
@@ -33,6 +32,8 @@ public class Student extends User {
     List<Language> languagesSpoken = new ArrayList<>();
 
 
+    public Student() { }
+
     public Student(String name, String eMailAdress, String userName) {
         super(name, eMailAdress, userName);
     }
@@ -48,7 +49,12 @@ public class Student extends User {
         city.addStudents(this);
     }
 
-    public Student() {
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
     public List<Language> getLanguagesSpoken() {
@@ -65,19 +71,6 @@ public class Student extends User {
 
     public void setCity(City city) {
         this.city = city;
-
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "gender=" + gender +
-                ", birthdate='" + birthdate + '\'' +
-                ", image='" + image + '\'' +
-                ", status=" + status +
-                '}';
     }
 
     @Override
@@ -97,13 +90,22 @@ public class Student extends User {
         this.birthdate = birthdate;
     }
 
-
     public List<Advertisement> getStudentsAdverts() {
         return studentsAdverts;
     }
 
     public void addStudentsAdverts(Advertisement studentsAdvert) {
         this.studentsAdverts.add(studentsAdvert);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "gender=" + gender +
+                ", birthdate='" + birthdate + '\'' +
+                ", image='" + image + '\'' +
+                ", status=" + status +
+                '}';
     }
 
     public enum Gender{

@@ -21,8 +21,8 @@ import java.util.List;
 
 public class DBController {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabourExchange");
-        EntityManager em = emf.createEntityManager();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabourExchange");
+    EntityManager em = emf.createEntityManager();
 
     public DBController() {
         this.populateDb();
@@ -79,17 +79,12 @@ public class DBController {
 
     public List<Advertisement> getAdvertsWithCities(String city) {
         EntityTransaction trans = em.getTransaction();
-        //long id = thisCity.getId();
         City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
         System.out.println(thisCity);
         if (!trans.isActive()) {
             trans.begin();
         }
-        //List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).getResultList();
         List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).setParameter("city", thisCity).getResultList();
         return advWithCity;
     }
 }
-
-
-

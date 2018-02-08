@@ -32,50 +32,10 @@ public class Server {
         //staticFileLocation("/public");
         port(8888);
 
-        //get("/", (Request req, Response res) -> new ThymeleafTemplateEngine().render(Controller.renderAdvertisement(req,res)));
         get("/hello", (req, res) -> "Hello World");
         get("/index", Controller::renderAdvertisement, new ThymeleafTemplateEngine());
-
         enableDebugScreen();
 
-
-
         get("/filter/:city", Controller::getAdvertWithCity, new ThymeleafTemplateEngine());
-
-        //get("/companys", //ProductController::renderProducts, new ThymeleafTemplateEngine());
-
-        //get("/student", //ProductController::renderProducts, new ThymeleafTemplateEngine()); show citys and their students
-
-
-
-
-
-}
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //}
-    //}
-
-
-
+}

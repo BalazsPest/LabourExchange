@@ -21,6 +21,7 @@ public abstract class User {
     private String userName;
     private String phoneNumber;
     private String eMailAdress;
+
     @Enumerated(value = EnumType.STRING)
     private UserStatus userStatus;
 
@@ -35,11 +36,26 @@ public abstract class User {
     public User(String name, String eMailAdress, String userName) {
         this.name = name;
         this.userName = userName;
-        //this.phoneNumber = phoneNumber;
         this.eMailAdress = eMailAdress;
     }
 
     public User() {
+    }
+
+    public List<Review> getReviewsOfSender() {
+        return reviewsOfSender;
+    }
+    //is it okay such way?
+    public void setReviewsOfSender(List<Review> reviewsOfSender) {
+        this.reviewsOfSender = reviewsOfSender;
+    }
+    //is it okay such way?
+    public void setReviewsOfReceiver(List<Review> reviewsOfReceiver) {
+        this.reviewsOfReceiver = reviewsOfReceiver;
+    }
+
+    public List<Review> getReviewsOfReceiver() {
+        return reviewsOfReceiver;
     }
 
     public int getId() {
@@ -49,8 +65,6 @@ public abstract class User {
     public String getName() {
         return name;
     }
-
-
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -86,8 +100,10 @@ public abstract class User {
         return userStatus;
     }
 
+
     @Override
     public String toString() {
+
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
