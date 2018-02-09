@@ -11,10 +11,11 @@ import com.codecool.spooks.labourexhange.users.Student;
 import com.codecool.spooks.labourexhange.users.review.Review;
 import com.codecool.spooks.labourexhange.users.review.SatisfactionLevel;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ public class DBController {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabourExchange");
         EntityManager em = emf.createEntityManager();
+
 
 
     public void populateDb() {
@@ -81,6 +83,47 @@ public class DBController {
         List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).getResultList();
         return advWithCity;
     }
+
+    public List<Advertisement> getActiveAdvert(){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<Advertisement> query = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> adv = query.from(Advertisement.class);
+        ParameterExpression<Status> parameter = criteriaBuilder.parameter(Status.class);
+        query.select(adv).where(criteriaBuilder.equal(adv.get("status"),parameter));
+
+        TypedQuery<Advertisement> newQuery = em.createQuery(query);
+        newQuery.setParameter(parameter, Status.ACTIVE);
+
+        return newQuery.getResultList();
+    }
+
+    public List<Advertisement> getAdvertWithField(Field vmi){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<Advertisement> query = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> adv = query.from(Advertisement.class);
+        //ParameterExpression<Status> parameter = criteriaBuilder.parameter(Status.class);
+        query.select(adv).where(criteriaBuilder.equal(adv.get("fieldOfWork"),vmi));
+
+        TypedQuery<Advertisement> newQuery = em.createQuery(query);
+        //newQuery.setParameter(parameter, Status.ACTIVE);
+
+        return newQuery.getResultList();
+    }
+
+
+
 }
 
 

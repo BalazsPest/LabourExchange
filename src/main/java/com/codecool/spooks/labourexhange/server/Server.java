@@ -3,6 +3,7 @@ package com.codecool.spooks.labourexhange.server;
 import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.adverts.Status;
 import com.codecool.spooks.labourexhange.adverts.category.Field;
+import com.codecool.spooks.labourexhange.databaseOperation.DBController;
 import com.codecool.spooks.labourexhange.users.City;
 import com.codecool.spooks.labourexhange.users.Student;
 import spark.Request;
@@ -40,7 +41,12 @@ public class Server {
 
 
 
+
+
         get("/filter/budapest", Controller::getAdvertWithCity, new ThymeleafTemplateEngine());
+
+        get("/filter/catering", Controller::getAdvertWithField, new ThymeleafTemplateEngine());
+
 
         //get("/companys", //ProductController::renderProducts, new ThymeleafTemplateEngine());
 

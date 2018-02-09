@@ -30,9 +30,8 @@ public class Controller {
     public static ModelAndView renderAdvertisement(Request req, Response res){
 
         thisController.populateDb();
-        List<Advertisement> advertisements = thisController.getAllAdverts();
 
-
+        List<Advertisement> advertisements = thisController.getActiveAdvert();
 
         Map<String, Object> params = new HashMap<>();
         params.put("advertisement", advertisements);
@@ -43,6 +42,18 @@ public class Controller {
 
         thisController.populateDb();
         List<Advertisement> advertisementsWithCity = thisController.getAdvertsWithCities();
+
+
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("advertisement", advertisementsWithCity);
+        return new ModelAndView(params, "index");
+    }
+
+    public static ModelAndView getAdvertWithField(Request req, Response res){
+
+        thisController.populateDb();
+        List<Advertisement> advertisementsWithCity = thisController.getAdvertWithField();
 
 
 
