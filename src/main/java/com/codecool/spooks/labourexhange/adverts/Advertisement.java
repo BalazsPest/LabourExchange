@@ -12,14 +12,16 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 @NamedQueries({@NamedQuery(name= "selectAllAdvert", query = "SELECT a FROM Advertisement a"),
-@NamedQuery(name = "selectAdvertWhithCity", query ="SELECT a FROM Advertisement a WHERE a.cityOfWorking = :city")})
+               @NamedQuery(name = "selectAdvertWithCity", query ="SELECT a FROM Advertisement a WHERE a.cityOfWorking = :city"),
+               @NamedQuery(name = "selectAdvByCity", query = "SELECT a FROM Advertisement a WHERE a.cityOfWorking.id = :id")})
+
 @Entity
 @Table(name = "ADVERTISEMENT")
 public class Advertisement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     @ManyToOne
     private Student student;
@@ -78,11 +80,11 @@ public class Advertisement {
         city.addAdverts(this);
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

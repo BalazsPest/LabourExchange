@@ -84,7 +84,37 @@ public class DBController {
         if (!trans.isActive()) {
             trans.begin();
         }
-        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).setParameter("city", thisCity).getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWithCity", Advertisement.class).setParameter("city", thisCity).getResultList();
         return advWithCity;
     }
+
+    public List<City> getCityNames(){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<City> getCities = em.createNamedQuery("selectCities", City.class).getResultList();
+        return getCities;
+
+    }
+    public City cityById(int id){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        City city = em.createNamedQuery("getCityById", City.class).setParameter("id", id).getSingleResult();
+
+        return city;
+    }
+
+    public List<Advertisement> getAdvertisementBy(City city) {
+        System.out.println("getId: " + city.getId());
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Advertisement> advertisementList = em.createNamedQuery("selectAdvByCity", Advertisement.class).setParameter("id", city.getId()).getResultList();
+        return advertisementList;
+    }
+
 }

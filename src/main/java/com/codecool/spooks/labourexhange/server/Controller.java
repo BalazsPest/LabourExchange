@@ -28,8 +28,10 @@ public class Controller {
 
 
     public static ModelAndView renderAdvertisement(Request req, Response res){
+        List<City> cities = thisController.getCityNames();
         List<Advertisement> advertisements = thisController.getAllAdverts();
         Map<String, Object> params = new HashMap<>();
+        params.put("cities", cities);
         params.put("advertisement", advertisements);
         return new ModelAndView(params, "index");
     }
@@ -41,4 +43,22 @@ public class Controller {
         params.put("advertisement", advertisementsWithCity);
         return new ModelAndView(params, "index");
     }
+    public static ModelAndView renderAdvertisementsByFilter(Request req, Response res){
+        thisController.populateDb();
+        DBController dbController = new DBController();
+        Map<String, Object> filteredParams = new HashMap<>();
+
+        List<City> cities = thisController.getCityNames();
+        filteredParams.put("cities", cities);
+
+        int cityId = Integer.parseInt(req.queryParams("city"));
+
+        City city = dbController.cityById(cityId);
+        filteredParams.put("city", city);
+        filteredParams.put("advertisement", dbController.getAdvertisementBy(city));
+
+        return new ModelAndView(filteredParams, "index");
+
+    }
+
 }

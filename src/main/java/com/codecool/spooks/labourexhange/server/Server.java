@@ -37,5 +37,11 @@ public class Server {
         enableDebugScreen();
 
         get("/filter/:city", Controller::getAdvertWithCity, new ThymeleafTemplateEngine());
+
+        get("/filter",(Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render( Controller.renderAdvertisementsByFilter(req, res));
+        });
+
+
     }
 }

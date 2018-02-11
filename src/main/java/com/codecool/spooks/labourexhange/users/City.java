@@ -5,14 +5,16 @@ import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-@NamedQuery(name = "selectCities", query = "SELECT c FROM City c WHERE c.name = :name")
+@NamedQueries({@NamedQuery( name = "selectCities" , query = "SELECT c FROM City c" ),
+               @NamedQuery(name= "getCityById", query="SELECT c FROM City c WHERE id = :id")})
+
 @Entity
 @Table(name = "CITY")
 public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     private String name;
 
@@ -29,7 +31,7 @@ public class City {
 
     public City() { }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,7 +59,7 @@ public class City {
         this.adverts.add(adv);
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
