@@ -12,10 +12,7 @@ import com.codecool.spooks.labourexhange.users.review.Review;
 import com.codecool.spooks.labourexhange.users.review.SatisfactionLevel;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -103,7 +100,7 @@ public class DBController {
         return newQuery.getResultList();
     }
 
-    public List<Advertisement> getAdvertWithField(Field vmi){
+    public List<Advertisement> getAdvertWithField(){
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
@@ -111,13 +108,14 @@ public class DBController {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-        CriteriaQuery<Advertisement> query = criteriaBuilder.createQuery(Advertisement.class);
-        Root<Advertisement> adv = query.from(Advertisement.class);
-        //ParameterExpression<Status> parameter = criteriaBuilder.parameter(Status.class);
-        query.select(adv).where(criteriaBuilder.equal(adv.get("fieldOfWork"),vmi));
+        CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> from = criteria.from(Advertisement.class);
+        Join<Advertisement,City> join = from.join("fieldOfWork");// joinolni a base változója alapján  ,case-switch-el dinamikussá tehető
+        ParameterExpression<String> parameter = criteriaBuilder.parameter(String.class);//
+        criteria.select(from).where(criteriaBuilder.equal(join.get("name"),parameter)); // joinolt táblából kell kieszedegetni a cuccokat
 
-        TypedQuery<Advertisement> newQuery = em.createQuery(query);
-        //newQuery.setParameter(parameter, Status.ACTIVE);
+        TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
+        newQuery.setParameter(parameter, "catering");//
 
         return newQuery.getResultList();
     }
