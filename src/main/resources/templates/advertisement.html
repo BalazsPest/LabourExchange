@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head th:replace="head :: copy"></head>
-    <img>
+    <body>
         <div th:replace="headerWithFilter :: copy"></div>
+
 
             <h3 align="center" >Create your Advertisement</h3>
             <form action="/newAdv" method="post">
-                <div class="form-group">
+                <div class="form-group" align="center">
                     <label th:for="title" >Title: </label><br/>
                     <input type="text" th:name="title" th:required="required"/>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" align="center">
                     <label th:for="description">Description: </label><br/>
                     <input type="comment"  th:name="description" th:required="required"/>
                 </div>
 
 
-                <div class="form-group" th:object="${languages}">
+                <div class="form-group" th:object="${languages}" align="center">
                     <label th:for="languages" > Select your languages </label>
                     <select class="form-control" style="width:150px" id="language" name="language">
                         <option th:each="lan : ${languages}"
@@ -26,7 +27,7 @@
                     </select>
                 </div>
 
-                <div class="form-group" th:object="${fields}">
+                <div class="form-group" th:object="${fields}" align="center">
                     <label th:for="languages" > Select the field </label>
                     <select class="form-control" style="width:150px" id="field" name="field">
                         <option th:each="field : ${fields}"
@@ -35,7 +36,7 @@
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" align="center">
                     <label th:for="weeklyCapacity" > Your weekly capacity </label>
                     <select class="form-control" style="width:150px" id="weeklyCapacity" name="weeklyCapacity">
                         <option>1</option>
@@ -46,11 +47,31 @@
                     </select>
                 </div>
 
+                <div class="form-group" align="center">
+                    <label th:for="requestedMoney" > Requested money/hour </label>
+                    <select class="form-control" style="width:150px" id="requestedMoney" name="requestedMoney">
+                        <option>0 - 10$</option>
+                        <option>10 - 20$</option>
+                        <option>20 - 30$</option>
+                    </select>
+                </div>
 
 
 
 
-                
+
+
+
+
+
+
+
+
+
+
+
+
+
         <input type="submit" class="btn btn-warning" value="Submit"/><p></p>
     </form>
 
