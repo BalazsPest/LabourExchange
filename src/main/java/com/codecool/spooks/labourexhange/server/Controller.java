@@ -1,26 +1,18 @@
 package com.codecool.spooks.labourexhange.server;
 
 import com.codecool.spooks.labourexhange.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.adverts.Status;
 import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.adverts.category.Tag;
 import com.codecool.spooks.labourexhange.databaseOperation.DBController;
 import com.codecool.spooks.labourexhange.users.City;
 import com.codecool.spooks.labourexhange.users.Language;
-import com.codecool.spooks.labourexhange.users.Student;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class Controller {
 
@@ -60,5 +52,17 @@ public class Controller {
         return new ModelAndView(filteredParams, "index");
 
     }
+
+    public static ModelAndView renderNewAdvertisementPage(Request req, Response res){
+        Map<String, Object> params = new HashMap<>();
+        List<City> cities = thisController.getCityNames();
+        List<Language> languages = thisController.getLanguages();
+        List<Field> fields = thisController.getFields();
+        params.put("cities", cities);
+        params.put("languages", languages);
+        params.put("fields", fields);
+        return new ModelAndView(params, "advertisement");
+    }
+
 
 }

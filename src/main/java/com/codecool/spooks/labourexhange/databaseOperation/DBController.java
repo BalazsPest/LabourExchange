@@ -33,6 +33,8 @@ public class DBController {
 
         Language ger = new Language("german", Language.LanguageLevel.BASIC);
         Language eng = new Language("english", Language.LanguageLevel.HIGH);
+
+
         City Bp = new City("budapest");
         City Ms = new City("miskolc");
         Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
@@ -115,6 +117,25 @@ public class DBController {
         }
         List<Advertisement> advertisementList = em.createNamedQuery("selectAdvByCity", Advertisement.class).setParameter("id", city.getId()).getResultList();
         return advertisementList;
+    }
+
+    public List<Language> getLanguages(){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Language> languageList = em.createNamedQuery("getLanguages", Language.class).getResultList();
+        return languageList;
+    }
+
+    public List<Field> getFields(){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Field> fieldList = em.createNamedQuery("getFields", Field.class).getResultList();
+        return fieldList;
+
     }
 
 }

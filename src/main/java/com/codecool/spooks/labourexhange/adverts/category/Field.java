@@ -6,6 +6,8 @@ import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+@NamedQueries({@NamedQuery(name= "getFields", query = "SELECT f FROM Field f")})
+
 
 @Entity
 @Table(name = "JOB_FIELDS")

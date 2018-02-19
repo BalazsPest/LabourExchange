@@ -2,6 +2,10 @@ package com.codecool.spooks.labourexhange.users;
 
 import javax.persistence.*;
 
+@NamedQueries({@NamedQuery(name= "getLanguages", query = "SELECT l FROM Language l")})
+
+
+
 @Entity
 @Table(name="SPOKEN_LANGUAGES")
 public class Language {
@@ -9,6 +13,14 @@ public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Column(name = "language")
     private String name;
