@@ -1,53 +1,34 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <body>
+<body>
 
-        <div th:fragment="copy">
-            <div class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <div class="form-inline">
-                        <a class="navbar-brand" href="/">
-                            <img src="img/tenor.png" alt=""/>
-                        </a>
-                        <form class="form-inline" action="/filter" method="get">
-                            <div class="form-group" th:object="${allCategories}">
-                                <select class="form-control" id="categories" name="categories">
-                                    <option th:each="cat : ${allCategories}"
-                                            th:value="${cat.id}"
-                                            th:text="${cat.name}"></option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm-5" th:object="${allSupplier}">
-                                <select class="form-control" id="suppliers" name="suppliers">
-                                    <option th:each="sup : ${allSupplier}"
-                                            th:value="${sup.id}"
-                                            th:text="${sup.name}"></option>
-                                </select>
-                            </div>
-                            <button type="selectCategory" class="btn btn-warning">Submit</button>
-                        </form>
+<div th:fragment="copy">
+    <div class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="form-inline">
+                <a class="navbar-brand" href="/">
+                    <img src="/img/tenor.png" alt="logo"/>
+                </a>
+                <form class="form-inline" action="/filter" method="get">
+                    <div class="form-group" th:object="${cities}">
+                        <select class="form-control" id="city" name="city">
+                            <option th:each="cit : ${cities}"
+                                    th:value="${cit.id}"
+                                    th:text="${cit.name}"></option>
+                        </select>
                     </div>
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-warning">
-                                    <a href="/cart"><img src="/img/cart.png" width="25" height="25" alt=""/></a>
-                                </button>
-                                <button type="button" class="btn btn-outline-warning"
-                                        th:text="${cartProducts}"></button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="jumbotron text-center">
-                <h2>
-                    FindYourWork With Us
-                    <small class="text-muted">by Spooks</small>
-                </h2>
+                    <button type="selectCategory" class="btn btn-warning">Submit</button>
+                </form>
             </div>
         </div>
+    </div>
+    <div class="jumbotron text-center">
+        <h2>
+            FindYourWork With Us
+            <small class="text-muted">by Spooks</small>
+        </h2>
+    </div>
+</div>
 
-    </body>
+</body>
 </html>
