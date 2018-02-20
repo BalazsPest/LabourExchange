@@ -2,6 +2,7 @@ package com.codecool.spooks.labourexhange.server;
 
 import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.adverts.category.Field;
+import com.codecool.spooks.labourexhange.databaseOperation.CriteriaController;
 import com.codecool.spooks.labourexhange.databaseOperation.DBController;
 import com.codecool.spooks.labourexhange.users.City;
 import com.codecool.spooks.labourexhange.users.Language;
@@ -19,16 +20,19 @@ public class Controller {
 
     private static DBController thisController = new DBController();
 
+    private static CriteriaController criteriaController = new CriteriaController();
+
 
     public static ModelAndView renderAdvertisement(Request req, Response res){
-        List<City> cities = thisController.getCityNames();
-        thisController.populateDb();
+        //List<City> cities = thisController.getCityNames();
+        //thisController.populateDb();
 
-        List<Advertisement> advertisements = thisController.getActiveAdvert();
+        List<Advertisement> advertisements = criteriaController.getActiveAdvert();
 
         Map<String, Object> params = new HashMap<>();
-        params.put("cities", cities);
+        //params.put("cities", cities);
         params.put("advertisement", advertisements);
+        System.out.println(params);
         return new ModelAndView(params, "index");
     }
 
@@ -42,8 +46,8 @@ public class Controller {
 
 
     public static ModelAndView renderAdvertisementsByFilter(Request req, Response res){
-        thisController.populateDb();
-        DBController dbController = new DBController();
+        //thisController.populateDb();
+        //DBController dbController = new DBController();
         Map<String, Object> filteredParams = new HashMap<>();
 
 
@@ -53,7 +57,7 @@ public class Controller {
 
         City city = thisController.cityById(cityId);
         filteredParams.put("city", city);
-        filteredParams.put("advertisement", dbController.getAdvertisementBy(city));
+        filteredParams.put("advertisement", thisController.getAdvertisementBy(city));
 
         return new ModelAndView(filteredParams, "index");
 
@@ -61,7 +65,7 @@ public class Controller {
 
     public static ModelAndView getAdvertWithField(Request req, Response res){
 
-        thisController.populateDb();
+        //thisController.populateDb();
         List<Advertisement> advertisementsWithCity = thisController.getAdvertWithField();
 
 

@@ -71,25 +71,6 @@ public class DBController {
         return advWithCity;
     }
 
-    public List<Advertisement> getActiveAdvert() {
-        EntityTransaction trans = em.getTransaction();
-        if (!trans.isActive()) {
-            trans.begin();
-        }
-
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-
-        CriteriaQuery<Advertisement> query = criteriaBuilder.createQuery(Advertisement.class);
-        Root<Advertisement> adv = query.from(Advertisement.class);
-        ParameterExpression<Status> parameter = criteriaBuilder.parameter(Status.class);
-        query.select(adv).where(criteriaBuilder.equal(adv.get("status"), parameter));
-
-        TypedQuery<Advertisement> newQuery = em.createQuery(query);
-        newQuery.setParameter(parameter, Status.ACTIVE);
-
-        return newQuery.getResultList();
-    }
-
 
     public List<Advertisement> getAdvertsWithCities(String city) {
 
@@ -179,7 +160,7 @@ public class DBController {
         String name = req.queryParams("name");
         String eMailAddress = req.queryParams("eMailAddress");
         String password = req.queryParams("password");
-        User newStudent = new Student(userName, userName, eMailAddress, password);
+        User newStudent = new Student(name, userName, eMailAddress, password);
         EntityTransaction et = em.getTransaction();
         et.begin();
         em.persist(newStudent);
