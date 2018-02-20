@@ -4,13 +4,10 @@ import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.adverts.Status;
 import com.codecool.spooks.labourexhange.adverts.category.Field;
 import com.codecool.spooks.labourexhange.adverts.category.Tag;
-import com.codecool.spooks.labourexhange.users.City;
-import com.codecool.spooks.labourexhange.users.Company;
-import com.codecool.spooks.labourexhange.users.Language;
-import com.codecool.spooks.labourexhange.users.Student;
+import com.codecool.spooks.labourexhange.users.*;
 import com.codecool.spooks.labourexhange.users.review.Review;
 import com.codecool.spooks.labourexhange.users.review.SatisfactionLevel;
-
+import spark.Request;
 import javax.persistence.*;
 import javax.persistence.criteria.*;
 import java.util.Arrays;
@@ -32,11 +29,11 @@ public class DBController {
         Language ger = new Language("german", Language.LanguageLevel.BASIC);
         Language eng = new Language("english", Language.LanguageLevel.HIGH);
 
-
         City Bp = new City("Budapest");
         City Ms = new City("Miskolc");
-        Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
-        Company comp1 = new Company("procter", "procter@gmail.com", "proki");
+        Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
+        Company comp1 = new Company("procter", "procter@gmail.com", "proki", "proki");
+
         Field catering = new Field("catering");
         Tag waitr = new Tag("waitressing", catering);
         Tag cook = new Tag("cooking", catering);
@@ -70,7 +67,7 @@ public class DBController {
         if (!trans.isActive()) {
             trans.begin();
         }
-        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWithCity", Advertisement.class).getResultList();
         return advWithCity;
     }
 
@@ -103,7 +100,7 @@ public class DBController {
             trans.begin();
         }
 
-        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWithCity", Advertisement.class).setParameter("city", thisCity).getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("getCitiesByName", Advertisement.class).setParameter("name", thisCity).getResultList();
         return advWithCity;
     }
 
@@ -172,4 +169,52 @@ public class DBController {
         return fieldList;
 
     }
+
+    public boolean addUser(Request req) {
+        String userName = req.queryParams("userName");
+        if (checkUsers(userName)) {
+            System.out.println("wrong username");
+            return false;
+        }
+        String name = req.queryParams("name");
+        String eMailAddress = req.queryParams("eMailAddress");
+        String password = req.queryParams("password");
+        User newStudent = new Student(userName, userName, eMailAddress, password);
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        em.persist(newStudent);
+        et.commit();
+        System.out.println("okay");
+        return true;
+    }
+
+    public boolean checkUsers(String userName) {
+        try {
+            System.out.println(userName);
+            em.createNamedQuery("findUser", User.class).setParameter("userName", userName).getSingleResult();
+            return true;
+        } catch (NoResultException e) {
+            System.out.println("wrooooooooong");
+            return false;
+        }
+    }
+
+    public boolean checkUserPassword(Request req) {
+        String eMailAddress = req.queryParams("eMailAddress");
+        String password = req.queryParams("password");
+        try {
+            User user = em.createNamedQuery("checkUserPassword", User.class).
+                            setParameter("eMailAddress", eMailAddress).getSingleResult();
+            if (user.getPassword().equals(password)) {
+            /*if (password.equals(em.createNamedQuery("checkUserPassword", User.class).
+                    setParameter("eMailAddress", eMailAddress).getSingleResult())) {*/
+                return true;
+            }
+        } catch (NoResultException e) {
+            System.out.println("There is no user registrated with that password");
+            return false;
+        }
+        return false;
+    }
 }
+

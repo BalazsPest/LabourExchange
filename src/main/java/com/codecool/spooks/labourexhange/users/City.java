@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @NamedQueries({@NamedQuery( name = "selectCities" , query = "SELECT c FROM City c" ),
+                @NamedQuery(name = "getCitiesByName", query= "SELECT c FROM City c WHERE c.name = :name"),
                @NamedQuery(name= "getCityById", query="SELECT c FROM City c WHERE id = :id")})
 
 @Entity
