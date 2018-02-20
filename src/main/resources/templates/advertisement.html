@@ -7,19 +7,25 @@
 
             <h3 align="center" >Create your Advertisement</h3>
             <form action="/newAdv" method="post">
+
                 <div class="form-group" align="center">
-                    <label th:for="title" >Title: </label><br/>
+                    <label th:for="name" >Your Name: </label><br/>
+                    <input type="text" th:name="name" th:required="required"/>
+                </div>
+
+                <div class="form-group" align="center">
+                    <label th:for="title" >Adv Title: </label><br/>
                     <input type="text" th:name="title" th:required="required"/>
                 </div>
 
                 <div class="form-group" align="center">
-                    <label th:for="description">Description: </label><br/>
+                    <label th:for="description">Adv Description: </label><br/>
                     <input type="comment"  th:name="description" th:required="required"/>
                 </div>
 
 
                 <div class="form-group" th:object="${languages}" align="center">
-                    <label th:for="languages" > Select your languages </label>
+                    <label th:for="languages" > Select your spoken languages </label>
                     <select class="form-control" style="width:150px" id="language" name="language">
                         <option th:each="lan : ${languages}"
                                 th:value="${lan.id}"
@@ -28,7 +34,7 @@
                 </div>
 
                 <div class="form-group" th:object="${fields}" align="center">
-                    <label th:for="languages" > Select the field </label>
+                    <label th:for="languages" > Select your field </label>
                     <select class="form-control" style="width:150px" id="field" name="field">
                         <option th:each="field : ${fields}"
                                 th:value="${field.id}"
@@ -37,7 +43,7 @@
                 </div>
 
                 <div class="form-group" align="center">
-                    <label th:for="weeklyCapacity" > Your weekly capacity </label>
+                    <label th:for="weeklyCapacity" > Select your weekly capacity </label>
                     <select class="form-control" style="width:150px" id="weeklyCapacity" name="weeklyCapacity">
                         <option>1</option>
                         <option>2</option>
@@ -48,7 +54,7 @@
                 </div>
 
                 <div class="form-group" align="center">
-                    <label th:for="requestedMoney" > Requested money/hour </label>
+                    <label th:for="requestedMoney" > Select your requested money/hour </label>
                     <select class="form-control" style="width:150px" id="requestedMoney" name="requestedMoney">
                         <option>0 - 10$</option>
                         <option>10 - 20$</option>
@@ -56,23 +62,16 @@
                     </select>
                 </div>
 
+                <div class="form-group" th:object="${cities}" align="center">
+                    <label th:for="cities" > Select the City </label>
+                    <select class="form-control" style="width:150px" id="city" name="city">
+                        <option th:each="city : ${cities}"
+                                th:value="${city.id}"
+                                th:text="${city.name}"></option>
+                    </select>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <input type="submit" class="btn btn-warning" value="Submit"/><p></p>
+        <input type="submit" class="btn btn-warning center-block" value="Submit"/><p></p>
     </form>
 
         <div th:replace="footer :: copy"></div>
