@@ -18,7 +18,6 @@ public class Company extends User {
 
     private boolean verified;
 
-
     public Company() { }
 
     public Company(String name, String eMailAdress, String userName) {
@@ -33,12 +32,10 @@ public class Company extends User {
         this.link = link;
     }
 
-
     //todo
     public void validateCompany() {
         this.verified = true;
     }
-
 
     @Override
     public void checkUserStatus(UserStatus userStatus) throws IllegalArgumentException {
@@ -47,6 +44,10 @@ public class Company extends User {
         } else {
             throw new IllegalArgumentException("Company cannot be in this status");
         }
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
@@ -58,4 +59,3 @@ public class Company extends User {
                 '}';
     }
 }
-

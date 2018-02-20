@@ -21,14 +21,20 @@ import java.util.List;
 
 public class DBController {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabourExchange");
-        EntityManager em = emf.createEntityManager();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabourExchange");
+    EntityManager em = emf.createEntityManager();
+
+    public DBController() {
+        this.populateDb();
+    }
 
 
     public void populateDb() {
 
         Language ger = new Language("german", Language.LanguageLevel.BASIC);
         Language eng = new Language("english", Language.LanguageLevel.HIGH);
+
+
         City Bp = new City("Budapest");
         City Ms = new City("Miskolc");
         Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
@@ -38,7 +44,7 @@ public class DBController {
         Tag cook = new Tag("cooking", catering);
 
         Advertisement adv = new Advertisement(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "I do everything", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr));
-        Advertisement adv2 = new Advertisement(stud1, Status.ACTIVE, catering, "dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
+        Advertisement adv2 = new Advertisement(stud1, Status.ACTIVE, catering, "Dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
         Review rev1 = new Review("you are not so funny", comp1, stud1, SatisfactionLevel.FIVE);
 
         EntityTransaction trans = em.getTransaction();
@@ -73,15 +79,63 @@ public class DBController {
         return adverts;
     }
 
-    public List<Advertisement> getAdvertsWithCities() {
+    public List<Advertisement> getAdvertsWithCities(String city) {
+        EntityTransaction trans = em.getTransaction();
+        City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
+        System.out.println(thisCity);
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWithCity", Advertisement.class).setParameter("city", thisCity).getResultList();
+        return advWithCity;
+    }
+
+    public List<City> getCityNames(){
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
-        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).getResultList();
-        return advWithCity;
+        List<City> getCities = em.createNamedQuery("selectCities", City.class).getResultList();
+        return getCities;
+
     }
+    public City cityById(int id){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        City city = em.createNamedQuery("getCityById", City.class).setParameter("id", id).getSingleResult();
+
+        return city;
+    }
+
+    public List<Advertisement> getAdvertisementBy(City city) {
+        System.out.println("getId: " + city.getId());
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Advertisement> advertisementList = em.createNamedQuery("selectAdvByCity", Advertisement.class).setParameter("id", city.getId()).getResultList();
+        return advertisementList;
+    }
+
+    public List<Language> getLanguages(){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Language> languageList = em.createNamedQuery("getLanguages", Language.class).getResultList();
+        return languageList;
+    }
+
+    public List<Field> getFields(){
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Field> fieldList = em.createNamedQuery("getFields", Field.class).getResultList();
+        return fieldList;
+
+    }
+
 }
-
-
-

@@ -1989,3 +1989,703 @@ alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER
 alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
 alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
 alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS
+create sequence hibernate_sequence start 1 increment 1
+create table ADVERTISEMENT (id int8 not null, creationTime date, description varchar(255), money_per_hour int4, status varchar(255), title varchar(255), weeklyCapacity int4 not null, cityOfWorking_id int8, fieldOfWork_id int8, student_USER_ID int4, primary key (id))
+create table ADVERTISEMENT_SPOKEN_LANGUAGES (Advertisement_id int8 not null, spokenLanguages_id int8 not null)
+create table ADVERTISEMENT_TAG (Advertisement_id int8 not null, tagsOfAdvert_id int8 not null)
+create table CITY (id int8 not null, name varchar(255), primary key (id))
+create table COMPANY (description varchar(255), link varchar(255), verified boolean not null, USER_ID int4 not null, primary key (USER_ID))
+create table JOB_FIELDS (id int8 not null, name varchar(255), primary key (id))
+create table REVIEW (reviewId int4 not null, description varchar(255), satisfactionLevel varchar(255), receiver_USER_ID int4, sender_USER_ID int4, primary key (reviewId))
+create table SPOKEN_LANGUAGES (id int8 not null, level int4, language varchar(255), primary key (id))
+create table STUDENT (birthdate varchar(255), gender varchar(255), image varchar(255), status varchar(255), USER_ID int4 not null, city_id int8, primary key (USER_ID))
+create table STUDENT_SPOKEN_LANGUAGES (Student_USER_ID int4 not null, languagesSpoken_id int8 not null)
+create table TAG (id int8 not null, WorkCategName varchar(255), field_id int8, primary key (id))
+create table USERS (USER_ID  serial not null, eMailAdress varchar(255), name varchar(255), phoneNumber varchar(255), userName varchar(255), userStatus varchar(255), primary key (USER_ID))
+alter table ADVERTISEMENT add constraint FKqhgyj6xyv6u9bhyst1lbwwbwd foreign key (cityOfWorking_id) references CITY
+alter table ADVERTISEMENT add constraint FKn8uuvkxndsp071iw6oesr3o9o foreign key (fieldOfWork_id) references JOB_FIELDS
+alter table ADVERTISEMENT add constraint FKnhymk7stqfu40ygqajxw6o1e7 foreign key (student_USER_ID) references STUDENT
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKlits060heu1m9dk6xk35xjt3p foreign key (spokenLanguages_id) references SPOKEN_LANGUAGES
+alter table ADVERTISEMENT_SPOKEN_LANGUAGES add constraint FKra9iw7ilbxjeqfdu2pvxqrmhb foreign key (Advertisement_id) references ADVERTISEMENT
+alter table ADVERTISEMENT_TAG add constraint FK5c3sb0ajbadptvxlanl0pv6wx foreign key (tagsOfAdvert_id) references TAG
+alter table ADVERTISEMENT_TAG add constraint FKqvxduamep5g631p1dcjob6j6g foreign key (Advertisement_id) references ADVERTISEMENT
+alter table COMPANY add constraint FKehbso24wodt66wk0rw0adqfad foreign key (USER_ID) references USERS
+alter table REVIEW add constraint FKejrh96krj2ijadr0a1s36j1vn foreign key (receiver_USER_ID) references USERS
+alter table REVIEW add constraint FKfmethwfjg7mb1btnm6hbs0lc1 foreign key (sender_USER_ID) references USERS
+alter table STUDENT add constraint FKb0fujy5thsyctux45cu0vns44 foreign key (city_id) references CITY
+alter table STUDENT add constraint FK7fn9rg9qky67b2js1pe3ulfi1 foreign key (USER_ID) references USERS
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FK7b9dc5ipktt87ouvp2nb1y13d foreign key (languagesSpoken_id) references SPOKEN_LANGUAGES
+alter table STUDENT_SPOKEN_LANGUAGES add constraint FKe8bg10qsg2ix7ga8cn78gum52 foreign key (Student_USER_ID) references STUDENT
+alter table TAG add constraint FKf030c3jenhi3h2iaombrpr2r9 foreign key (field_id) references JOB_FIELDS

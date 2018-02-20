@@ -26,15 +26,6 @@ public class Tag {
         field.addTagForField(this);
     }
 
-    @Override
-    public String toString() {
-        return "Tag{" +
-                "id=" + id +
-                ", WorkCategName='" + WorkCategName + '\'' +
-                ", field=" + field +
-                '}';
-    }
-
     public long getId() {
         return id;
     }
@@ -54,11 +45,13 @@ public class Tag {
     public void setFieldTitle(Field fieldTitle) {
         this.field = fieldTitle;
     }
-    /*public List<Advertisement> getAdverts() {
-        return adverts;
-    }
 
-    public void setAdverts(List<Advertisement> adverts) {
-        this.adverts = adverts;
-    }*/
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", WorkCategName='" + WorkCategName + '\'' +
+                ", field=" + field +
+                '}';
+    }
 }
