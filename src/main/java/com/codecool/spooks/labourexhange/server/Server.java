@@ -14,7 +14,7 @@ public class Server {
     public static void main(String[] args) {
 
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
-        //staticFileLocation("/public");
+        staticFileLocation("/public");
         port(7000);
 
         get("/hello", (req, res) -> "Hello World");
