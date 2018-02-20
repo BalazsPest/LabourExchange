@@ -20,8 +20,8 @@ public class Company extends User {
 
     public Company() { }
 
-    public Company(String name, String eMailAdress, String userName) {
-        super(name, eMailAdress, userName);
+    public Company(String name, String eMailAdress, String userName, String password) {
+        super(name, eMailAdress, userName, password);
     }
 
     public void setDescription(String description) {

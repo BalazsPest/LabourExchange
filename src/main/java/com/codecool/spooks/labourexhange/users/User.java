@@ -1,12 +1,16 @@
 package com.codecool.spooks.labourexhange.users;
 
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
 
 import com.codecool.spooks.labourexhange.users.review.Review;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@NamedQueries({@NamedQuery( name = "findUser", query = "SELECT u FROM User u WHERE u.userName = :userName"),
+        @NamedQuery(name="checkUserPassword", query = "SELECT u FROM User u WHERE u.eMailAdress = :eMailAddress")})
 @Entity
 @Table(name = "USERS")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,6 +25,8 @@ public abstract class User {
     private String userName;
     private String phoneNumber;
     private String eMailAdress;
+    private String password;
+
 
     @Enumerated(value = EnumType.STRING)
     private UserStatus userStatus;
@@ -33,10 +39,11 @@ public abstract class User {
 
 
 
-    public User(String name, String eMailAdress, String userName) {
+    public User(String name, String eMailAdress, String userName, String password) {
         this.name = name;
         this.userName = userName;
         this.eMailAdress = eMailAdress;
+        this.password = password;
     }
 
     public User() {
@@ -45,6 +52,15 @@ public abstract class User {
     public List<Review> getReviewsOfSender() {
         return reviewsOfSender;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     //is it okay such way?
     public void setReviewsOfSender(List<Review> reviewsOfSender) {
         this.reviewsOfSender = reviewsOfSender;

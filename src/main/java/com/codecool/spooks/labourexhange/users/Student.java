@@ -34,13 +34,13 @@ public class Student extends User {
 
     public Student() { }
 
-    public Student(String name, String eMailAdress, String userName) {
-        super(name, eMailAdress, userName);
+    public Student(String name, String userName, String eMailAddress, String password) {
+        super(name, userName, eMailAddress, password);
     }
 
-    public Student(String name, String eMailAdress, String userName,
+    public Student(String name, String userName, String eMailAddress, String password,
                    Gender gender, String birthdate, City city, List<Language> languages) {
-        super(name, eMailAdress, userName);
+        super(name, userName, eMailAddress, password);
         this.gender = gender;
         this.birthdate = birthdate;
         this.status = UserStatus.ACTIVE;

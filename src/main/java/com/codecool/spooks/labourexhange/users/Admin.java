@@ -2,8 +2,8 @@ package com.codecool.spooks.labourexhange.users;
 
 public class Admin extends User {
 
-    public Admin(String name, String eMailAdress, String userName) {
-        super(name, eMailAdress, userName);
+    public Admin(String name, String eMailAdress, String userName, String password) {
+        super(name, eMailAdress, userName, password);
         setUserStatus(UserStatus.ADMINISTRATOR);
     }
 
