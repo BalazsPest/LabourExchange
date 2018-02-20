@@ -19,16 +19,15 @@ import static spark.Spark.redirect;
 public class Controller {
 
     private static DBController thisController = new DBController();
-
-    private static CriteriaController criteriaController = new CriteriaController();
+    //ezt szedtem ki most ideiglenesen
+    //private static CriteriaController criteriaController = new CriteriaController();
 
 
     public static ModelAndView renderAdvertisement(Request req, Response res){
-        //List<City> cities = thisController.getCityNames();
-        //thisController.populateDb();
-
-        List<Advertisement> advertisements = criteriaController.getActiveAdvert();
-
+        //itt volt használva
+        //List<Advertisement> advertisements = criteriaController.getActiveAdvert();
+        //és ide kellett megírnom egy getAdvertset, mert az eltűnt
+        List<Advertisement> advertisements = thisController.getAdverts();
         Map<String, Object> params = new HashMap<>();
         //params.put("cities", cities);
         params.put("advertisement", advertisements);
@@ -46,8 +45,6 @@ public class Controller {
 
 
     public static ModelAndView renderAdvertisementsByFilter(Request req, Response res){
-        //thisController.populateDb();
-        //DBController dbController = new DBController();
         Map<String, Object> filteredParams = new HashMap<>();
 
 
@@ -65,7 +62,6 @@ public class Controller {
 
     public static ModelAndView getAdvertWithField(Request req, Response res){
 
-        //thisController.populateDb();
         List<Advertisement> advertisementsWithCity = thisController.getAdvertWithField();
 
 

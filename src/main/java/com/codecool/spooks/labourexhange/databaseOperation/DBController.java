@@ -62,12 +62,21 @@ public class DBController {
     }
 
 
-    public List<Advertisement> getAdvertsWithCities() {
+    /*public List<Advertisement> getAdvertsWithCities() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
         List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWithCity", Advertisement.class).getResultList();
+        return advWithCity;
+    }*/
+
+    public List<Advertisement> getAdverts() {
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Advertisement> advWithCity = em.createNamedQuery("selectAllAdvert", Advertisement.class).getResultList();
         return advWithCity;
     }
 
