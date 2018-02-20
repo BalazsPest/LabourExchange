@@ -21,11 +21,9 @@ public class CriteriaController {
         this.filteredClass = filteredClass;
     }
 
-    @BeforeEach
-
 
     public List<Object> filterBy(String filter){
-        return null;
+
     }
 
     //kell open-close method a connectionnek,egy enum a case-switch-nek

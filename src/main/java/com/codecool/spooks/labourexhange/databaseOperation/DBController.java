@@ -60,18 +60,6 @@ public class DBController {
     }
 
 
-    public List<Advertisement> getAllAdverts() {
-        EntityTransaction trans = em.getTransaction();
-        if (!trans.isActive()) {
-            trans.begin();
-        }
-        List<Advertisement> adverts = em.createNamedQuery("selectAllAdvert", Advertisement.class).getResultList();
-        for (Advertisement adve : adverts) {
-            System.out.println(adve);
-        }
-        return adverts;
-    }
-
     public List<Advertisement> getAdvertsWithCities() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
