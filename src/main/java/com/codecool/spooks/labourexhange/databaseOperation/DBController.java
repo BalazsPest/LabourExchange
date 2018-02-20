@@ -11,10 +11,8 @@ import com.codecool.spooks.labourexhange.users.Student;
 import com.codecool.spooks.labourexhange.users.review.Review;
 import com.codecool.spooks.labourexhange.users.review.SatisfactionLevel;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import javax.persistence.criteria.*;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -67,30 +65,66 @@ public class DBController {
     }
 
 
-    public List<Advertisement> getAllAdverts() {
+    public List<Advertisement> getAdvertsWithCities() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
-        List<Advertisement> adverts = em.createNamedQuery("selectAllAdvert", Advertisement.class).getResultList();
-        for (Advertisement adve : adverts) {
-            System.out.println(adve);
-        }
-        return adverts;
+        List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWhithCity", Advertisement.class).getResultList();
+        return advWithCity;
     }
 
+    public List<Advertisement> getActiveAdvert() {
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<Advertisement> query = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> adv = query.from(Advertisement.class);
+        ParameterExpression<Status> parameter = criteriaBuilder.parameter(Status.class);
+        query.select(adv).where(criteriaBuilder.equal(adv.get("status"), parameter));
+
+        TypedQuery<Advertisement> newQuery = em.createQuery(query);
+        newQuery.setParameter(parameter, Status.ACTIVE);
+
+        return newQuery.getResultList();
+    }
+
+
     public List<Advertisement> getAdvertsWithCities(String city) {
+
         EntityTransaction trans = em.getTransaction();
         City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
         System.out.println(thisCity);
         if (!trans.isActive()) {
             trans.begin();
         }
+
         List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWithCity", Advertisement.class).setParameter("city", thisCity).getResultList();
         return advWithCity;
     }
 
-    public List<City> getCityNames(){
+
+    public List<Advertisement> getAdvertWithField() {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> from = criteria.from(Advertisement.class);
+        Join<Advertisement, City> join = from.join("fieldOfWork");// joinolni a base változója alapján  ,case-switch-el dinamikussá tehető
+        ParameterExpression<String> parameter = criteriaBuilder.parameter(String.class);//
+        criteria.select(from).where(criteriaBuilder.equal(join.get("name"), parameter)); // joinolt táblából kell kieszedegetni a cuccokat
+
+        TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
+        newQuery.setParameter(parameter, "catering");//
+
+        return newQuery.getResultList();
+    }
+
+
+    public List<City> getCityNames() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
@@ -99,7 +133,8 @@ public class DBController {
         return getCities;
 
     }
-    public City cityById(int id){
+
+    public City cityById(int id) {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
@@ -119,7 +154,7 @@ public class DBController {
         return advertisementList;
     }
 
-    public List<Language> getLanguages(){
+    public List<Language> getLanguages() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
@@ -128,7 +163,7 @@ public class DBController {
         return languageList;
     }
 
-    public List<Field> getFields(){
+    public List<Field> getFields() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
@@ -137,5 +172,4 @@ public class DBController {
         return fieldList;
 
     }
-
 }
