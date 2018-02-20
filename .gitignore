@@ -1,10 +1,8 @@
 
-\.idea/workspace\.xml
+.idea
+target
+*.ddl
+*.iml
+DS_store
+*.xml
 
-src/main/resources/META-INF/create-schema\.ddl
-
-src/main/resources/META-INF/drop-schema\.ddl
-
-target/classes/META-INF/create-schema\.ddl
-
-target/classes/META-INF/drop-schema\.ddl
