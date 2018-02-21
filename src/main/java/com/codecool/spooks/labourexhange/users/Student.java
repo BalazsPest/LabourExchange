@@ -5,6 +5,8 @@ import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+@NamedQueries({@NamedQuery(name= "getStudents", query = "SELECT s FROM Student s WHERE s.name = :name"),
+                @NamedQuery(name = "getStudentById", query = "SELECT s FROM Student s WHERE s.id =:id")})
 
 
 @Entity

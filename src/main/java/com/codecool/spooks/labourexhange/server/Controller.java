@@ -4,7 +4,6 @@ import com.codecool.spooks.labourexhange.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.adverts.category.Field;
 import com.codecool.spooks.labourexhange.databaseOperation.DBController;
 import com.codecool.spooks.labourexhange.users.City;
-import com.codecool.spooks.labourexhange.users.Language;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -12,20 +11,15 @@ import spark.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static spark.Spark.redirect;
 
 
 public class Controller {
 
     private static DBController thisController = new DBController();
-
-
+    
     public static ModelAndView renderAdvertisement(Request req, Response res){
         List<City> cities = thisController.getCityNames();
-        thisController.populateDb();
-
         List<Advertisement> advertisements = thisController.getActiveAdvert();
-
         Map<String, Object> params = new HashMap<>();
         params.put("cities", cities);
         params.put("advertisement", advertisements);
@@ -42,10 +36,8 @@ public class Controller {
 
 
     public static ModelAndView renderAdvertisementsByFilter(Request req, Response res){
-        thisController.populateDb();
         DBController dbController = new DBController();
         Map<String, Object> filteredParams = new HashMap<>();
-
 
         List<City> cities = thisController.getCityNames();
         filteredParams.put("cities", cities);
@@ -54,40 +46,29 @@ public class Controller {
         City city = thisController.cityById(cityId);
         filteredParams.put("city", city);
         filteredParams.put("advertisement", dbController.getAdvertisementBy(city));
-
         return new ModelAndView(filteredParams, "index");
 
     }
 
     public static ModelAndView getAdvertWithField(Request req, Response res){
 
-        thisController.populateDb();
         List<Advertisement> advertisementsWithCity = thisController.getAdvertWithField();
-
-
-
         Map<String, Object> params = new HashMap<>();
         params.put("advertisement", advertisementsWithCity);
         return new ModelAndView(params, "index");
     }
 
 
-
-
     public static ModelAndView renderNewAdvertisementPage(Request req, Response res){
         Map<String, Object> params = new HashMap<>();
         List<City> cities = thisController.getCityNames();
-        List<Language> languages = thisController.getLanguages();
         List<Field> fields = thisController.getFields();
         params.put("cities", cities);
-        params.put("languages", languages);
         params.put("fields", fields);
         return new ModelAndView(params, "advertisement");
     }
 
-
-
-    public static ModelAndView registrateUser(Request req, Response res) {
+    public static ModelAndView registerUser(Request req, Response res) {
         Map<String, Object> params = new HashMap<>();
         if (thisController.addUser(req)) {
             res.redirect("/index");
@@ -98,6 +79,8 @@ public class Controller {
 
     public static ModelAndView userLogin(Request req, Response res) {
         Map<String, Object> params = new HashMap<>();
+        List<City> cities = thisController.getCityNames();
+        params.put("cities", cities);
         params.put("login", true);
         return new ModelAndView(params, "registration");
     }
@@ -111,4 +94,37 @@ public class Controller {
         }
         return null;
     }
+
+
+
+
+    public static ModelAndView makeAdvertisement(Request req, Response res) {
+
+        //int id = (Integer)req.session().attribute("id");
+        int id = 1;
+        System.out.println("id: " + id);
+
+        String title = req.queryParams("title");
+        String description = req.queryParams("description");
+        String field = req.queryParams("field");
+        String city = req.queryParams("city");
+
+        int weeklyCapacity = Integer.parseInt(req.queryParams("weeklyCapacity"));
+        int requestedMoney = Integer.parseInt(req.queryParams("requestedMoney"));
+
+        System.out.println("field" + field);
+        System.out.println("descrpition" + description);
+
+
+        if (thisController.createNewAdvertisement(id,title,description,field,city,weeklyCapacity,requestedMoney)){
+            res.redirect("index");
+        } else {
+            res.redirect("404");
+        }
+        return null;
+    }
+
+
+
+
 }

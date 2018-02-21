@@ -3,6 +3,8 @@
 <body>
 
 <div th:fragment="copy">
+
+
     <div class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="form-inline">
@@ -17,11 +19,18 @@
                                     th:text="${cit.name}"></option>
                         </select>
                     </div>
-                    <button type="selectCategory" class="btn btn-warning">Submit</button>
+                    <button type="selectCategory" class="btn btn-warning">Go!</button>
                 </form>
-                <form action="/newAdv" method="get">
-                    <button type="createNewAdv" align="right" class="btn btn-warning">New advertisement</button>
+                <form action="/new-advertisement" method="get">
+                    <button type="createNewAdv" align="center" class="btn btn-warning">New advertisement</button>
                 </form>
+
+                <form action="/login" method="get">
+                    <button type="LogIn" align="left" class="btn btn-warning">Login</button>
+                </form>
+
+
+
             </div>
         </div>
     </div>
