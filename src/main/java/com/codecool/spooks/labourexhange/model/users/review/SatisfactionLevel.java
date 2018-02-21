@@ -1,4 +1,4 @@
-package com.codecool.spooks.labourexhange.users.review;
+package com.codecool.spooks.labourexhange.model.users.review;
 
 public enum SatisfactionLevel {
 

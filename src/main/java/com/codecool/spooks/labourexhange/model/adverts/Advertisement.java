@@ -1,14 +1,12 @@
-package com.codecool.spooks.labourexhange.adverts;
+package com.codecool.spooks.labourexhange.model.adverts;
 
-import com.codecool.spooks.labourexhange.users.City;
-import com.codecool.spooks.labourexhange.users.Language;
-import com.codecool.spooks.labourexhange.users.Student;
-import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Language;
+import com.codecool.spooks.labourexhange.model.users.Student;
+import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 @NamedQueries({@NamedQuery(name= "selectAllAdvert", query = "SELECT a FROM Advertisement a"),

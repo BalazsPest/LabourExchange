@@ -1,64 +1,68 @@
-package com.codecool.spooks.labourexhange.server;
+package com.codecool.spooks.labourexhange.controller;
 
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.databaseOperation.CriteriaController;
-import com.codecool.spooks.labourexhange.databaseOperation.DBController;
-import com.codecool.spooks.labourexhange.users.City;
-import com.codecool.spooks.labourexhange.users.Language;
+
+import com.codecool.spooks.labourexhange.domain.Domain;
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.domain.DBController;
+import com.codecool.spooks.labourexhange.model.adverts.Status;
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Language;
+import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static spark.Spark.redirect;
 
 
 public class Controller {
 
-    private static DBController thisController = new DBController();
-    //ezt szedtem ki most ideiglenesen
-    //private static CriteriaController criteriaController = new CriteriaController();
+
+    private static Domain domain = new Domain();
 
 
-    public static ModelAndView renderAdvertisement(Request req, Response res){
-        //itt volt használva
-        //List<Advertisement> advertisements = criteriaController.getActiveAdvert();
-        //és ide kellett megírnom egy getAdvertset, mert az eltűnt
-        List<Advertisement> advertisements = thisController.getAdverts();
-        Map<String, Object> params = new HashMap<>();
-        //params.put("cities", cities);
-        params.put("advertisement", advertisements);
+    public static ModelAndView getActiveAdverts(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
         System.out.println(params);
         return new ModelAndView(params, "index");
     }
 
-    public static ModelAndView getAdvertWithCity(Request req, Response res){
-        String city = req.params("city");
-        List<Advertisement> advertisementsWithCity = thisController.getAdvertsWithCities(city);
-        Map<String, Object> params = new HashMap<>();
-        params.put("advertisement", advertisementsWithCity);
+
+
+    public static ModelAndView getAdvertsWithCity(Request req, Response res){
+        //String city = req.params("city");
+        Map<String, Object> params =domain.getAdvertsWithCity(1);
         return new ModelAndView(params, "index");
     }
 
 
-    public static ModelAndView renderAdvertisementsByFilter(Request req, Response res){
-        Map<String, Object> filteredParams = new HashMap<>();
-
-
-        List<City> cities = thisController.getCityNames();
-        filteredParams.put("cities", cities);
-        int cityId = Integer.parseInt(req.queryParams("city"));
-
-        City city = thisController.cityById(cityId);
-        filteredParams.put("city", city);
-        filteredParams.put("advertisement", thisController.getAdvertisementBy(city));
-
-        return new ModelAndView(filteredParams, "index");
-
+    public static ModelAndView getAdvertsWithField(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertsWithField("catering");
+        return new ModelAndView(params, "index");
     }
+
+    public static ModelAndView getadvertisement(Request req, Response res) {
+        Integer id = req.queryParams("id");
+        Map<String, Object> params = domain.getAdvertById(id);
+        return new ModelAndView(params, "index");
+    }
+
+
+/*
+    public static ModelAndView filterAdvert(Request req, Response res){
+        Map<String, Object> params =domain.filterAdvertsBy();
+        return new ModelAndView(params, "index");
+    }*/
+
+
+
+/*
+
 
     public static ModelAndView getAdvertWithField(Request req, Response res){
 
@@ -111,4 +115,5 @@ public class Controller {
         }
         return null;
     }
+    */
 }

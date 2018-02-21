@@ -1,12 +1,12 @@
-package com.codecool.spooks.labourexhange.databaseOperation;
+package com.codecool.spooks.labourexhange.domain;
 
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.adverts.Status;
-import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.adverts.category.Tag;
-import com.codecool.spooks.labourexhange.users.*;
-import com.codecool.spooks.labourexhange.users.review.Review;
-import com.codecool.spooks.labourexhange.users.review.SatisfactionLevel;
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Status;
+import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.*;
+import com.codecool.spooks.labourexhange.model.users.review.Review;
+import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
 import spark.Request;
 import javax.persistence.*;
 import javax.persistence.criteria.*;
@@ -20,10 +20,10 @@ public class DBController {
     EntityManager em = emf.createEntityManager();
 
     public DBController() {
-        this.populateDb();
+        //this.populateDb();
     }
 
-
+/*
     public void populateDb() {
 
         Language ger = new Language("german", Language.LanguageLevel.BASIC);
@@ -60,7 +60,7 @@ public class DBController {
         em.persist(rev1);
         trans.commit();
     }
-
+*/
 
     /*public List<Advertisement> getAdvertsWithCities() {
         EntityTransaction trans = em.getTransaction();

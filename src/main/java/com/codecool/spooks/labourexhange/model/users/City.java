@@ -1,6 +1,6 @@
-package com.codecool.spooks.labourexhange.users;
+package com.codecool.spooks.labourexhange.model.users;
 
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.codecool.spooks.labourexhange.users;
+package com.codecool.spooks.labourexhange.model.users;
 
 public enum UserStatus {
     ACTIVE,
@@ -6,5 +6,4 @@ public enum UserStatus {
     DELETED,
     BANNED,
     PREMIUM,
-    ADMINISTRATOR,
 }

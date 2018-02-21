@@ -1,9 +1,7 @@
-package com.codecool.spooks.labourexhange.users.review;
+package com.codecool.spooks.labourexhange.model.users.review;
 
 
-import com.codecool.spooks.labourexhange.users.Company;
-import com.codecool.spooks.labourexhange.users.Student;
-import com.codecool.spooks.labourexhange.users.User;
+import com.codecool.spooks.labourexhange.model.users.User;
 
 import javax.persistence.*;
 
