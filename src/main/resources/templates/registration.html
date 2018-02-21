@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="head :: copy">
-    <!--<title>ifes tag kéne</title>-->
-</head>
+<head th:replace="head :: copy"></head>
 <body>
 
+<div th:replace="navBar :: copy"></div>
 
-<div th:replace="headerWithFilter :: copy"></div>
+
 <h1 th:if="${login}">Please, log in</h1>
 <h1 th:unless="${login}">Registration</h1>
 
@@ -36,25 +35,3 @@
 <div th:replace="footer :: copy"></div>
 </body>
 </html>
-
-
-
-
-
-
-<!--<div class="container">
-    <div id="products" class="row list-group">
-        <div class="item col-4" th:each="adv,iterStat : ${advertisement}">
-            <div class="thumbnail">
-
-                <div class="caption">
-                    <h4 class="group inner list-group-item-heading" th:text="${adv.titleOfAdvert}">Advertisement title</h4>
-                    <p class="group inner list-group-item-text" th:text="${adv.descriptionOfAdvert}">Advertisement description </p>
-                    <p class="group inner list-group-item-text" th:text="${adv.FieldOfWork}">Advertisement Field </p>
-                    <p class="group inner list-group-item-text" th:text="${adv.cityOfWorking.name}">Advertisement Field </p>
-                    <p class="group inner list-group-item-text" th:text="${adv.student.name}">Advertisement Field </p>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
