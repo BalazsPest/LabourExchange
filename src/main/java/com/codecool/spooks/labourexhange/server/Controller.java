@@ -16,13 +16,15 @@ import java.util.Map;
 public class Controller {
 
     private static DBController thisController = new DBController();
-    
+
     public static ModelAndView renderAdvertisement(Request req, Response res){
         List<City> cities = thisController.getCityNames();
         List<Advertisement> advertisements = thisController.getActiveAdvert();
+        List<Field> fields = thisController.getFields();
         Map<String, Object> params = new HashMap<>();
         params.put("cities", cities);
         params.put("advertisement", advertisements);
+        params.put("fields", fields);
         return new ModelAndView(params, "index");
     }
 
@@ -34,7 +36,6 @@ public class Controller {
         return new ModelAndView(params, "index");
     }
 
-
     public static ModelAndView renderAdvertisementsByFilter(Request req, Response res){
         DBController dbController = new DBController();
         Map<String, Object> filteredParams = new HashMap<>();
@@ -45,7 +46,7 @@ public class Controller {
 
         City city = thisController.cityById(cityId);
         filteredParams.put("city", city);
-        filteredParams.put("advertisement", dbController.getAdvertisementBy(city));
+        filteredParams.put("advertisement", thisController.getAdvertisementBy(city));
         return new ModelAndView(filteredParams, "index");
 
     }
@@ -96,8 +97,6 @@ public class Controller {
     }
 
 
-
-
     public static ModelAndView makeAdvertisement(Request req, Response res) {
 
         //int id = (Integer)req.session().attribute("id");
@@ -108,6 +107,10 @@ public class Controller {
         String description = req.queryParams("description");
         String field = req.queryParams("field");
         String city = req.queryParams("city");
+
+
+        String filterCity = req.queryParams("filterCity");
+        System.out.println("Filtercity:" + filterCity);
 
         int weeklyCapacity = Integer.parseInt(req.queryParams("weeklyCapacity"));
         int requestedMoney = Integer.parseInt(req.queryParams("requestedMoney"));
