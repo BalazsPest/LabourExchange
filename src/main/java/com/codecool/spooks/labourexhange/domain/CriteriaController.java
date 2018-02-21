@@ -1,11 +1,10 @@
-package com.codecool.spooks.labourexhange.databaseOperation;
+package com.codecool.spooks.labourexhange.domain;
 
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.adverts.Status;
-import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.users.City;
-import com.codecool.spooks.labourexhange.users.Student;
-import org.junit.jupiter.api.BeforeEach;
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Status;
+import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Student;
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;

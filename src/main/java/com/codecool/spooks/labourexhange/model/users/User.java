@@ -1,10 +1,10 @@
-package com.codecool.spooks.labourexhange.users;
+package com.codecool.spooks.labourexhange.model.users;
 
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 
-import com.codecool.spooks.labourexhange.users.review.Review;
+import com.codecool.spooks.labourexhange.model.users.review.Review;
 
 import javax.persistence.*;
 import java.util.ArrayList;

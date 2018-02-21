@@ -1,12 +1,12 @@
-package com.codecool.spooks.labourexhange.databaseOperation;
+package com.codecool.spooks.labourexhange.domain;
 
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.adverts.Status;
-import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.adverts.category.Tag;
-import com.codecool.spooks.labourexhange.users.*;
-import com.codecool.spooks.labourexhange.users.review.Review;
-import com.codecool.spooks.labourexhange.users.review.SatisfactionLevel;
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Status;
+import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.*;
+import com.codecool.spooks.labourexhange.model.users.review.Review;
+import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
 import spark.Request;
 import javax.persistence.*;
 import javax.persistence.criteria.*;
@@ -196,7 +196,7 @@ public class DBController {
             User user = em.createNamedQuery("checkUserPassword", User.class).
                             setParameter("eMailAddress", eMailAddress).getSingleResult();
             if (user.getPassword().equals(password)) {
-            /*if (password.equals(em.createNamedQuery("checkUserPassword", User.class).
+            /*if (password.equals(em.createNamedQuery("getUserIfPasswordAndMailIsForSameUser", User.class).
                     setParameter("eMailAddress", eMailAddress).getSingleResult())) {*/
                 return true;
             }

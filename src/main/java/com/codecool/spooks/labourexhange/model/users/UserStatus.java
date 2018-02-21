@@ -1,4 +1,4 @@
-package com.codecool.spooks.labourexhange.users;
+package com.codecool.spooks.labourexhange.model.users;
 
 public enum UserStatus {
     ACTIVE,
