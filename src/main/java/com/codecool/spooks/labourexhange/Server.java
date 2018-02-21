@@ -40,13 +40,16 @@ public class Server {
 
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
-        port(7000);
+        port(9992);
+
+
 
         get("/hello", (req, res) -> "Hello World");
+
         get("/registration", (request, response) -> { HashMap <String, Object> model = new HashMap<>();
         return new ModelAndView(model, "registration");
         }, new ThymeleafTemplateEngine());
-        Spark.get("/login", controller::userLogin, new ThymeleafTemplateEngine());
+        get("/login", controller::userLogin, new ThymeleafTemplateEngine());
         post("/authenticateuser", controller::authenticateUserAfterLogin);
         post("/registrateuser", controller:: registrateUser, new ThymeleafTemplateEngine());
         get("/index", controller::renderAdvertisement, new ThymeleafTemplateEngine());
@@ -54,7 +57,10 @@ public class Server {
 
         get("/filter/:city", controller::getAdvertWithCity, new ThymeleafTemplateEngine());
 
-        get("/newAdv", controller::renderNewAdvertisementPage, new ThymeleafTemplateEngine());
+
+        get("/new-advertisement", controller::renderNewAdvertisementPage, new ThymeleafTemplateEngine());
+        post("/make-advertisement", controller::makeAdvertisement, new ThymeleafTemplateEngine());
+
 
         get("/filter",(Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render( controller.renderAdvertisementsByFilter(req, res));

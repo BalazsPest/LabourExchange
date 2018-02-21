@@ -84,6 +84,36 @@ public class Controller {
         return new ModelAndView(params, "advertisement");
     }
 
+    public ModelAndView makeAdvertisement(Request req, Response res) {
+
+        //int id = (Integer)req.session().attribute("id");
+        int id = 1;
+        System.out.println("id: " + id);
+
+        String title = req.queryParams("title");
+        String description = req.queryParams("description");
+        String field = req.queryParams("field");
+        String city = req.queryParams("city");
+
+
+        String filterCity = req.queryParams("filterCity");
+        System.out.println("Filtercity:" + filterCity);
+
+        int weeklyCapacity = Integer.parseInt(req.queryParams("weeklyCapacity"));
+        int requestedMoney = Integer.parseInt(req.queryParams("requestedMoney"));
+
+        System.out.println("field" + field);
+        System.out.println("descrpition" + description);
+
+
+        if (thisController.createNewAdvertisement(id,title,description,field,city,weeklyCapacity,requestedMoney)){
+            res.redirect("index");
+        } else {
+            res.redirect("404");
+        }
+        return null;
+    }
+
 
 
     public ModelAndView registrateUser(Request req, Response res) {

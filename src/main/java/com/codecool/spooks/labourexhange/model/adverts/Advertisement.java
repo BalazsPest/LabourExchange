@@ -47,9 +47,9 @@ public class Advertisement {
     @Column(name = "money_per_hour")
     private int requestedMoneyPerHour;
 
-    //nincs feltöltve
-    @ManyToMany
-    private List<Language> spokenLanguages;
+    //TODO
+    //@ManyToMany
+    //private List<Language> spokenLanguages;
 
     @ManyToOne
     private City cityOfWorking;
@@ -70,7 +70,7 @@ public class Advertisement {
         this.creationTime = creationTime;
         this.weeklyCapacity = weeklyCapacity;
         this.requestedMoneyPerHour = requestedMoneyPerHour;
-        this.spokenLanguages = student.getLanguagesSpoken();
+        //this.spokenLanguages = student.getLanguagesSpoken();
         //student.addStudentsAdverts(this);
         fieldOfWork.addAdvertisements(this);
         addTagsOfAdvert(tagsOfAdvert);
@@ -150,13 +150,13 @@ public class Advertisement {
         this.requestedMoneyPerHour = requestedMoneyPerHour;
     }
 
-    public List<Language> getSpokenLanguages() {
-        return spokenLanguages;
-    }
+    //public List<Language> getSpokenLanguages() {
+      //  return spokenLanguages;
+    //}
 
-    public void setSpokenLanguages(List<Language> languages) {
-        this.spokenLanguages = languages;
-    }
+    //public void setSpokenLanguages(List<Language> languages) {
+        //this.spokenLanguages = languages;
+   // }
 
     public void setCityOfWorking(City cityOfWorking) {
         this.cityOfWorking = cityOfWorking;
@@ -183,7 +183,7 @@ public class Advertisement {
                 ", creationTime=" + creationTime +
                 ", weeklyCapacity=" + weeklyCapacity +
                 ", requestedMoneyPerHour=" + requestedMoneyPerHour +
-                ", spokenLanguages=" + spokenLanguages +
+               // ", spokenLanguages=" + spokenLanguages +
                 ", cityOfWorking=" + cityOfWorking +
                 '}';
     }

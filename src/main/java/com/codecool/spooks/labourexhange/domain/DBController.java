@@ -8,8 +8,12 @@ import com.codecool.spooks.labourexhange.model.users.*;
 import com.codecool.spooks.labourexhange.model.users.review.Review;
 import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
 import spark.Request;
+
 import javax.persistence.*;
 import javax.persistence.criteria.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -81,16 +85,16 @@ public class DBController {
     }
 
 
-    public List<Advertisement> getAdvertsWithCities(String city) {
+     public List<Advertisement> getAdvertsWithCities(String city) {
 
         EntityTransaction trans = em.getTransaction();
-        City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
+        City thisCity = em.createNamedQuery("getCityByName", City.class).setParameter("name", city).getSingleResult();
         System.out.println(thisCity);
         if (!trans.isActive()) {
             trans.begin();
         }
 
-        List<Advertisement> advWithCity = em.createNamedQuery("getCitiesByName", Advertisement.class).setParameter("name", thisCity).getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("getCityByName", Advertisement.class).setParameter("name", thisCity).getResultList();
         return advWithCity;
     }
 
@@ -157,8 +161,19 @@ public class DBController {
         }
         List<Field> fieldList = em.createNamedQuery("getFields", Field.class).getResultList();
         return fieldList;
+    }
+
+    public List<Student> getStudents() {
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Student> studentList = em.createNamedQuery("getStudents", Student.class).getResultList();
+        return studentList;
 
     }
+
+
 
     public boolean addUser(Request req) {
         String userName = req.queryParams("userName");
@@ -206,5 +221,59 @@ public class DBController {
         }
         return false;
     }
+
+    public boolean createNewAdvertisement(int id, String title, String description,String name, String cityName, int weeklyCapacity, int requestedMoney){
+
+
+
+        Student student =null;
+        Field field = null;
+        City city = null;
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        List<Tag> tags = new ArrayList<>();
+        System.out.println(name);
+
+        try {
+            field = em.createNamedQuery("getFieldWithName", Field.class).setParameter("name", name).getSingleResult();
+
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("1");
+
+        try {
+            city = em.createNamedQuery("getCityByName", City.class).setParameter("name", cityName).getSingleResult();
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("2");
+
+        try {
+            student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("3");
+
+        Advertisement newAdvertisement = new Advertisement(student,Status.ACTIVE,field,title,description,date,weeklyCapacity,requestedMoney,city,tags);
+
+
+        System.out.println("4");
+
+        EntityTransaction trans = em.getTransaction();
+        em.persist(newAdvertisement);
+        trans.commit();
+        System.out.println("print");
+        return true;
+    }
+
+
+
+
 }
 
