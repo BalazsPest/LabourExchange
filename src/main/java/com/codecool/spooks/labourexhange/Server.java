@@ -2,9 +2,7 @@ package com.codecool.spooks.labourexhange;
 
 import com.codecool.spooks.labourexhange.controller.Controller;
 import com.codecool.spooks.labourexhange.domain.Domain;
-import com.codecool.spooks.labourexhange.service.AdvertisementService;
-import com.codecool.spooks.labourexhange.service.ModelSetUpService;
-import com.codecool.spooks.labourexhange.service.UserService;
+import com.codecool.spooks.labourexhange.service.*;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
@@ -33,7 +31,10 @@ public class Server {
     public static void main(String[] args) {
         UserService usrService = new UserService();
         AdvertisementService advService = new AdvertisementService();
-        Domain domain = new Domain(advService, usrService);
+        FieldService fieldService = new FieldService();
+        CityService cityService = new CityService();
+        LanguageService lngService = new LanguageService();
+        Domain domain = new Domain(advService, usrService, fieldService, cityService, lngService);
         Controller controller = new Controller(domain);
         Server server = new Server(controller);
 

@@ -17,7 +17,10 @@ public class UserService {
 
 
         EntityTransaction et = em.getTransaction();
-        et.begin();
+        if (!et.isActive()) {
+            et.begin();
+        }
+        //et.begin();
         em.persist(someone);
         et.commit();
         System.out.println("okay");
@@ -42,6 +45,16 @@ public class UserService {
             }
         } catch (NoResultException e) {
             System.out.println("There is no user registrated with that password");
+        }
+        return null;
+    }
+
+    public Student findStudent(int id, EntityManager em) {
+        try {
+            Student student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
+            return student;
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
         }
         return null;
     }

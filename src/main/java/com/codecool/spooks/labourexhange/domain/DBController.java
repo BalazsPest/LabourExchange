@@ -235,6 +235,10 @@ public class DBController {
         List<Tag> tags = new ArrayList<>();
         System.out.println(name);
 
+
+
+
+
         try {
             field = em.createNamedQuery("getFieldWithName", Field.class).setParameter("name", name).getSingleResult();
 

@@ -78,16 +78,20 @@ public class Controller {
         List<City> cities = domain.getCityNames();
         List<Language> languages = domain.getLanguages();
         List<Field> fields = domain.getFields();
-        params.put("cities", cities);
-        params.put("languages", languages);
-        params.put("fields", fields);
-        return new ModelAndView(params, "advertisement");
+        if (cities != null && languages!= null && fields!= null) {
+            params.put("cities", cities);
+            params.put("languages", languages);
+            params.put("fields", fields);
+            return new ModelAndView(params, "advertisement");
+        }
+        res.redirect("404");
+        return null;
     }
 
     public ModelAndView makeAdvertisement(Request req, Response res) {
 
-        //int id = (Integer)req.session().attribute("id");
-        int id = 1;
+        int id = Integer.parseInt(req.session().attribute("userId"));
+        //int id = 1;
         System.out.println("id: " + id);
 
         String title = req.queryParams("title");
@@ -106,7 +110,7 @@ public class Controller {
         System.out.println("descrpition" + description);
 
 
-        if (thisController.createNewAdvertisement(id,title,description,field,city,weeklyCapacity,requestedMoney)){
+        if (domain.createNewAdvertisement(id,title,description,field,city,weeklyCapacity,requestedMoney)){
             res.redirect("index");
         } else {
             res.redirect("404");
