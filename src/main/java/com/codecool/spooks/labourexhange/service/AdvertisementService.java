@@ -24,6 +24,7 @@ import java.util.List;
 public class AdvertisementService {
 
     public Advertisement addNewAdvert(Student studentOfAdv, Field fieldOfAdv, String title, String description, Date date, int weeklyCapacity, int requestedMoney, City cityOfAdv, List<Tag> tags, EntityManager em) {
+
         Advertisement newAdvertisement = new Advertisement(studentOfAdv, Status.ACTIVE, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags);
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {

@@ -3,7 +3,6 @@ package com.codecool.spooks.labourexhange.controller;
 
 import com.codecool.spooks.labourexhange.domain.Domain;
 import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.domain.DBController;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Language;
@@ -63,7 +62,7 @@ public class Controller {
         Map<String, Object> filteredParams = new HashMap<>();
 
 
-        List<City> cities = domain.getCityNames();
+        List<City> cities = domain.getCities();
         filteredParams.put("cities", cities);
         int cityId = Integer.parseInt(req.queryParams("city"));
 
@@ -137,7 +136,7 @@ public class Controller {
 
     public ModelAndView renderNewAdvertisementPage(Request req, Response res){
         Map<String, Object> params = new HashMap<>();
-        List<City> cities = domain.getCityNames();
+        List<City> cities = domain.getCities();
         List<Language> languages = domain.getLanguages();
         List<Field> fields = domain.getFields();
         if (cities != null && languages!= null && fields!= null) {
@@ -155,15 +154,13 @@ public class Controller {
         int id = Integer.parseInt(req.session().attribute("userId"));
         //int id = 1;
         System.out.println("id: " + id);
-
         String title = req.queryParams("title");
         String description = req.queryParams("description");
         String field = req.queryParams("field");
         String city = req.queryParams("city");
 
-
-        String filterCity = req.queryParams("filterCity");
-        System.out.println("Filtercity:" + filterCity);
+        //String filterCity = req.queryParams("filterCity");
+        //System.out.println("Filtercity:" + filterCity);
 
         int weeklyCapacity = Integer.parseInt(req.queryParams("weeklyCapacity"));
         int requestedMoney = Integer.parseInt(req.queryParams("requestedMoney"));
@@ -254,5 +251,4 @@ public class Controller {
         Map<String, Object> params = domain.getAdvertsFromStudent(id);
         return new ModelAndView(params, "studentIndex");
     }
-
 }

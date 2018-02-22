@@ -29,9 +29,14 @@ public class ModelSetUpService {
 
         City Bp = new City("Budapest");
         City Ms = new City("Miskolc");
+        City P = new City("Pécs");
+        City Ny = new City("Nyíregyháza");
+        City Sz = new City("Szeged");
         Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
         Company comp1 = new Company("procter", "procter@gmail.com", "proki", "proki");
-
+        Field housekeeping = new Field("housekeeping");
+        Field it = new Field("it-related");
+        Field ecol = new Field("ecology-related");
         Field catering = new Field("catering");
         Tag waitr = new Tag("waitressing", catering);
         Tag cook = new Tag("cooking", catering);
@@ -44,6 +49,12 @@ public class ModelSetUpService {
         if (!trans.isActive()) {
             trans.begin();
         }
+        em.persist(Ny);
+        em.persist(Sz);
+        em.persist(P);
+        em.persist(housekeeping);
+        em.persist(ecol);
+        em.persist(it);
         em.persist(Bp);
         em.persist(Ms);
         em.persist(stud1);

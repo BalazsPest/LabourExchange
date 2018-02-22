@@ -59,7 +59,7 @@ public class Domain {
     }
 
     //WRONG NAME -------------------------------
-    public List<City> getCityNames() {
+    public List<City> getCities() {
         List <City> cities = cityService.getCities(em);
         if (cities != null) {
             System.out.println(cities.toString());
@@ -168,6 +168,7 @@ public class Domain {
     }
 
     public boolean createNewAdvertisement(int id, String title, String description, String fieldName, String cityName, int weeklyCapacity, int requestedMoney) {
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         List<Tag> tags = new ArrayList<>();
@@ -175,7 +176,6 @@ public class Domain {
         Field fieldOfAdv = fieldService.findField(fieldName, em);
         City cityOfAdv = cityService.findCity(cityName, em);
         Student studentOfAdv = userService.findStudent(id, em);
-
         if (fieldOfAdv != null && cityOfAdv != null && studentOfAdv != null) {
             try {
                 Advertisement newAdvert = advertisementService.addNewAdvert(studentOfAdv, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags, em);
