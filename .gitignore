@@ -3,6 +3,7 @@
 target
 *.ddl
 *.iml
-DS_store
+DS_Store
+.DS_Store
 *.xml
 

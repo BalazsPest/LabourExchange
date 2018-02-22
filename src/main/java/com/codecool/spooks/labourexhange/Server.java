@@ -55,6 +55,7 @@ public class Server {
         post("/registrateuser", controller:: registrateUser, new ThymeleafTemplateEngine());
         get("/index", controller::renderActiveAdvertisements, new ThymeleafTemplateEngine());
         enableDebugScreen();
+        get("/companyIndex", controller::renderActiveAdvertisements, new ThymeleafTemplateEngine());
 
         get("/filter/:city", controller::getAdvertWithCity, new ThymeleafTemplateEngine());
 

@@ -36,14 +36,20 @@ public class DBController {
         City Bp = new City("Budapest");
         City Ms = new City("Miskolc");
         Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
+        Student stud2 = new Student("Kiss Béla", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
+        Student stud3 = new Student("Velencze Gáspár", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
+
         Company comp1 = new Company("procter", "procter@gmail.com", "proki", "proki");
 
         Field catering = new Field("catering");
         Tag waitr = new Tag("waitressing", catering);
         Tag cook = new Tag("cooking", catering);
 
-        Advertisement adv = new Advertisement(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "I do everything", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr));
-        Advertisement adv2 = new Advertisement(stud1, Status.ACTIVE, catering, "Dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
+        Advertisement adv = new Advertisement(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "Im a 24 years old man, and i have a lot of feedback about my work. You can check on my profile.", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr));
+        Advertisement adv2 = new Advertisement(stud2, Status.ACTIVE, catering, "Dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
+        Advertisement adv3 = new Advertisement(stud3, Status.ACTIVE, catering, "Chef", "I been working as a chef for 4 years now. I have a lot of experience.", new Date(), 10, 700, Ms, Arrays.asList(cook));
+
+
         Review rev1 = new Review("you are not so funny", comp1, stud1, SatisfactionLevel.FIVE);
 
         EntityTransaction trans = em.getTransaction();
@@ -53,6 +59,8 @@ public class DBController {
         em.persist(Bp);
         em.persist(Ms);
         em.persist(stud1);
+        em.persist(stud2);
+        em.persist(stud3);
         em.persist(comp1);
         em.persist(ger);
         em.persist(eng);
@@ -62,6 +70,7 @@ public class DBController {
         em.persist(adv);
         em.persist(adv2);
         em.persist(rev1);
+        em.persist(adv3);
         trans.commit();
     }
 */
