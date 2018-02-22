@@ -83,7 +83,7 @@ public class Controller {
         List<City> cities = thisController.getCityNames();
         params.put("cities", cities);
         params.put("login", true);
-        return new ModelAndView(params, "registration");
+        return new ModelAndView(params, "login");
     }
 
     public static ModelAndView authenticateUser(Request req, Response res) {
