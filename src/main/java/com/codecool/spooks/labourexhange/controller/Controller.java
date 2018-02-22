@@ -173,7 +173,7 @@ public class Controller {
 
 
         if (domain.createNewAdvertisement(id, title, description, field, city, weeklyCapacity, requestedMoney)) {
-            res.redirect("index");
+            res.redirect("studentIndex");
         } else {
             res.redirect("404");
         }
@@ -192,10 +192,11 @@ public class Controller {
             //req.session().attribute("id", req.queryParams("id"));
 
             //if (thisController.addUser(req)) {
-            res.redirect("/login");
+            res.redirect("/studentIndex");
         }
         //is it okay?
         params.put("notManagedToRegistrate", true);
+        System.out.println("registration didnt workinh");
         return new ModelAndView(params, "registration");
     }
 
@@ -223,5 +224,20 @@ public class Controller {
         /*if (thisController.getUserIfPasswordAndMailIsForSameUser(req)) {
             req.session().attribute("id", req.queryParams("id"));*/
     }
+
+
+
+    public ModelAndView renderStudentIndex(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
+        System.out.println(params);
+        return new ModelAndView(params, "studentIndex");
+    }
+    public ModelAndView renderCompanyIndex(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
+        System.out.println(params);
+        return new ModelAndView(params, "companyIndex");
+    }
+
+
 
 }
