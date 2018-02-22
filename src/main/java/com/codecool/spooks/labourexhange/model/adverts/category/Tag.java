@@ -1,10 +1,7 @@
-package com.codecool.spooks.labourexhange.adverts.category;
+package com.codecool.spooks.labourexhange.model.adverts.category;
 
-
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="TAG")
