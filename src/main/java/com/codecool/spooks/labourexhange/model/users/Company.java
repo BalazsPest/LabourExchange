@@ -1,10 +1,7 @@
-package com.codecool.spooks.labourexhange.users;
+package com.codecool.spooks.labourexhange.model.users;
 
-
-import com.codecool.spooks.labourexhange.users.review.Review;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NamedQuery(name="selectCompanies", query = "SELECT c FROM Company c")
 @Entity
@@ -39,11 +36,11 @@ public class Company extends User {
 
     @Override
     public void checkUserStatus(UserStatus userStatus) throws IllegalArgumentException {
-        if (userStatus != UserStatus.ADMINISTRATOR) {
+        /*if (userStatus != UserStatus.ADMINISTRATOR) {
             setUserStatus(userStatus);
         } else {
             throw new IllegalArgumentException("Company cannot be in this status");
-        }
+        }*/
     }
 
     public String getDescription() {

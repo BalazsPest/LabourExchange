@@ -1,14 +1,12 @@
-package com.codecool.spooks.labourexhange.adverts;
+package com.codecool.spooks.labourexhange.model.adverts;
 
-import com.codecool.spooks.labourexhange.users.City;
-import com.codecool.spooks.labourexhange.users.Language;
-import com.codecool.spooks.labourexhange.users.Student;
-import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Language;
+import com.codecool.spooks.labourexhange.model.users.Student;
+import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 @NamedQueries({@NamedQuery(name= "selectAllAdvert", query = "SELECT a FROM Advertisement a"),
@@ -49,9 +47,9 @@ public class Advertisement {
     @Column(name = "money_per_hour")
     private int requestedMoneyPerHour;
 
-    //nincs feltöltve
-    @ManyToMany
-    private List<Language> spokenLanguages;
+    //TODO
+    //@ManyToMany
+    //private List<Language> spokenLanguages;
 
     @ManyToOne
     private City cityOfWorking;
@@ -72,7 +70,7 @@ public class Advertisement {
         this.creationTime = creationTime;
         this.weeklyCapacity = weeklyCapacity;
         this.requestedMoneyPerHour = requestedMoneyPerHour;
-        this.spokenLanguages = student.getLanguagesSpoken();
+        //this.spokenLanguages = student.getLanguagesSpoken();
         //student.addStudentsAdverts(this);
         fieldOfWork.addAdvertisements(this);
         addTagsOfAdvert(tagsOfAdvert);
@@ -152,13 +150,13 @@ public class Advertisement {
         this.requestedMoneyPerHour = requestedMoneyPerHour;
     }
 
-    public List<Language> getSpokenLanguages() {
-        return spokenLanguages;
-    }
+    //public List<Language> getSpokenLanguages() {
+      //  return spokenLanguages;
+    //}
 
-    public void setSpokenLanguages(List<Language> languages) {
-        this.spokenLanguages = languages;
-    }
+    //public void setSpokenLanguages(List<Language> languages) {
+        //this.spokenLanguages = languages;
+   // }
 
     public void setCityOfWorking(City cityOfWorking) {
         this.cityOfWorking = cityOfWorking;
@@ -185,7 +183,7 @@ public class Advertisement {
                 ", creationTime=" + creationTime +
                 ", weeklyCapacity=" + weeklyCapacity +
                 ", requestedMoneyPerHour=" + requestedMoneyPerHour +
-                ", spokenLanguages=" + spokenLanguages +
+               // ", spokenLanguages=" + spokenLanguages +
                 ", cityOfWorking=" + cityOfWorking +
                 '}';
     }

@@ -1,15 +1,19 @@
-package com.codecool.spooks.labourexhange.databaseOperation;
+package com.codecool.spooks.labourexhange.domain;
 
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.adverts.Status;
-import com.codecool.spooks.labourexhange.adverts.category.Field;
-import com.codecool.spooks.labourexhange.adverts.category.Tag;
-import com.codecool.spooks.labourexhange.users.*;
-import com.codecool.spooks.labourexhange.users.review.Review;
-import com.codecool.spooks.labourexhange.users.review.SatisfactionLevel;
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Status;
+import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.*;
+import com.codecool.spooks.labourexhange.model.users.review.Review;
+import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
 import spark.Request;
+
 import javax.persistence.*;
 import javax.persistence.criteria.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -20,10 +24,10 @@ public class DBController {
     EntityManager em = emf.createEntityManager();
 
     public DBController() {
-        this.populateDb();
+        //this.populateDb();
     }
 
-
+/*
     public void populateDb() {
 
         Language ger = new Language("german", Language.LanguageLevel.BASIC);
@@ -60,47 +64,37 @@ public class DBController {
         em.persist(rev1);
         trans.commit();
     }
+*/
 
-
-    public List<Advertisement> getAdvertsWithCities() {
+    /*public List<Advertisement> getAdvertsWithCities() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
         List<Advertisement> advWithCity = em.createNamedQuery("selectAdvertWithCity", Advertisement.class).getResultList();
         return advWithCity;
-    }
+    }*/
 
-    public List<Advertisement> getActiveAdvert() {
+    public List<Advertisement> getAdverts() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
-
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-
-        CriteriaQuery<Advertisement> query = criteriaBuilder.createQuery(Advertisement.class);
-        Root<Advertisement> adv = query.from(Advertisement.class);
-        ParameterExpression<Status> parameter = criteriaBuilder.parameter(Status.class);
-        query.select(adv).where(criteriaBuilder.equal(adv.get("status"), parameter));
-
-        TypedQuery<Advertisement> newQuery = em.createQuery(query);
-        newQuery.setParameter(parameter, Status.ACTIVE);
-
-        return newQuery.getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("selectAllAdvert", Advertisement.class).getResultList();
+        return advWithCity;
     }
 
 
-    public List<Advertisement> getAdvertsWithCities(String city) {
+     public List<Advertisement> getAdvertsWithCities(String city) {
 
         EntityTransaction trans = em.getTransaction();
-        City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
+        City thisCity = em.createNamedQuery("getCityByName", City.class).setParameter("name", city).getSingleResult();
         System.out.println(thisCity);
         if (!trans.isActive()) {
             trans.begin();
         }
 
-        List<Advertisement> advWithCity = em.createNamedQuery("getCitiesByName", Advertisement.class).setParameter("name", thisCity).getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("getCityByName", Advertisement.class).setParameter("name", thisCity).getResultList();
         return advWithCity;
     }
 
@@ -167,8 +161,18 @@ public class DBController {
         }
         List<Field> fieldList = em.createNamedQuery("getFields", Field.class).getResultList();
         return fieldList;
-
     }
+
+    public List<Student> getStudents() {
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Student> studentList = em.createNamedQuery("getStudents", Student.class).getResultList();
+        return studentList;
+    }
+
+
 
     public boolean addUser(Request req) {
         String userName = req.queryParams("userName");
@@ -179,7 +183,7 @@ public class DBController {
         String name = req.queryParams("name");
         String eMailAddress = req.queryParams("eMailAddress");
         String password = req.queryParams("password");
-        User newStudent = new Student(userName, userName, eMailAddress, password);
+        User newStudent = new Student(name, userName, eMailAddress, password);
         EntityTransaction et = em.getTransaction();
         et.begin();
         em.persist(newStudent);
@@ -206,7 +210,7 @@ public class DBController {
             User user = em.createNamedQuery("checkUserPassword", User.class).
                             setParameter("eMailAddress", eMailAddress).getSingleResult();
             if (user.getPassword().equals(password)) {
-            /*if (password.equals(em.createNamedQuery("checkUserPassword", User.class).
+            /*if (password.equals(em.createNamedQuery("getUserIfPasswordAndMailIsForSameUser", User.class).
                     setParameter("eMailAddress", eMailAddress).getSingleResult())) {*/
                 return true;
             }
@@ -216,5 +220,63 @@ public class DBController {
         }
         return false;
     }
+
+    public boolean createNewAdvertisement(int id, String title, String description,String name, String cityName, int weeklyCapacity, int requestedMoney){
+
+
+
+        Student student =null;
+        Field field = null;
+        City city = null;
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        List<Tag> tags = new ArrayList<>();
+        System.out.println(name);
+
+
+
+
+
+        try {
+            field = em.createNamedQuery("getFieldWithName", Field.class).setParameter("name", name).getSingleResult();
+
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("1");
+
+        try {
+            city = em.createNamedQuery("getCityByName", City.class).setParameter("name", cityName).getSingleResult();
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("2");
+
+        try {
+            student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("3");
+
+        Advertisement newAdvertisement = new Advertisement(student,Status.ACTIVE,field,title,description,date,weeklyCapacity,requestedMoney,city,tags);
+
+
+        System.out.println("4");
+
+        EntityTransaction trans = em.getTransaction();
+        em.persist(newAdvertisement);
+        trans.commit();
+        System.out.println("print");
+        return true;
+    }
+
+
+
+
 }
 

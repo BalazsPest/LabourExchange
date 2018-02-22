@@ -1,12 +1,15 @@
-package com.codecool.spooks.labourexhange.adverts.category;
+package com.codecool.spooks.labourexhange.model.adverts.category;
 
 
-import com.codecool.spooks.labourexhange.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-@NamedQueries({@NamedQuery(name= "getFields", query = "SELECT f FROM Field f")})
+
+
+@NamedQueries({@NamedQuery(name= "getFields",query="SELECT f FROM Field f"),
+               @NamedQuery(name= "getFieldWithName",query="SELECT f FROM Field f WHERE f.name = :name")})
 
 
 @Entity
