@@ -24,10 +24,10 @@ public class DBController {
     EntityManager em = emf.createEntityManager();
 
     public DBController() {
-        this.populateDb();
+        //this.populateDb();
     }
 
-
+/*
     public void populateDb() {
 
         Language ger = new Language("german", Language.LanguageLevel.BASIC);
@@ -64,7 +64,7 @@ public class DBController {
         em.persist(rev1);
         trans.commit();
     }
-
+*/
 
     /*public List<Advertisement> getAdvertsWithCities() {
         EntityTransaction trans = em.getTransaction();
@@ -170,7 +170,6 @@ public class DBController {
         }
         List<Student> studentList = em.createNamedQuery("getStudents", Student.class).getResultList();
         return studentList;
-
     }
 
 

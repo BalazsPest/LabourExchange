@@ -2,14 +2,32 @@ package com.codecool.spooks.labourexhange.service;
 
 import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.model.users.User;
-import spark.Request;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
-import java.util.Arrays;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.List;
 
 public class UserService {
+
+
+    public List<User> getUserById(EntityManager em, Integer id) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
+        Root<User> from = criteria.from(User.class);
+        ParameterExpression<Integer> parameter = criteriaBuilder.parameter(Integer.class);
+        criteria.select(from).where(criteriaBuilder.equal(from.get("id"), parameter));
+
+        TypedQuery<User> newQuery = em.createQuery(criteria);
+        newQuery.setParameter(parameter, id);
+
+        return newQuery.getResultList();
+    }
 
 
     public void addUser(String userName, String name, String eMailAddress, String password, EntityManager em) {
@@ -53,7 +71,7 @@ public class UserService {
         try {
             Student student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
             return student;
-        } catch (NoResultException e){
+        } catch (NoResultException e) {
             System.out.println(" E R R O R");
         }
         return null;

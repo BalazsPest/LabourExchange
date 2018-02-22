@@ -1,21 +1,26 @@
 package com.codecool.spooks.labourexhange.domain;
 
-import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.Student;
+import com.codecool.spooks.labourexhange.service.AdvertisementService;
+import com.codecool.spooks.labourexhange.service.UserService;
+
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Language;
-import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.model.users.User;
 import com.codecool.spooks.labourexhange.service.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Domain {
@@ -25,15 +30,16 @@ public class Domain {
     EntityManager em = emf.createEntityManager();
     private ModelSetUpService setUp = new ModelSetUpService(em);
 
-    private AdvertisementService advService;
-    private UserService usrService;
+    private AdvertisementService advertisementService;
+    private UserService userService;
     private FieldService fieldService;
     private CityService cityService;
     private LanguageService lngService;
+    private Map<String, Object> container = new HashMap<>();
 
-    public Domain(AdvertisementService advService, UserService usrService, FieldService fieldService, CityService cityService, LanguageService lngService) {
-        this.usrService = usrService;
-        this.advService = advService;
+    public Domain(AdvertisementService advertisementService, UserService userService, FieldService fieldService, CityService cityService, LanguageService lngService) {
+        this.userService = userService;
+        this.advertisementService = advertisementService;
         this.fieldService = fieldService;
         this.cityService = cityService;
         this.lngService = lngService;
@@ -82,7 +88,7 @@ public class Domain {
     }
 
     public List<Field> getFields() {
-        List <Field> fields = fieldService.getFields(em);
+        List<Field> fields = fieldService.getFields(em);
         if (fields != null) {
             System.out.println(fields.toString());
             return fields;
@@ -93,10 +99,59 @@ public class Domain {
 
 
 
+    public Map<String, Object> getAdvertsWithStatus(Status status){
+        List<Advertisement> adverts = advertisementService.getAdvertWithStatus(em,status);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
+    public Map<String,Object> getAdvertsWithCity(Integer id) {
+        List<Advertisement> adverts =advertisementService.getAdvertsWithCity(em,id);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
+
+    public Map<String,Object> getAdvertsWithField(String field) {
+        List<Advertisement> adverts =advertisementService.getAdvertsWithField(em,field);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
+    public Map<String,Object> getAdvertBetween(Integer from,Integer to) {
+        List<Advertisement> adverts =advertisementService.getAdvertBetween(em,from,to);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
+
+
+
+
+    public Map<String,Object> getUserById(Integer id) {
+        List<User> adverts = userService.getUserById(em,id);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
+
+
+    /*public Map<String,Object> getStudents() {
+        List<Advertisement> adverts = advertisementService.getAll(em);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
+    public Map<String,Object> getAdvertById(Integer id) {
+        List<Advertisement> adverts =advertisementService.getAdvertById(em, id);
+        container.put("advertisement",adverts);
+        return container;
+    }*/
+
 
     public boolean registrateTheUser(String userName, String name, String eMailAddress, String password) {
-        if(!usrService.checkUsers(userName, em)) {
-            usrService.addUser(userName, name, eMailAddress, password, em);
+        if(!userService.checkUsers(userName, em)) {
+            userService.addUser(userName, name, eMailAddress, password, em);
             return true;
         }
         return false;
@@ -104,7 +159,7 @@ public class Domain {
 
 
     public int authenticateUserAndIfSuccessGetUserId(String password, String eMailAddress) {
-        User user = usrService.getUserIfPasswordAndMailIsForSameUser(password, eMailAddress, em);
+        User user = userService.getUserIfPasswordAndMailIsForSameUser(password, eMailAddress, em);
         if (user != null) {
             int id = user.getId();
             return id;
@@ -119,11 +174,11 @@ public class Domain {
 
         Field fieldOfAdv = fieldService.findField(fieldName, em);
         City cityOfAdv = cityService.findCity(cityName, em);
-        Student studentOfAdv = usrService.findStudent(id, em);
+        Student studentOfAdv = userService.findStudent(id, em);
 
         if (fieldOfAdv != null && cityOfAdv != null && studentOfAdv != null) {
             try {
-                Advertisement newAdvert = advService.addNewAdvert(studentOfAdv, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags, em);
+                Advertisement newAdvert = advertisementService.addNewAdvert(studentOfAdv, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags, em);
             } catch (NullPointerException e) {
                 System.out.println("cant make advert");
                 return false;
@@ -131,4 +186,10 @@ public class Domain {
         }
         return true;
     }
+
+    /*public Map<String,Object> filterAdvertsBy(Object filter) {
+        List<Advertisement> adverts =advertisementService.filterAdvertsBy(em,filter);
+        container.put("advertisement",adverts);
+        return container;
+    }*/
 }

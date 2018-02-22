@@ -31,6 +31,9 @@ public abstract class User {
     @Enumerated(value = EnumType.STRING)
     private UserStatus userStatus;
 
+    @Enumerated(value = EnumType.STRING)
+    private UserRole userRole;
+
     @OneToMany(mappedBy = "sender")
     private List<Review> reviewsOfSender = new ArrayList<>();
 
@@ -116,6 +119,13 @@ public abstract class User {
         return userStatus;
     }
 
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
 
     @Override
     public String toString() {
@@ -127,6 +137,7 @@ public abstract class User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", eMailAdress='" + eMailAdress + '\'' +
                 ", userStatus=" + userStatus +
+                ", userRole=" + userRole +
                 ", reviewsOfSender=" + reviewsOfSender +
                 ", reviewsOfReceiver=" + reviewsOfReceiver +
                 '}';

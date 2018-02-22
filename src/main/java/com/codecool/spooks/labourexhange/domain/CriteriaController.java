@@ -3,11 +3,22 @@ package com.codecool.spooks.labourexhange.domain;
 import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Student;
 
+import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Company;
+import com.codecool.spooks.labourexhange.model.users.Language;
+import com.codecool.spooks.labourexhange.model.users.Student;
+import com.codecool.spooks.labourexhange.model.users.review.Review;
+import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
+
 import javax.persistence.*;
 import javax.persistence.criteria.*;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class CriteriaController {
@@ -19,6 +30,10 @@ public class CriteriaController {
     // constructorban paraméterek emgadása,változók a methodokhoz
     //külön methodok,más-más db feladatokra
     //null-al egyenlővé teszed az objectet és idővel a garbage collector összeszedi
+
+
+    public CriteriaController(){
+    }
 
 
 
@@ -68,25 +83,6 @@ public class CriteriaController {
 
         TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
         newQuery.setParameter(parameter, student);
-
-        return newQuery.getResultList();
-    }
-
-    public List<Advertisement> getActiveAdvert() {
-        EntityTransaction trans = em.getTransaction();
-        if (!trans.isActive()) {
-            trans.begin();
-        }
-
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-
-        CriteriaQuery<Advertisement> query = criteriaBuilder.createQuery(Advertisement.class);
-        Root<Advertisement> adv = query.from(Advertisement.class);
-        ParameterExpression<Status> parameter = criteriaBuilder.parameter(Status.class);
-        query.select(adv).where(criteriaBuilder.equal(adv.get("status"), parameter));
-
-        TypedQuery<Advertisement> newQuery = em.createQuery(query);
-        newQuery.setParameter(parameter, Status.ACTIVE);
 
         return newQuery.getResultList();
     }

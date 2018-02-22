@@ -36,11 +36,11 @@ public class Company extends User {
 
     @Override
     public void checkUserStatus(UserStatus userStatus) throws IllegalArgumentException {
-        if (userStatus != UserStatus.ADMINISTRATOR) {
+        /*if (userStatus != UserStatus.ADMINISTRATOR) {
             setUserStatus(userStatus);
         } else {
             throw new IllegalArgumentException("Company cannot be in this status");
-        }
+        }*/
     }
 
     public String getDescription() {

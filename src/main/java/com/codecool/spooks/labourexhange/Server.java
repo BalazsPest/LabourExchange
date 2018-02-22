@@ -3,6 +3,7 @@ package com.codecool.spooks.labourexhange;
 import com.codecool.spooks.labourexhange.controller.Controller;
 import com.codecool.spooks.labourexhange.domain.Domain;
 import com.codecool.spooks.labourexhange.service.*;
+
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
@@ -53,7 +54,7 @@ public class Server {
         get("/login", controller::userLogin, new ThymeleafTemplateEngine());
         post("/authenticateuser", controller::authenticateUserAfterLogin);
         post("/registrateuser", controller:: registrateUser, new ThymeleafTemplateEngine());
-        get("/index", controller::renderAdvertisement, new ThymeleafTemplateEngine());
+        get("/index", controller::getActiveAdverts, new ThymeleafTemplateEngine());
         enableDebugScreen();
 
         get("/filter/:city", controller::getAdvertWithCity, new ThymeleafTemplateEngine());
@@ -64,7 +65,7 @@ public class Server {
 
 
         get("/filter",(Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render( controller.renderAdvertisementsByFilter(req, res));
+            return new ThymeleafTemplateEngine().render( controller.renderAdvertisementsByFilter(req, res));});
 
 
 
@@ -77,6 +78,5 @@ public class Server {
 
         //get("/student", //ProductController::renderProducts, new ThymeleafTemplateEngine()); show citys and their students
 
-        });
     }
 }
