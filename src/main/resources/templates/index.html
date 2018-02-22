@@ -1,31 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="head :: copy"></head>
+
 <body>
 
+<div th:replace="navBar :: copy"></div>
 
-<div th:replace="headerWithFilter :: copy"></div>
-
-<div class="container">
-    <div id="products" class="row list-group">
-        <div class="item col-4" th:each="adv,iterStat : ${advertisement}">
-            <div class="thumbnail">
-
-                <span class="border border-white">
-                <div  class="caption" id ="oneAdv">
-                    <h4 class="group inner list-group-item-heading" th:text="${adv.titleOfAdvert}">Advertisement title</h4>
-                    <p class="group inner list-group-item-text text-muted" th:text="${adv.descriptionOfAdvert}">Advertisement description </p>
-                    <p class="group inner list-group-item-text text-muted" th:text="${adv.FieldOfWork}">Advertisement Field </p>
-                    <p class="group inner list-group-item-text text-muted" th:text="${adv.student.city.name}">Advertisement Field </p>
-                    <p class="group inner list-group-item-text text-muted" th:text="${adv.student.name}">Advertisement Field </p>
-                        <p></p>
-                </div>
-                </span>
-
+<!-- Header with Background Image -->
+<header class="business-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="display-3 text-center text-white mt-4">Spookers</h1>
             </div>
         </div>
     </div>
-    <div th:replace="footer :: copy"></div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2 class="mt-4">What we can do for you</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+            <p>
+                <a class="btn btn-info btn-sm" href="/partners">Our Partners: &raquo;</a>
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h2 class="mt-4">Contact Us</h2>
+            <address>
+                <strong>Spooks Company</strong>
+                <p>1037 Budapest</p>
+                <p>Nagymező utca 44</p>
+            </address>
+            <address>
+                <abbr title="Phone"></abbr>
+                (20) 3766633
+                <br></br>
+                <abbr title="Email"></abbr>
+                <a href="mailto:#">info@spooks.com</a>
+            </address>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-sm-4 my-4">
+            <div class="card">
+                <img class="card-img-top" src="img/06.jpg" alt=""/>
+                <div class="card-body">
+                    <h4 class="card-title">Google</h4>
+                    <p class="card-text"></p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-info btn-sm">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 my-4">
+            <div class="card">
+                <img class="card-img-top" src="img/04.jpg" alt=""/>
+                <div class="card-body">
+                    <h4 class="card-title">Hyundai</h4>
+                    <p class="card-text"></p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-info btn-sm">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 my-4">
+            <div class="card">
+                <img class="card-img-top" src="img/05.jpg" alt=""/>
+                <div class="card-body">
+                    <h4 class="card-title">HBO</h4>
+                    <p class="card-text"></p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-info btn-sm">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
 </div>
+<!-- /.container -->
+
+<div th:replace="footer :: copy"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

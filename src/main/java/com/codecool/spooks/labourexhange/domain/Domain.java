@@ -1,58 +1,127 @@
 package com.codecool.spooks.labourexhange.domain;
 
-import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
-import com.codecool.spooks.labourexhange.model.users.*;
-import com.codecool.spooks.labourexhange.model.users.review.Review;
-import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
+import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.service.AdvertisementService;
 import com.codecool.spooks.labourexhange.service.UserService;
-import spark.Request;
 
-import javax.persistence.*;
-import javax.persistence.criteria.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Language;
+import com.codecool.spooks.labourexhange.model.users.User;
+import com.codecool.spooks.labourexhange.service.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.List;
 
 public class Domain {
 
-    public Domain(){
-        populateDb();
-    }
-
-    private Map<String, Object> params = new HashMap<>();
-
+    //private static DBController thisController = new DBController();
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("LabourExchange");
     EntityManager em = emf.createEntityManager();
+    private ModelSetUpService setUp = new ModelSetUpService(em);
 
-    AdvertisementService advertisementService = AdvertisementService.getInstance();
+    private AdvertisementService advertisementService;
+    private UserService userService;
+    private FieldService fieldService;
+    private CityService cityService;
+    private LanguageService lngService;
+    private Map<String, Object> container = new HashMap<>();
 
-    UserService userService = UserService.getInstance();
+    public Domain(AdvertisementService advertisementService, UserService userService, FieldService fieldService, CityService cityService, LanguageService lngService) {
+        this.userService = userService;
+        this.advertisementService = advertisementService;
+        this.fieldService = fieldService;
+        this.cityService = cityService;
+        this.lngService = lngService;
+    }
+
+    //better name listAllAdvertsForCompanies
+    public List<Advertisement> getAdverts() {
+
+        System.out.println("adverts");
+        return null;
+    }
+
+    //listAllAdvertsInONeCity
+    public List<Advertisement> getAdvertsWithCities(String city) {
+        System.out.println("advwithcity");
+        return null;
+    }
+
+    //WRONG NAME -------------------------------
+    public List<City> getCityNames() {
+        List <City> cities = cityService.getCities(em);
+        if (cities != null) {
+            System.out.println(cities.toString());
+            return cities;
+        }
+        return null;
+    }
+    // i think it will be unnecessary or not here
+    public City cityById(int id) {
+        System.out.println("citybyid");
+        return null;
+    }
+    // i think it will be unnecessary or not here
+    public List<Advertisement> getAdvertisementBy(City city) {
+        System.out.println("");
+        return null;
+    }
+
+    public List<Language> getLanguages() {
+        List <Language> languages = lngService.getLanguages(em);
+        if (languages != null) {
+            System.out.println(languages.toString());
+            return languages;
+        }
+        return null;
+    }
+
+    public List<Field> getFields() {
+        List<Field> fields = fieldService.getFields(em);
+        if (fields != null) {
+            System.out.println(fields.toString());
+            return fields;
+        }
+        return null;
+    }
+
+
+
 
     public Map<String, Object> getAdvertsWithStatus(Status status){
-        List<Advertisement> adverts =advertisementService.getAdvertWithStatus(em,status);
-        params.put("advertisement",adverts);
-        return params;
+        List<Advertisement> adverts = advertisementService.getAdvertWithStatus(em,status);
+        container.put("advertisement",adverts);
+        return container;
     }
 
     public Map<String,Object> getAdvertsWithCity(Integer id) {
         List<Advertisement> adverts =advertisementService.getAdvertsWithCity(em,id);
-        params.put("advertisement",adverts);
-        return params;
+        container.put("advertisement",adverts);
+        return container;
     }
 
 
     public Map<String,Object> getAdvertsWithField(String field) {
         List<Advertisement> adverts =advertisementService.getAdvertsWithField(em,field);
-        params.put("advertisement",adverts);
-        return params;
+        container.put("advertisement",adverts);
+        return container;
     }
 
     public Map<String,Object> getAdvertBetween(Integer from,Integer to) {
         List<Advertisement> adverts =advertisementService.getAdvertBetween(em,from,to);
-        params.put("advertisement",adverts);
-        return params;
+        container.put("advertisement",adverts);
+        return container;
     }
 
 
@@ -61,69 +130,66 @@ public class Domain {
 
     public Map<String,Object> getUserById(Integer id) {
         List<User> adverts = userService.getUserById(em,id);
-        params.put("advertisement",adverts);
-        return params;
-    }
-
-
-/*
-    public Map<String,Object> getStudents() {
-        List<Advertisement> adverts =advertisementService.getAll(em);
-        params.put("advertisement",adverts);
-        return params;
-    }
-
-    public Map<String,Object> getAdvertById() {
-        List<Advertisement> adverts =advertisementService.getAdvertById(em,id);
-        params.put("advertisement",adverts);
-        return params;
+        container.put("advertisement",adverts);
+        return container;
     }
 
 
 
-    public Map<String,Object> filterAdvertsBy(Object filter) {
-        List<Advertisement> adverts =advertisementService.filterAdvertsBy(em,filter);
-        params.put("advertisement",adverts);
-        return params;
+    /*public Map<String,Object> getStudents() {
+        List<Advertisement> adverts = advertisementService.getAll(em);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
+    public Map<String,Object> getAdvertById(Integer id) {
+        List<Advertisement> adverts =advertisementService.getAdvertById(em, id);
+        container.put("advertisement",adverts);
+        return container;
     }*/
 
 
-    public void populateDb() {
-
-        Language ger = new Language("german", Language.LanguageLevel.BASIC);
-        Language eng = new Language("english", Language.LanguageLevel.HIGH);
-
-        City Bp = new City("Budapest");
-        City Ms = new City("Miskolc");
-        Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
-        Company comp1 = new Company("procter", "procter@gmail.com", "proki", "proki");
-
-        Field catering = new Field("catering");
-        Tag waitr = new Tag("waitressing", catering);
-        Tag cook = new Tag("cooking", catering);
-
-        Advertisement adv = new Advertisement(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "I do everything", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr));
-        Advertisement adv2 = new Advertisement(stud1, Status.ACTIVE, catering, "Dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
-        Review rev1 = new Review("you are not so funny", comp1, stud1, SatisfactionLevel.FIVE);
-
-        EntityTransaction trans = em.getTransaction();
-        if (!trans.isActive()) {
-            trans.begin();
+    public boolean registrateTheUser(String userName, String name, String eMailAddress, String password) {
+        if(!userService.checkUsers(userName, em)) {
+            userService.addUser(userName, name, eMailAddress, password, em);
+            return true;
         }
-        em.persist(Bp);
-        em.persist(Ms);
-        em.persist(stud1);
-        em.persist(comp1);
-        em.persist(ger);
-        em.persist(eng);
-        em.persist(catering);
-        em.persist(waitr);
-        em.persist(cook);
-        em.persist(adv);
-        em.persist(adv2);
-        em.persist(rev1);
-        trans.commit();
+        return false;
     }
 
 
+    public int authenticateUserAndIfSuccessGetUserId(String password, String eMailAddress) {
+        User user = userService.getUserIfPasswordAndMailIsForSameUser(password, eMailAddress, em);
+        if (user != null) {
+            int id = user.getId();
+            return id;
+        }
+        return 0;
+    }
+
+    public boolean createNewAdvertisement(int id, String title, String description, String fieldName, String cityName, int weeklyCapacity, int requestedMoney) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        List<Tag> tags = new ArrayList<>();
+
+        Field fieldOfAdv = fieldService.findField(fieldName, em);
+        City cityOfAdv = cityService.findCity(cityName, em);
+        Student studentOfAdv = userService.findStudent(id, em);
+
+        if (fieldOfAdv != null && cityOfAdv != null && studentOfAdv != null) {
+            try {
+                Advertisement newAdvert = advertisementService.addNewAdvert(studentOfAdv, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags, em);
+            } catch (NullPointerException e) {
+                System.out.println("cant make advert");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*public Map<String,Object> filterAdvertsBy(Object filter) {
+        List<Advertisement> adverts =advertisementService.filterAdvertsBy(em,filter);
+        container.put("advertisement",adverts);
+        return container;
+    }*/
 }

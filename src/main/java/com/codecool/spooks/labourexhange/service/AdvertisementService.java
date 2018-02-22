@@ -3,6 +3,12 @@ package com.codecool.spooks.labourexhange.service;
 import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+
+import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Student;
+import com.codecool.spooks.labourexhange.model.users.User;
+import spark.Request;
 import com.codecool.spooks.labourexhange.model.users.City;
 
 import javax.persistence.EntityManager;
@@ -10,22 +16,30 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.List;
+import javax.persistence.NoResultException;
+import java.util.Date;
+import java.util.List;
+
 
 public class AdvertisementService {
-    private static AdvertisementService ourInstance = new AdvertisementService();
 
-    public static AdvertisementService getInstance() {
-        return ourInstance;
-    }
-
-    private AdvertisementService() {
-    }
-
-    public List<Advertisement> getAdvertWithStatus(EntityManager em, Status status) {
+    public Advertisement addNewAdvert(Student studentOfAdv, Field fieldOfAdv, String title, String description, Date date, int weeklyCapacity, int requestedMoney, City cityOfAdv, List<Tag> tags, EntityManager em) {
+        Advertisement newAdvertisement = new Advertisement(studentOfAdv, Status.ACTIVE, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags);
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
             trans.begin();
         }
+        em.persist(newAdvertisement);
+        trans.commit();
+        System.out.println(newAdvertisement);
+        return newAdvertisement;
+    }
+
+
+
+    public List<Advertisement> getAdvertWithStatus(EntityManager em, Status status) {
+        EntityTransaction trans = em.getTransaction();
+
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
@@ -84,7 +98,7 @@ public class AdvertisementService {
     }
 
 
-    public List<Advertisement> filterAdvertsBy(EntityManager em,Object filter) {
+    /*public List<Advertisement> filterAdvertsBy(EntityManager em,Object filter) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
@@ -112,7 +126,7 @@ public class AdvertisementService {
         newQuery.setParameter(parameter, filter);
 
         return newQuery.getResultList();
-    }
+    }*/
 
     public List<Advertisement> getAdvertBetween(EntityManager em, Integer fromInt,Integer toInt) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();

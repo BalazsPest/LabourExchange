@@ -8,8 +8,12 @@ import com.codecool.spooks.labourexhange.model.users.*;
 import com.codecool.spooks.labourexhange.model.users.review.Review;
 import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
 import spark.Request;
+
 import javax.persistence.*;
 import javax.persistence.criteria.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -32,14 +36,20 @@ public class DBController {
         City Bp = new City("Budapest");
         City Ms = new City("Miskolc");
         Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
+        Student stud2 = new Student("Kiss Béla", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
+        Student stud3 = new Student("Velencze Gáspár", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Bp, Arrays.asList(ger, eng));
+
         Company comp1 = new Company("procter", "procter@gmail.com", "proki", "proki");
 
         Field catering = new Field("catering");
         Tag waitr = new Tag("waitressing", catering);
         Tag cook = new Tag("cooking", catering);
 
-        Advertisement adv = new Advertisement(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "I do everything", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr));
-        Advertisement adv2 = new Advertisement(stud1, Status.ACTIVE, catering, "Dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
+        Advertisement adv = new Advertisement(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "Im a 24 years old man, and i have a lot of feedback about my work. You can check on my profile.", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr));
+        Advertisement adv2 = new Advertisement(stud2, Status.ACTIVE, catering, "Dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
+        Advertisement adv3 = new Advertisement(stud3, Status.ACTIVE, catering, "Chef", "I been working as a chef for 4 years now. I have a lot of experience.", new Date(), 10, 700, Ms, Arrays.asList(cook));
+
+
         Review rev1 = new Review("you are not so funny", comp1, stud1, SatisfactionLevel.FIVE);
 
         EntityTransaction trans = em.getTransaction();
@@ -49,6 +59,8 @@ public class DBController {
         em.persist(Bp);
         em.persist(Ms);
         em.persist(stud1);
+        em.persist(stud2);
+        em.persist(stud3);
         em.persist(comp1);
         em.persist(ger);
         em.persist(eng);
@@ -58,6 +70,7 @@ public class DBController {
         em.persist(adv);
         em.persist(adv2);
         em.persist(rev1);
+        em.persist(adv3);
         trans.commit();
     }
 */
@@ -81,16 +94,16 @@ public class DBController {
     }
 
 
-    public List<Advertisement> getAdvertsWithCities(String city) {
+     public List<Advertisement> getAdvertsWithCities(String city) {
 
         EntityTransaction trans = em.getTransaction();
-        City thisCity = em.createNamedQuery("selectCities", City.class).setParameter("name", city).getSingleResult();
+        City thisCity = em.createNamedQuery("getCityByName", City.class).setParameter("name", city).getSingleResult();
         System.out.println(thisCity);
         if (!trans.isActive()) {
             trans.begin();
         }
 
-        List<Advertisement> advWithCity = em.createNamedQuery("getCitiesByName", Advertisement.class).setParameter("name", thisCity).getResultList();
+        List<Advertisement> advWithCity = em.createNamedQuery("getCityByName", Advertisement.class).setParameter("name", thisCity).getResultList();
         return advWithCity;
     }
 
@@ -159,6 +172,17 @@ public class DBController {
         return fieldList;
     }
 
+    public List<Student> getStudents() {
+        EntityTransaction trans = em.getTransaction();
+        if (!trans.isActive()) {
+            trans.begin();
+        }
+        List<Student> studentList = em.createNamedQuery("getStudents", Student.class).getResultList();
+        return studentList;
+    }
+
+
+
     public boolean addUser(Request req) {
         String userName = req.queryParams("userName");
         if (checkUsers(userName)) {
@@ -195,7 +219,7 @@ public class DBController {
             User user = em.createNamedQuery("checkUserPassword", User.class).
                             setParameter("eMailAddress", eMailAddress).getSingleResult();
             if (user.getPassword().equals(password)) {
-            /*if (password.equals(em.createNamedQuery("checkUserPassword", User.class).
+            /*if (password.equals(em.createNamedQuery("getUserIfPasswordAndMailIsForSameUser", User.class).
                     setParameter("eMailAddress", eMailAddress).getSingleResult())) {*/
                 return true;
             }
@@ -205,5 +229,63 @@ public class DBController {
         }
         return false;
     }
+
+    public boolean createNewAdvertisement(int id, String title, String description,String name, String cityName, int weeklyCapacity, int requestedMoney){
+
+
+
+        Student student =null;
+        Field field = null;
+        City city = null;
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        List<Tag> tags = new ArrayList<>();
+        System.out.println(name);
+
+
+
+
+
+        try {
+            field = em.createNamedQuery("getFieldWithName", Field.class).setParameter("name", name).getSingleResult();
+
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("1");
+
+        try {
+            city = em.createNamedQuery("getCityByName", City.class).setParameter("name", cityName).getSingleResult();
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("2");
+
+        try {
+            student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
+        } catch (NoResultException e){
+            System.out.println(" E R R O R");
+        }
+
+        System.out.println("3");
+
+        Advertisement newAdvertisement = new Advertisement(student,Status.ACTIVE,field,title,description,date,weeklyCapacity,requestedMoney,city,tags);
+
+
+        System.out.println("4");
+
+        EntityTransaction trans = em.getTransaction();
+        em.persist(newAdvertisement);
+        trans.commit();
+        System.out.println("print");
+        return true;
+    }
+
+
+
+
 }
 

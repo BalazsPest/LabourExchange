@@ -3,6 +3,10 @@ package com.codecool.spooks.labourexhange.domain;
 import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
+
+import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Student;
+
 import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Company;
