@@ -157,7 +157,6 @@ public class DBController {
         }
         List<Field> fieldList = em.createNamedQuery("getFields", Field.class).getResultList();
         return fieldList;
-
     }
 
     public boolean addUser(Request req) {

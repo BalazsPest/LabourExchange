@@ -4,13 +4,12 @@ import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
-import com.codecool.spooks.labourexhange.model.users.City;
-import com.codecool.spooks.labourexhange.model.users.Company;
-import com.codecool.spooks.labourexhange.model.users.Language;
-import com.codecool.spooks.labourexhange.model.users.Student;
+import com.codecool.spooks.labourexhange.model.users.*;
 import com.codecool.spooks.labourexhange.model.users.review.Review;
 import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
 import com.codecool.spooks.labourexhange.service.AdvertisementService;
+import com.codecool.spooks.labourexhange.service.UserService;
+import spark.Request;
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;
@@ -28,6 +27,8 @@ public class Domain {
     EntityManager em = emf.createEntityManager();
 
     AdvertisementService advertisementService = AdvertisementService.getInstance();
+
+    UserService userService = UserService.getInstance();
 
     public Map<String, Object> getAdvertsWithStatus(Status status){
         List<Advertisement> adverts =advertisementService.getAdvertWithStatus(em,status);
@@ -48,6 +49,24 @@ public class Domain {
         return params;
     }
 
+    public Map<String,Object> getAdvertBetween(Integer from,Integer to) {
+        List<Advertisement> adverts =advertisementService.getAdvertBetween(em,from,to);
+        params.put("advertisement",adverts);
+        return params;
+    }
+
+
+
+
+
+    public Map<String,Object> getUserById(Integer id) {
+        List<User> adverts = userService.getUserById(em,id);
+        params.put("advertisement",adverts);
+        return params;
+    }
+
+
+/*
     public Map<String,Object> getStudents() {
         List<Advertisement> adverts =advertisementService.getAll(em);
         params.put("advertisement",adverts);
@@ -61,7 +80,7 @@ public class Domain {
     }
 
 
-    /*
+
     public Map<String,Object> filterAdvertsBy(Object filter) {
         List<Advertisement> adverts =advertisementService.filterAdvertsBy(em,filter);
         params.put("advertisement",adverts);
@@ -105,7 +124,6 @@ public class Domain {
         em.persist(rev1);
         trans.commit();
     }
-
 
 
 }

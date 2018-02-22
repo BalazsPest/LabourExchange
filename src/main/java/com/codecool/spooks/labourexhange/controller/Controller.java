@@ -27,6 +27,8 @@ public class Controller {
 
 
     public static ModelAndView getActiveAdverts(Request req, Response res){
+        City city = new City();
+        System.out.println(city.getClass().getSimpleName());
         Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
         System.out.println(params);
         return new ModelAndView(params, "index");
@@ -46,14 +48,35 @@ public class Controller {
         return new ModelAndView(params, "index");
     }
 
+    public static ModelAndView getUserById(Request req, Response res){
+        Map<String, Object> params = domain.getUserById(2);
+
+        return new ModelAndView(params, "index");
+    }
+
+    public static ModelAndView getAdvertBetweenPrice(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertBetween(600,900);
+
+        return new ModelAndView(params, "index");
+    }
+
+    public static ModelAndView getAdvertBetweenWorkHours(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertBetween(20,40);
+
+        return new ModelAndView(params, "index");
+    }
+
+
+
+/*
     public static ModelAndView getadvertisement(Request req, Response res) {
-        Integer id = req.queryParams("id");
+        //Integer id = req.queryParams("id");
         Map<String, Object> params = domain.getAdvertById(id);
         return new ModelAndView(params, "index");
     }
 
 
-/*
+
     public static ModelAndView filterAdvert(Request req, Response res){
         Map<String, Object> params =domain.filterAdvertsBy();
         return new ModelAndView(params, "index");
@@ -115,5 +138,5 @@ public class Controller {
         }
         return null;
     }
-    */
+*/
 }

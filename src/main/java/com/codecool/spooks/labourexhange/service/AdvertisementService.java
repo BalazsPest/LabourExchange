@@ -83,16 +83,19 @@ public class AdvertisementService {
         return newQuery.getResultList();
     }
 
-/*
+
     public List<Advertisement> filterAdvertsBy(EntityManager em,Object filter) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
         Root<Advertisement> from = criteria.from(Advertisement.class);
-        switch (filter.getClass()){
-            case :
+
+        switch (filter.getClass().getSimpleName()){
+            case "City":
+                Join<Advertisement, City> join = from.join("cityOfWorking");
+
         }
-        Join<Advertisement, City> join = from.join("cityOfWorking");
+
         ParameterExpression<Object> parameter = criteriaBuilder.parameter(Object.class);
         criteria.select(from).where(criteriaBuilder.equal(join.get("id"), parameter)); // ha joinolt bálának az id-ját akarod berakni akkor nem működik,az csak egy kapocs
 
@@ -101,8 +104,25 @@ public class AdvertisementService {
 
         return newQuery.getResultList();
     }
-*/
 
+    public List<Advertisement> getAdvertBetween(EntityManager em, Integer fromInt,Integer toInt) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
+        CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> from = criteria.from(Advertisement.class);
+        ParameterExpression<Integer> parameter = criteriaBuilder.parameter(Integer.class);
+        ParameterExpression<Integer> parameter2 = criteriaBuilder.parameter(Integer.class);
+        if(fromInt>100) {
+            criteria.select(from).where(criteriaBuilder.between(from.get("requestedMoneyPerHour"), parameter, parameter2));
+        }
+        else{
+            criteria.select(from).where(criteriaBuilder.between(from.get("weeklyCapacity"), parameter, parameter2));
+        }
 
+        TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
+        newQuery.setParameter(parameter, fromInt);
+        newQuery.setParameter(parameter2, toInt);
+
+        return newQuery.getResultList();
+    }
 }
