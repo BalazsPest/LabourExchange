@@ -90,14 +90,23 @@ public class AdvertisementService {
         CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
         Root<Advertisement> from = criteria.from(Advertisement.class);
 
+        Join<Object, Object> join;
+
         switch (filter.getClass().getSimpleName()){
+            case "Field":
+                join = from.join("field");
+                break;
             case "City":
-                Join<Advertisement, City> join = from.join("cityOfWorking");
+                join = from.join("cityOfWorking");
+                break;
+            case "Status":
+                join = from.join("status");
+                break;
 
         }
 
         ParameterExpression<Object> parameter = criteriaBuilder.parameter(Object.class);
-        criteria.select(from).where(criteriaBuilder.equal(join.get("id"), parameter)); // ha joinolt bálának az id-ját akarod berakni akkor nem működik,az csak egy kapocs
+        criteria.select(from).where(criteriaBuilder.equal(join.get("id"), parameter));
 
         TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
         newQuery.setParameter(parameter, filter);
