@@ -38,6 +38,7 @@ public class Server {
 
         enableDebugScreen();
 
+        get("/companyIndex", Controller::renderCompanyPage, new ThymeleafTemplateEngine());
 
         get("/new-advertisement", Controller::renderNewAdvertisementPage, new ThymeleafTemplateEngine());
 

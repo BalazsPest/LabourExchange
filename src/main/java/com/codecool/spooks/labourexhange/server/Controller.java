@@ -28,6 +28,21 @@ public class Controller {
         return new ModelAndView(params, "index");
     }
 
+    public static ModelAndView renderCompanyPage(Request req, Response res) {
+        List<Advertisement> advertisements = thisController.getActiveAdvert();
+        List<City> cities = thisController.getCityNames();
+        List<Field> fields = thisController.getFields();
+        Map<String, Object> params = new HashMap<>();
+        params.put("cities", cities);
+        params.put("advertisement", advertisements);
+        params.put("fields", fields);
+        return new ModelAndView(params, "companyIndex");
+    }
+
+
+
+
+
     public static ModelAndView getAdvertWithCity(Request req, Response res){
         String city = req.params("city");
         List<Advertisement> advertisementsWithCity = thisController.getAdvertsWithCities(city);
