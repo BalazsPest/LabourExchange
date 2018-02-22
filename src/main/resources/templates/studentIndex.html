@@ -5,7 +5,7 @@
 
 <body>
 
-<div th:replace="navBar :: copy"></div>
+<div th:replace="userNavBar :: copy"></div>
 
 <div class="container">
     <div class="row">
@@ -15,34 +15,20 @@
             <div class="list-group">
 
 
-                <div class="selectpicker">
-                    <label for="exampleSelect1">Sort by</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Top Rated</option>
-                        <option>Most Recent</option>
-                        <option> -- ! --</option>
-                    </select>
+                <div class="">
+                    <div class="card h-100">
+                        <a href="/new-advertisement"><img class="card-img-top" src="/img/student.jpg" alt=""/></a>
+                        <div class="card-body">
+
+                            <a href="/new-advertisement">Add new Advertisement</a>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="selectpicker">
-                    <label for="exampleSelect1">Location:</label>
-                    <select th:object="${cities}" class="form-control" id="exampleSelect2">
-                        <option th:each="cit : ${cities}"
-                                th:value="${cit.name}"
-                                th:text="${cit.name}"></option>
-                    </select>
-                </div>
-
-                <div class="selectpicker">
-                    <label for="exampleSelect1">Field:</label>
-                    <select class="form-control" th:object="${fields}" id="exampleSelect1">
-                        <option th:each="field : ${fields}"
-                                th:value="${field.name}"
-                                th:text="${field.name}"></option>
-                    </select>
-                </div>
                 <p></p>
-                <button type="button" class="btn btn-info">Search</button>
+
             </div>
         </div>
         <!-- /.col-lg-3 -->
@@ -76,17 +62,6 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/new-advertisement"><img class="card-img-top" src="/img/student.jpg" alt=""/></a>
-                        <div class="card-body">
-
-                            <a href="/new-advertisement">Add new Advertisement</a>
-                        </div>
-                        <div class="card-footer">
-                        </div>
-                    </div>
-                </div>
 
                 <div th:each="adv,iterStat : ${advertisement}" class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">

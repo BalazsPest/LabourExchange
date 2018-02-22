@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="copy">
+<div th:each="adv,iterStat : ${advertisement}" class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="/img/student.jpg" alt=""/></a>
+        <div class="card-body">
+            <h4 class="card-title" th:text="${adv.titleOfAdvert}"></h4>
+            <h5 th:text="${adv.FieldOfWork}"></h5>
+            <p class="card-text" th:text="${adv.descriptionOfAdvert}"></p>
+            <h6 th:text="${adv.student.name}" ></h6>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
