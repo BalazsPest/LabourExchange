@@ -9,6 +9,7 @@ import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Language;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 
+import com.codecool.spooks.labourexhange.model.users.Student;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -75,16 +76,6 @@ public class Controller {
 
     }
 
-    /*
-    public static ModelAndView getAdvertWithField(Request req, Response res){
-
-        List<Advertisement> advertisementsWithCity = thisController.getAdvertWithField();
-
-
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("advertisement", advertisementsWithCity);*/
-
 
     public ModelAndView getAdvertsWithCity(Request req, Response res){
         //String city = req.params("city");
@@ -123,15 +114,15 @@ public class Controller {
         Integer id = Integer.parseInt(req.queryParams("id"));
         Map<String, Object> params = domain.getAdvertById(id);
         return new ModelAndView(params, "index");
-    }
+    }*/
 
 
 
     public ModelAndView filterAdvert(Request req, Response res){
-        Object object = null;
-        Map<String, Object> params =domain.filterAdvertsBy(object);
+        Object object = req.queryParams();
+        Map<String, Object> params =domain.filterAdverts(object);
         return new ModelAndView(params, "index");
-    }*/
+    }
 
 
 
@@ -222,6 +213,12 @@ public class Controller {
         return null;
         /*if (thisController.getUserIfPasswordAndMailIsForSameUser(req)) {
             req.session().attribute("id", req.queryParams("id"));*/
+    }
+
+    public ModelAndView getStudentAdvert(Request req, Response res){
+        Integer id = Integer.parseInt(req.session().attribute("userId"));
+        Map<String, Object> params = domain.getAdvertsFromStudent(id);
+        return new ModelAndView(params, "index");
     }
 
 }

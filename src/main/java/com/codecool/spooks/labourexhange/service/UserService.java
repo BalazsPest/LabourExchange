@@ -30,6 +30,8 @@ public class UserService {
     }
 
 
+
+
     public void addUser(String userName, String name, String eMailAddress, String password, EntityManager em) {
         User someone = new Student(name, eMailAddress, userName, password);
 

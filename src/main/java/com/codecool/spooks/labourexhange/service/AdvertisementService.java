@@ -19,6 +19,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 public class AdvertisementService {
@@ -53,6 +54,20 @@ public class AdvertisementService {
 
         return newQuery.getResultList();
 
+    }
+
+    public List<Advertisement> getAdvertsFromStudent(EntityManager em,Integer id) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> from = criteria.from(Advertisement.class);
+        Join<Advertisement, Student> join = from.join("student");
+        ParameterExpression<Integer> parameter = criteriaBuilder.parameter(Integer.class);
+        criteria.select(from).where(criteriaBuilder.equal(join.get("id"), parameter));
+        TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
+        newQuery.setParameter(parameter, id);
+
+        return newQuery.getResultList();
     }
 
     public List<Advertisement> getAdvertsWithCity(EntityManager em,Integer id) {
@@ -98,17 +113,18 @@ public class AdvertisementService {
     }
 
 
-    /*public List<Advertisement> filterAdvertsBy(EntityManager em,Object filter) {
+    public List<Advertisement> filterAdvertsBy(EntityManager em,Object filter) {
+        String filterClass = filter.getClass().getSimpleName();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
         Root<Advertisement> from = criteria.from(Advertisement.class);
 
-        Join<Object, Object> join;
+        Join<Object, Object> join = null;
 
-        switch (filter.getClass().getSimpleName()){
+        switch (filterClass){
             case "Field":
-                join = from.join("field");
+                join = from.join("fieldOfWork");
                 break;
             case "City":
                 join = from.join("cityOfWorking");
@@ -116,17 +132,28 @@ public class AdvertisementService {
             case "Status":
                 join = from.join("status");
                 break;
+            case "Student":
+                join = from.join("student");
+                break;
 
         }
 
         ParameterExpression<Object> parameter = criteriaBuilder.parameter(Object.class);
-        criteria.select(from).where(criteriaBuilder.equal(join.get("id"), parameter));
+        if(Objects.equals(filterClass, "City") || Objects.equals(filterClass, "Field") || Objects.equals(filterClass, "Student")){
+            if (join != null) {
+                criteria.select(from).where(criteriaBuilder.equal(join.get("id"), parameter));
+            }
+            else{
+                System.out.println("wrong filter type");
+            }
+        }
+        criteria.select(from).where(criteriaBuilder.equal(from.get("id"), parameter));
 
         TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
         newQuery.setParameter(parameter, filter);
 
         return newQuery.getResultList();
-    }*/
+    }
 
     public List<Advertisement> getAdvertBetween(EntityManager em, Integer fromInt,Integer toInt) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();

@@ -129,8 +129,8 @@ public class Domain {
 
 
     public Map<String,Object> getUserById(Integer id) {
-        List<User> adverts = userService.getUserById(em,id);
-        container.put("advertisement",adverts);
+        List<User> user = userService.getUserById(em,id);
+        container.put("user",user);
         return container;
     }
 
@@ -187,9 +187,16 @@ public class Domain {
         return true;
     }
 
-    /*public Map<String,Object> filterAdvertsBy(Object filter) {
+    public Map<String,Object> filterAdverts(Object filter) {
+
         List<Advertisement> adverts =advertisementService.filterAdvertsBy(em,filter);
         container.put("advertisement",adverts);
         return container;
-    }*/
+    }
+
+    public Map<String,Object> getAdvertsFromStudent(Integer id){
+        List<Advertisement> adverts =advertisementService.getAdvertsFromStudent(em,id);
+        container.put("advertisement",adverts);
+        return container;
+    }
 }
