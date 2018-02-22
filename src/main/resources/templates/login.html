@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: copy"></head>
+<body>
+
+<div th:replace="navBar :: copy"></div>
+
+<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>Login to Your Account</h1><br/>
+            <form>
+                <input th:type="text" th:name="user" placeholder="Username"/>
+                <input th:type="password" th:name="pass" placeholder="Password"/>
+                <input th:type="submit" th:name="login" class="login loginmodal-submit" th:value="Login"/>
+            </form>
+
+            <div class="login-help">
+                <a href="/registration">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="footer :: copy"></div>
+</body>
+</html>
