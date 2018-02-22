@@ -192,4 +192,12 @@ public class Domain {
         container.put("advertisement",adverts);
         return container;
     }*/
+
+
+    public Map<String,Object> getAdvertsFromStudent(Integer id){
+        List<Advertisement> adverts =advertisementService.getAdvertsFromStudent(em,id);
+        container.put("advertisement",adverts);
+        return container;
+    }
+
 }

@@ -192,7 +192,7 @@ public class Controller {
             //req.session().attribute("id", req.queryParams("id"));
 
             //if (thisController.addUser(req)) {
-            res.redirect("/studentIndex");
+            res.redirect("/login");
         }
         //is it okay?
         params.put("notManagedToRegistrate", true);
@@ -204,8 +204,18 @@ public class Controller {
     public ModelAndView userLogin(Request req, Response res) {
         Map<String, Object> params = new HashMap<>();
         params.put("login", true);
-        return new ModelAndView(params, "registration");
+        params.put("studentId", req.session().attribute("userId"));
+        return new ModelAndView(params, "login");
     }
+
+
+    public ModelAndView logout(Request req, Response res) {
+        Map<String, Object> params = new HashMap<>();
+        System.out.println("session element: " + req.session().attributes());
+        req.session().removeAttribute("userId");
+        return new ModelAndView(params, "index");
+    }
+
 
 
     public ModelAndView authenticateUserAfterLogin(Request req, Response res) {
@@ -216,9 +226,9 @@ public class Controller {
         if (id != 0) {
             req.session().attribute("userId", userId);
             System.out.println((String) req.session().attribute("userId"));
-            res.redirect("/index");
+            res.redirect("/studentIndex"); //TODO logika ha student vagy ha company
         } else {
-            res.redirect("/registration");
+            res.redirect("/login");
         }
         return null;
         /*if (thisController.getUserIfPasswordAndMailIsForSameUser(req)) {
@@ -238,6 +248,11 @@ public class Controller {
         return new ModelAndView(params, "companyIndex");
     }
 
-
+    public ModelAndView getStudentAdvert(Request req, Response res){
+        System.out.println((String)req.session().attribute("userId"));
+        Integer id = Integer.parseInt(req.session().attribute("userId"));
+        Map<String, Object> params = domain.getAdvertsFromStudent(id);
+        return new ModelAndView(params, "studentIndex");
+    }
 
 }
