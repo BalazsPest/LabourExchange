@@ -31,7 +31,7 @@ public class Controller {
 
 
 
-    public ModelAndView getActiveAdverts(Request req, Response res){
+    public ModelAndView renderActiveAdvertisements(Request req, Response res){
         Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
         System.out.println(params);
         return new ModelAndView(params, "index");
