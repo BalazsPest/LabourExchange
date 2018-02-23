@@ -51,11 +51,18 @@ public class Server {
         return new ModelAndView(model, "registration");
         }, new ThymeleafTemplateEngine());
         get("/login", controller::userLogin, new ThymeleafTemplateEngine());
+        get("/logout", controller::logout, new ThymeleafTemplateEngine());
+
+
+
         post("/authenticateuser", controller::authenticateUserAfterLogin);
         post("/registrateuser", controller:: registrateUser, new ThymeleafTemplateEngine());
         get("/index", controller::renderActiveAdvertisements, new ThymeleafTemplateEngine());
         enableDebugScreen();
-        get("/companyIndex", controller::renderActiveAdvertisements, new ThymeleafTemplateEngine());
+        get("/companyIndex", controller::renderCompanyIndex, new ThymeleafTemplateEngine());
+        get("/studentIndex", controller::getStudentAdvert, new ThymeleafTemplateEngine());
+
+
 
         get("/filter/:city", controller::getAdvertWithCity, new ThymeleafTemplateEngine());
 

@@ -3,7 +3,6 @@ package com.codecool.spooks.labourexhange.controller;
 
 import com.codecool.spooks.labourexhange.domain.Domain;
 import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
-import com.codecool.spooks.labourexhange.domain.DBController;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Language;
@@ -63,7 +62,7 @@ public class Controller {
         Map<String, Object> filteredParams = new HashMap<>();
 
 
-        List<City> cities = domain.getCityNames();
+        List<City> cities = domain.getCities();
         filteredParams.put("cities", cities);
         int cityId = Integer.parseInt(req.queryParams("city"));
 
@@ -137,7 +136,7 @@ public class Controller {
 
     public ModelAndView renderNewAdvertisementPage(Request req, Response res){
         Map<String, Object> params = new HashMap<>();
-        List<City> cities = domain.getCityNames();
+        List<City> cities = domain.getCities();
         List<Language> languages = domain.getLanguages();
         List<Field> fields = domain.getFields();
         if (cities != null && languages!= null && fields!= null) {
@@ -155,15 +154,13 @@ public class Controller {
         int id = Integer.parseInt(req.session().attribute("userId"));
         //int id = 1;
         System.out.println("id: " + id);
-
         String title = req.queryParams("title");
         String description = req.queryParams("description");
         String field = req.queryParams("field");
         String city = req.queryParams("city");
 
-
-        String filterCity = req.queryParams("filterCity");
-        System.out.println("Filtercity:" + filterCity);
+        //String filterCity = req.queryParams("filterCity");
+        //System.out.println("Filtercity:" + filterCity);
 
         int weeklyCapacity = Integer.parseInt(req.queryParams("weeklyCapacity"));
         int requestedMoney = Integer.parseInt(req.queryParams("requestedMoney"));
@@ -173,7 +170,7 @@ public class Controller {
 
 
         if (domain.createNewAdvertisement(id, title, description, field, city, weeklyCapacity, requestedMoney)) {
-            res.redirect("index");
+            res.redirect("studentIndex");
         } else {
             res.redirect("404");
         }
@@ -196,6 +193,7 @@ public class Controller {
         }
         //is it okay?
         params.put("notManagedToRegistrate", true);
+        System.out.println("registration didnt workinh");
         return new ModelAndView(params, "registration");
     }
 
@@ -203,8 +201,18 @@ public class Controller {
     public ModelAndView userLogin(Request req, Response res) {
         Map<String, Object> params = new HashMap<>();
         params.put("login", true);
-        return new ModelAndView(params, "registration");
+        params.put("studentId", req.session().attribute("userId"));
+        return new ModelAndView(params, "login");
     }
+
+
+    public ModelAndView logout(Request req, Response res) {
+        Map<String, Object> params = new HashMap<>();
+        System.out.println("session element: " + req.session().attributes());
+        req.session().removeAttribute("userId");
+        return new ModelAndView(params, "index");
+    }
+
 
 
     public ModelAndView authenticateUserAfterLogin(Request req, Response res) {
@@ -215,13 +223,32 @@ public class Controller {
         if (id != 0) {
             req.session().attribute("userId", userId);
             System.out.println((String) req.session().attribute("userId"));
-            res.redirect("/index");
+            res.redirect("/studentIndex"); //TODO logika ha student vagy ha company
         } else {
-            res.redirect("/registration");
+            res.redirect("/login");
         }
         return null;
         /*if (thisController.getUserIfPasswordAndMailIsForSameUser(req)) {
             req.session().attribute("id", req.queryParams("id"));*/
     }
 
+
+
+    public ModelAndView renderStudentIndex(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
+        System.out.println(params);
+        return new ModelAndView(params, "studentIndex");
+    }
+    public ModelAndView renderCompanyIndex(Request req, Response res){
+        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
+        System.out.println(params);
+        return new ModelAndView(params, "companyIndex");
+    }
+
+    public ModelAndView getStudentAdvert(Request req, Response res){
+        System.out.println((String)req.session().attribute("userId"));
+        Integer id = Integer.parseInt(req.session().attribute("userId"));
+        Map<String, Object> params = domain.getAdvertsFromStudent(id);
+        return new ModelAndView(params, "studentIndex");
+    }
 }

@@ -5,7 +5,7 @@
 
   <body>
 
-  <div th:replace="navBar :: copy"></div>
+  <div th:replace="userNavBar :: copy"></div>
 
     <div class="container">
       <div class="row">
@@ -76,18 +76,6 @@
           </div>
 
           <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="/new-advertisement"><img class="card-img-top" src="/img/student.jpg" alt=""/></a>
-                <div class="card-body">
-
-                    <a href="/new-advertisement">Add new Advertisement</a>
-                </div>
-                <div class="card-footer">
-                </div>
-              </div>
-            </div>
-
             <div th:each="adv,iterStat : ${advertisement}" class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
                 <a href="#"><img class="card-img-top" src="/img/student.jpg" alt=""/></a>

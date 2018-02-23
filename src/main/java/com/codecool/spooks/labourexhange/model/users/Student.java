@@ -37,7 +37,7 @@ public class Student extends User {
     List<Language> languagesSpoken = new ArrayList<>();
 
 
-    public Student() { }
+    public Student(String someone, String asdf, String asdfa) { }
 
     public Student(String name, String userName, String eMailAddress, String password) {
         super(name, userName, eMailAddress, password);

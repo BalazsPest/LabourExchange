@@ -24,6 +24,7 @@ import java.util.List;
 public class AdvertisementService {
 
     public Advertisement addNewAdvert(Student studentOfAdv, Field fieldOfAdv, String title, String description, Date date, int weeklyCapacity, int requestedMoney, City cityOfAdv, List<Tag> tags, EntityManager em) {
+
         Advertisement newAdvertisement = new Advertisement(studentOfAdv, Status.ACTIVE, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags);
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
@@ -139,4 +140,20 @@ public class AdvertisementService {
 
         return newQuery.getResultList();
     }
+
+    public List<Advertisement> getAdvertsFromStudent(EntityManager em,Integer id) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
+        Root<Advertisement> from = criteria.from(Advertisement.class);
+        Join<Advertisement, Student> join = from.join("student");
+        ParameterExpression<Integer> parameter = criteriaBuilder.parameter(Integer.class);
+        criteria.select(from).where(criteriaBuilder.equal(join.get("id"), parameter));
+        TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
+        newQuery.setParameter(parameter, id);
+
+        return newQuery.getResultList();
+    }
+
+
 }

@@ -72,7 +72,7 @@ public class UserService {
             Student student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
             return student;
         } catch (NoResultException e) {
-            System.out.println(" E R R O R");
+            System.out.println(" E R R O R student");
         }
         return null;
     }
