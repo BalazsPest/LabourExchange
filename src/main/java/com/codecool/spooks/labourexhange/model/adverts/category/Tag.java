@@ -10,7 +10,7 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String WorkCategName;
+    private String name;
 
     @ManyToOne
     private Field field;
@@ -18,21 +18,21 @@ public class Tag {
     public Tag() { }
 
     public Tag(String name, Field field){
-        this.WorkCategName = name;
+        this.name = name;
         this.field = field;
-        field.addTagForField(this);
+        //field.addTagForField(this);
     }
 
     public long getId() {
         return id;
     }
 
-    public String getWorkCategName() {
-        return WorkCategName;
+    public String getName() {
+        return name;
     }
 
-    public void setWorkCategName(String workCategName) {
-        this.WorkCategName = workCategName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Field getFieldTitle() {
@@ -47,7 +47,7 @@ public class Tag {
     public String toString() {
         return "Tag{" +
                 "id=" + id +
-                ", WorkCategName='" + WorkCategName + '\'' +
+                ", name='" + name + '\'' +
                 ", field=" + field +
                 '}';
     }

@@ -138,8 +138,10 @@ public class AdvertisementService {
         return newQuery.getResultList();
     }
 
-    public List<Advertisement> getAdvertsFromStudent(EntityManager em,Integer id) {
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    public List<Advertisement> getAdvertsFromStudent(Integer id) {
+        System.out.println("belép");
+        return advertisementRepository.findByStudentId(id);
+        /*CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<Advertisement> criteria = criteriaBuilder.createQuery(Advertisement.class);
         Root<Advertisement> from = criteria.from(Advertisement.class);
@@ -149,7 +151,7 @@ public class AdvertisementService {
         TypedQuery<Advertisement> newQuery = em.createQuery(criteria);
         newQuery.setParameter(parameter, id);
 
-        return newQuery.getResultList();
+        return newQuery.getResultList();*/
     }
 
 

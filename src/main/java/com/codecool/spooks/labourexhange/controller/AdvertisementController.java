@@ -61,7 +61,7 @@ public class AdvertisementController {
                                    @RequestParam("requestedMoney")int requestedMoney){
             // int id = Integer.parseInt(req.session().attribute("userId"));
         //Todo
-        Integer id = 5;
+        Integer id = 1;
         Field fieldOfAdv = fieldService.getFieldByName(fieldName);
         City cityOfAdv = cityService.getCityByName(cityName);
         Student studentOfAdv = studentService.getStudentById(id);

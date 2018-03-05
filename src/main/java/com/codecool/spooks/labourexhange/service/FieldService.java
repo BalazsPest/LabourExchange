@@ -29,4 +29,13 @@ public class FieldService {
             return null;
         }*/
     }
+
+    public void addField(String fieldName) {
+        Field newField = new Field(fieldName);
+        fieldRepository.save(newField);
+    }
+
+    public void saveField(Field field) {
+        fieldRepository.save(field);
+    }
 }

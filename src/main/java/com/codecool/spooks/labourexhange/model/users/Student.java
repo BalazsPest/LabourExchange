@@ -36,8 +36,7 @@ public class Student extends User {
     @ManyToMany
     List<Language> languagesSpoken = new ArrayList<>();
 
-
-    public Student(String someone, String asdf, String asdfa) { }
+    public Student() {}
 
     public Student(String name, String userName, String eMailAddress, String password) {
         super(name, userName, eMailAddress, password);
@@ -52,7 +51,7 @@ public class Student extends User {
         this.userRole = UserRole.STUDENT;
         this.city = city;
         this.languagesSpoken = languages;
-        city.addStudents(this);
+        //city.addStudents(this);
     }
 
     public UserStatus getStatus() {
