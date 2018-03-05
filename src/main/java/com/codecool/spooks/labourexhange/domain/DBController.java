@@ -5,9 +5,7 @@ import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
 import com.codecool.spooks.labourexhange.model.users.*;
-import com.codecool.spooks.labourexhange.model.users.review.Review;
-import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
-import spark.Request;
+
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;
@@ -84,6 +82,7 @@ public class DBController {
         return advWithCity;
     }*/
 
+    /*
     public List<Advertisement> getAdverts() {
         EntityTransaction trans = em.getTransaction();
         if (!trans.isActive()) {
@@ -212,80 +211,10 @@ public class DBController {
         }
     }
 
-    public boolean checkUserPassword(Request req) {
-        String eMailAddress = req.queryParams("eMailAddress");
-        String password = req.queryParams("password");
-        try {
-            User user = em.createNamedQuery("checkUserPassword", User.class).
-                            setParameter("eMailAddress", eMailAddress).getSingleResult();
-            if (user.getPassword().equals(password)) {
-            /*if (password.equals(em.createNamedQuery("getUserIfPasswordAndMailIsForSameUser", User.class).
-                    setParameter("eMailAddress", eMailAddress).getSingleResult())) {*/
-                return true;
-            }
-        } catch (NoResultException e) {
-            System.out.println("There is no user registrated with that password");
-            return false;
-        }
-        return false;
-    }
-
-    public boolean createNewAdvertisement(int id, String title, String description,String name, String cityName, int weeklyCapacity, int requestedMoney){
 
 
 
-        Student student =null;
-        Field field = null;
-        City city = null;
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        List<Tag> tags = new ArrayList<>();
-        System.out.println(name);
-
-
-
-
-
-        try {
-            field = em.createNamedQuery("getFieldWithName", Field.class).setParameter("name", name).getSingleResult();
-
-        } catch (NoResultException e){
-            System.out.println(" E R R O R");
-        }
-
-        System.out.println("1");
-
-        try {
-            city = em.createNamedQuery("getCityByName", City.class).setParameter("name", cityName).getSingleResult();
-        } catch (NoResultException e){
-            System.out.println(" E R R O R");
-        }
-
-        System.out.println("2");
-
-        try {
-            student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
-        } catch (NoResultException e){
-            System.out.println(" E R R O R");
-        }
-
-        System.out.println("3");
-
-        Advertisement newAdvertisement = new Advertisement(student,Status.ACTIVE,field,title,description,date,weeklyCapacity,requestedMoney,city,tags);
-
-
-        System.out.println("4");
-
-        EntityTransaction trans = em.getTransaction();
-        em.persist(newAdvertisement);
-        trans.commit();
-        System.out.println("print");
-        return true;
-    }
-
-
-
-
+}
+*/
 }
 

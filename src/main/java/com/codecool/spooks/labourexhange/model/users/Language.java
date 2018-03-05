@@ -63,6 +63,6 @@ public class Language {
     public enum LanguageLevel {
         BASIC,
         INTERMEDIATE,
-        HIGH;
+        HIGH
     }
 }

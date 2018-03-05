@@ -4,18 +4,9 @@ import com.codecool.spooks.labourexhange.controller.Controller;
 import com.codecool.spooks.labourexhange.domain.Domain;
 import com.codecool.spooks.labourexhange.service.*;
 
-import spark.template.thymeleaf.ThymeleafTemplateEngine;
-
-import static spark.Spark.get;
-
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
 
 import java.util.HashMap;
 
-import static spark.Spark.*;
-import static spark.debug.DebugScreen.enableDebugScreen;
 
 
 public class Server {
@@ -28,6 +19,7 @@ public class Server {
         this.controller = controller;
     }
 
+    /*
     public static void main(String[] args) {
         UserService usrService = new UserService();
         AdvertisementService advService = new AdvertisementService();
@@ -37,6 +29,7 @@ public class Server {
         Domain domain = new Domain(advService, usrService, fieldService, cityService, lngService);
         Controller controller = new Controller(domain);
         Server server = new Server(controller);
+
 
 
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
@@ -57,18 +50,12 @@ public class Server {
 
         post("/authenticateuser", controller::authenticateUserAfterLogin);
         post("/registrateuser", controller:: registrateUser, new ThymeleafTemplateEngine());
-        get("/index", controller::renderActiveAdvertisements, new ThymeleafTemplateEngine());
-        enableDebugScreen();
-        get("/companyIndex", controller::renderCompanyIndex, new ThymeleafTemplateEngine());
-        get("/studentIndex", controller::getStudentAdvert, new ThymeleafTemplateEngine());
+
 
 
 
         get("/filter/:city", controller::getAdvertWithCity, new ThymeleafTemplateEngine());
 
-
-        get("/new-advertisement", controller::renderNewAdvertisementPage, new ThymeleafTemplateEngine());
-        post("/make-advertisement", controller::makeAdvertisement, new ThymeleafTemplateEngine());
 
 
         get("/filter",(Request req, Response res) -> {
@@ -84,6 +71,5 @@ public class Server {
         //get("/companys", //ProductController::renderProducts, new ThymeleafTemplateEngine());
 
         //get("/student", //ProductController::renderProducts, new ThymeleafTemplateEngine()); show citys and their students
-
+*/
     }
-}

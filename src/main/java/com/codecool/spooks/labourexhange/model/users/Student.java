@@ -118,6 +118,6 @@ public class Student extends User {
     public enum Gender{
         FEMALE,
         MALE,
-        OTHER;
+        OTHER
     }
 }

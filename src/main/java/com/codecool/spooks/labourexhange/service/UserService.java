@@ -2,6 +2,9 @@ package com.codecool.spooks.labourexhange.service;
 
 import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.model.users.User;
+import com.codecool.spooks.labourexhange.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import javax.persistence.EntityManager;
@@ -12,10 +15,12 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.List;
 
+
 public class UserService {
 
-
-    public List<User> getUserById(EntityManager em, Integer id) {
+/*
+    public User getUserById(Integer id) {
+        return userRepository.findById(id);
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
@@ -28,6 +33,7 @@ public class UserService {
 
         return newQuery.getResultList();
     }
+    */
 
 
     public void addUser(String userName, String name, String eMailAddress, String password, EntityManager em) {
@@ -67,6 +73,7 @@ public class UserService {
         return null;
     }
 
+    /*
     public Student findStudent(int id, EntityManager em) {
         try {
             Student student = em.createNamedQuery("getStudentById", Student.class).setParameter("id", id).getSingleResult();
@@ -76,4 +83,5 @@ public class UserService {
         }
         return null;
     }
+    */
 }

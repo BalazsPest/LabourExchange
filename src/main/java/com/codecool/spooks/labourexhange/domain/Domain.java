@@ -59,6 +59,7 @@ public class Domain {
     }
 
     //WRONG NAME -------------------------------
+    /*
     public List<City> getCities() {
         List <City> cities = cityService.getCities(em);
         if (cities != null) {
@@ -67,6 +68,7 @@ public class Domain {
         }
         return null;
     }
+    */
     // i think it will be unnecessary or not here
     public City cityById(int id) {
         System.out.println("citybyid");
@@ -78,6 +80,7 @@ public class Domain {
         return null;
     }
 
+    /*
     public List<Language> getLanguages() {
         List <Language> languages = lngService.getLanguages(em);
         if (languages != null) {
@@ -86,7 +89,9 @@ public class Domain {
         }
         return null;
     }
+    */
 
+    /*
     public List<Field> getFields() {
         List<Field> fields = fieldService.getFields(em);
         if (fields != null) {
@@ -95,15 +100,17 @@ public class Domain {
         }
         return null;
     }
+    */
 
 
 
-
+/*
     public Map<String, Object> getAdvertsWithStatus(Status status){
         List<Advertisement> adverts = advertisementService.getAdvertWithStatus(em,status);
         container.put("advertisement",adverts);
         return container;
     }
+    */
 
     public Map<String,Object> getAdvertsWithCity(Integer id) {
         List<Advertisement> adverts =advertisementService.getAdvertsWithCity(em,id);
@@ -127,12 +134,14 @@ public class Domain {
 
 
 
+    /*
 
     public Map<String,Object> getUserById(Integer id) {
         List<User> adverts = userService.getUserById(em,id);
         container.put("advertisement",adverts);
         return container;
     }
+    */
 
 
 
@@ -167,25 +176,7 @@ public class Domain {
         return 0;
     }
 
-    public boolean createNewAdvertisement(int id, String title, String description, String fieldName, String cityName, int weeklyCapacity, int requestedMoney) {
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        List<Tag> tags = new ArrayList<>();
-
-        Field fieldOfAdv = fieldService.findField(fieldName, em);
-        City cityOfAdv = cityService.findCity(cityName, em);
-        Student studentOfAdv = userService.findStudent(id, em);
-        if (fieldOfAdv != null && cityOfAdv != null && studentOfAdv != null) {
-            try {
-                Advertisement newAdvert = advertisementService.addNewAdvert(studentOfAdv, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags, em);
-            } catch (NullPointerException e) {
-                System.out.println("cant make advert");
-                return false;
-            }
-        }
-        return true;
-    }
 
     /*public Map<String,Object> filterAdvertsBy(Object filter) {
         List<Advertisement> adverts =advertisementService.filterAdvertsBy(em,filter);

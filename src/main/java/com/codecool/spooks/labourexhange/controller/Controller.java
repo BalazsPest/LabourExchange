@@ -8,9 +8,6 @@ import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Language;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
 
 
 import java.util.HashMap;
@@ -29,7 +26,7 @@ public class Controller {
     }
 
 
-
+/*
     public ModelAndView renderActiveAdvertisements(Request req, Response res){
         Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
         System.out.println(params);
@@ -82,13 +79,10 @@ public class Controller {
 
 
         Map<String, Object> params = new HashMap<>();
-        params.put("advertisement", advertisementsWithCity);*/
+        params.put("advertisement", advertisementsWithCity);
 
 
-    public ModelAndView getAdvertsWithCity(Request req, Response res){
-        //String city = req.params("city");
-        Map<String, Object> params = domain.getAdvertsWithCity(1);
-        return new ModelAndView(params, "index");
+
     }
 
 
@@ -118,7 +112,7 @@ public class Controller {
 
 
 
-    /*public ModelAndView getadvertisement(Request req, Response res) {
+    public ModelAndView getadvertisement(Request req, Response res) {
         Integer id = Integer.parseInt(req.queryParams("id"));
         Map<String, Object> params = domain.getAdvertById(id);
         return new ModelAndView(params, "index");
@@ -130,7 +124,7 @@ public class Controller {
         Object object = null;
         Map<String, Object> params =domain.filterAdvertsBy(object);
         return new ModelAndView(params, "index");
-    }*/
+    }
 
 
 
@@ -151,30 +145,9 @@ public class Controller {
 
     public ModelAndView makeAdvertisement(Request req, Response res) {
 
-        int id = Integer.parseInt(req.session().attribute("userId"));
-        //int id = 1;
-        System.out.println("id: " + id);
-        String title = req.queryParams("title");
-        String description = req.queryParams("description");
-        String field = req.queryParams("field");
-        String city = req.queryParams("city");
 
         //String filterCity = req.queryParams("filterCity");
         //System.out.println("Filtercity:" + filterCity);
-
-        int weeklyCapacity = Integer.parseInt(req.queryParams("weeklyCapacity"));
-        int requestedMoney = Integer.parseInt(req.queryParams("requestedMoney"));
-
-        System.out.println("field" + field);
-        System.out.println("descrpition" + description);
-
-
-        if (domain.createNewAdvertisement(id, title, description, field, city, weeklyCapacity, requestedMoney)) {
-            res.redirect("studentIndex");
-        } else {
-            res.redirect("404");
-        }
-        return null;
     }
 
 
@@ -228,8 +201,8 @@ public class Controller {
             res.redirect("/login");
         }
         return null;
-        /*if (thisController.getUserIfPasswordAndMailIsForSameUser(req)) {
-            req.session().attribute("id", req.queryParams("id"));*/
+        if (thisController.getUserIfPasswordAndMailIsForSameUser(req)) {
+            req.session().attribute("id", req.queryParams("id"));
     }
 
 
@@ -251,4 +224,5 @@ public class Controller {
         Map<String, Object> params = domain.getAdvertsFromStudent(id);
         return new ModelAndView(params, "studentIndex");
     }
+    */
 }

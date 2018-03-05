@@ -8,38 +8,33 @@ import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.model.users.User;
-import spark.Request;
-import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.repository.AdvertisementRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.List;
-import javax.persistence.NoResultException;
 import java.util.Date;
-import java.util.List;
 
 
+@Service
 public class AdvertisementService {
 
-    public Advertisement addNewAdvert(Student studentOfAdv, Field fieldOfAdv, String title, String description, Date date, int weeklyCapacity, int requestedMoney, City cityOfAdv, List<Tag> tags, EntityManager em) {
+    @Autowired
+    AdvertisementRepository advertisementRepository;
+
+    public Advertisement addNewAdvert(Student studentOfAdv, Field fieldOfAdv, String title, String description, Date date, int weeklyCapacity, int requestedMoney, City cityOfAdv, List<Tag> tags) {
 
         Advertisement newAdvertisement = new Advertisement(studentOfAdv, Status.ACTIVE, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags);
-        EntityTransaction trans = em.getTransaction();
-        if (!trans.isActive()) {
-            trans.begin();
-        }
-        em.persist(newAdvertisement);
-        trans.commit();
-        System.out.println(newAdvertisement);
-        return newAdvertisement;
+        return advertisementRepository.save(newAdvertisement);
     }
 
 
 
-    public List<Advertisement> getAdvertWithStatus(EntityManager em, Status status) {
-        EntityTransaction trans = em.getTransaction();
+    public List<Advertisement> getAdvertsWithStatus(Status status) {
+        /* EntityTransaction trans = em.getTransaction();
 
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -53,6 +48,8 @@ public class AdvertisementService {
         newQuery.setParameter(parameter, status);
 
         return newQuery.getResultList();
+        */
+        return advertisementRepository.findByStatus(status);
 
     }
 

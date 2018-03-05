@@ -11,6 +11,7 @@ import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.model.users.review.Review;
 import com.codecool.spooks.labourexhange.model.users.review.SatisfactionLevel;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.Arrays;
