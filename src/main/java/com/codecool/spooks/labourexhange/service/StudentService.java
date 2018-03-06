@@ -25,8 +25,10 @@ public class StudentService {
         Student newStudent = new Student(name, eMailAddress, userName, password, gender, birthdate, city, languages);
         studentRepository.save(newStudent);
     }
-
-
+     public void addStudent(String userName, String name, String eMailAddress, String password) {
+         Student newStudent = new Student(name, eMailAddress, userName, password);
+         studentRepository.save(newStudent);
+     }
 
     public void saveStudent(Student student) {
         studentRepository.save(student);
