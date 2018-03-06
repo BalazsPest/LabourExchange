@@ -37,9 +37,4 @@ public class AdvertisementService {
         return advertisementRepository.findByStudentId(id);
     }
 
-
-    public List<Advertisement> getAdvertsFromStudent(Integer id) {
-        System.out.println("belép");
-        return advertisementRepository.findByStudentId(id);
-    }
 }
