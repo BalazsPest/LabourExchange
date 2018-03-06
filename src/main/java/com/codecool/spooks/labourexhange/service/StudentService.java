@@ -31,4 +31,9 @@ public class StudentService {
         studentRepository.save(student);
     }
 
+    public Student getStudentByUsername(String username){
+       return studentRepository.findByUserName(username);
     }
+
+    }
+
