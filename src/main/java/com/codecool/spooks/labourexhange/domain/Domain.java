@@ -105,7 +105,7 @@ public class Domain {
 
 
 /*
-    public Map<String, Object> getAdvertsWithStatus(Status status){
+    public Map<String, Object> getAdvertsByStatus(Status status){
         List<Advertisement> adverts = advertisementService.getAdvertWithStatus(em,status);
         container.put("advertisement",adverts);
         return container;

@@ -33,7 +33,7 @@ public class AdvertisementService {
 
 
 
-    public List<Advertisement> getAdvertsWithStatus(Status status) {
+    public List<Advertisement> getAdvertsByStatus(Status status) {
         /* EntityTransaction trans = em.getTransaction();
 
 

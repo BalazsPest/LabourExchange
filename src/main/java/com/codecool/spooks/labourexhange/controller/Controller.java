@@ -28,7 +28,7 @@ public class Controller {
 
 /*
     public ModelAndView renderActiveAdvertisements(Request req, Response res){
-        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
+        Map<String, Object> params = domain.getAdvertsByStatus(Status.ACTIVE);
         System.out.println(params);
         return new ModelAndView(params, "index");
     }
@@ -208,12 +208,12 @@ public class Controller {
 
 
     public ModelAndView renderStudentIndex(Request req, Response res){
-        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
+        Map<String, Object> params = domain.getAdvertsByStatus(Status.ACTIVE);
         System.out.println(params);
         return new ModelAndView(params, "studentIndex");
     }
     public ModelAndView renderCompanyIndex(Request req, Response res){
-        Map<String, Object> params = domain.getAdvertsWithStatus(Status.ACTIVE);
+        Map<String, Object> params = domain.getAdvertsByStatus(Status.ACTIVE);
         System.out.println(params);
         return new ModelAndView(params, "companyIndex");
     }
