@@ -97,8 +97,6 @@ public class Domain {
     }
 
 
-
-
     public Map<String, Object> getAdvertsWithStatus(Status status){
         List<Advertisement> adverts = advertisementService.getAdvertWithStatus(em,status);
         container.put("advertisement",adverts);
@@ -123,9 +121,6 @@ public class Domain {
         container.put("advertisement",adverts);
         return container;
     }
-
-
-
 
 
     public Map<String,Object> getUserById(Integer id) {

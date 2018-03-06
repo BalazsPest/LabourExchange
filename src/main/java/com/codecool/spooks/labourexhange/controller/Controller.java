@@ -13,6 +13,7 @@ import spark.Request;
 import spark.Response;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +36,6 @@ public class Controller {
         System.out.println(params);
         return new ModelAndView(params, "index");
     }
-
-
 
     public ModelAndView renderAdvertisement(Request req, Response res){
 
@@ -251,4 +250,21 @@ public class Controller {
         Map<String, Object> params = domain.getAdvertsFromStudent(id);
         return new ModelAndView(params, "studentIndex");
     }
+
+    public ModelAndView renderStudentProfilePage (Request req, Response res){
+        Map<String, Object> params = new HashMap<>();
+        List<Language> languages = new ArrayList<>();
+        languages = domain.getLanguages();
+
+        return new ModelAndView(params, "studentProfile");
+    }
+
+    public ModelAndView renderCompanyProfilePage (Request req, Response res){
+        Map<String, Object> params = new HashMap<>();
+        return new ModelAndView(params, "companyProfile");
+    }
+
+
+
+
 }

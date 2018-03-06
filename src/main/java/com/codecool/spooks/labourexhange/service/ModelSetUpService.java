@@ -43,6 +43,10 @@ public class ModelSetUpService {
 
         Advertisement adv = new Advertisement(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "I do everything", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr));
         Advertisement adv2 = new Advertisement(stud1, Status.ACTIVE, catering, "Dishwashing", "I almost do nothing", new Date(), 10, 700, Ms, Arrays.asList(cook));
+        Advertisement adv3 = new Advertisement(stud1, Status.ACTIVE, catering, "Tresaure hunter","I can you Gooooold for you", new Date(), 10,700,Bp, Arrays.asList(cook));
+        Advertisement adv4 = new Advertisement(stud1, Status.ACTIVE, catering, "BabySitter","The best in the city", new Date(), 10,700,Bp, Arrays.asList(cook));
+
+
         Review rev1 = new Review("you are not so funny", comp1, stud1, SatisfactionLevel.FIVE);
 
         EntityTransaction trans = em.getTransaction();
@@ -66,6 +70,8 @@ public class ModelSetUpService {
         em.persist(cook);
         em.persist(adv);
         em.persist(adv2);
+        em.persist(adv3);
+        em.persist(adv4);
         em.persist(rev1);
         trans.commit();
     }

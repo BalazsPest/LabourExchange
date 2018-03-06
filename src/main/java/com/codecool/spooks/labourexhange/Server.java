@@ -41,7 +41,7 @@ public class Server {
 
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
-        port(9992);
+        port(9993);
 
 
 
@@ -73,6 +73,9 @@ public class Server {
 
         get("/filter",(Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render( controller.renderAdvertisementsByFilter(req, res));});
+
+        get("/studentProfile", controller::renderStudentProfilePage, new ThymeleafTemplateEngine());
+        get("/companyProfile", controller::renderCompanyProfilePage, new ThymeleafTemplateEngine());
 
 
 
