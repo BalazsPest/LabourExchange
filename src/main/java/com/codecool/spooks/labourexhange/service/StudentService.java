@@ -4,7 +4,6 @@ package com.codecool.spooks.labourexhange.service;
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Language;
 import com.codecool.spooks.labourexhange.model.users.Student;
-import com.codecool.spooks.labourexhange.model.users.User;
 import com.codecool.spooks.labourexhange.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +26,6 @@ public class StudentService {
         studentRepository.save(newStudent);
     }
 
-    public void saveStudent(Student student) {
-        studentRepository.save(student);
-    }
 
     public Student getStudentByUsername(String username){
        return studentRepository.findByUserName(username);

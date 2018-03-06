@@ -27,7 +27,7 @@ public class Student extends User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private City city;
 
     @OneToMany(mappedBy = "student")
