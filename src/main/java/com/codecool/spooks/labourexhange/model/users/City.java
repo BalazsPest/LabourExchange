@@ -21,6 +21,7 @@ public class City {
 
     //other place declared obj variable name
     @OneToMany(mappedBy = "city")
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "city", cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<>();
 
     @OneToMany(mappedBy = "cityOfWorking")
@@ -30,7 +31,8 @@ public class City {
         this.name = name;
     }
 
-    public City() { }
+    public City() {
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -63,6 +65,9 @@ public class City {
     public int getId() {
         return id;
     }
+
+
+
 
     @Override
     public String toString() {

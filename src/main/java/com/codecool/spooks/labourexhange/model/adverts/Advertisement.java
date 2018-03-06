@@ -72,10 +72,11 @@ public class Advertisement {
         this.requestedMoneyPerHour = requestedMoneyPerHour;
         //this.spokenLanguages = student.getLanguagesSpoken();
         //student.addStudentsAdverts(this);
-        fieldOfWork.addAdvertisements(this);
-        addTagsOfAdvert(tagsOfAdvert);
+        //--------------kirakva az alsók MOST
+        //fieldOfWork.addAdvertisements(this);
+        //addTagsOfAdvert(tagsOfAdvert);
         this.cityOfWorking = city;
-        city.addAdverts(this);
+        //city.addAdverts(this);
     }
 
     public int getId() {
