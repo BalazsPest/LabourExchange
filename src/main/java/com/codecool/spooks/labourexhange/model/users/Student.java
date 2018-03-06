@@ -27,7 +27,7 @@ public class Student extends User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne //(cascade = CascadeType.ALL)
     private City city;
 
     @OneToMany(mappedBy = "student")
@@ -36,8 +36,7 @@ public class Student extends User {
     @ManyToMany
     List<Language> languagesSpoken = new ArrayList<>();
 
-
-    public Student(String someone, String asdf, String asdfa) { }
+    public Student() {}
 
     public Student(String name, String userName, String eMailAddress, String password) {
         super(name, userName, eMailAddress, password);
@@ -52,7 +51,7 @@ public class Student extends User {
         this.userRole = UserRole.STUDENT;
         this.city = city;
         this.languagesSpoken = languages;
-        city.addStudents(this);
+        //city.addStudents(this);
     }
 
     public UserStatus getStatus() {
@@ -118,6 +117,6 @@ public class Student extends User {
     public enum Gender{
         FEMALE,
         MALE,
-        OTHER;
+        OTHER
     }
 }

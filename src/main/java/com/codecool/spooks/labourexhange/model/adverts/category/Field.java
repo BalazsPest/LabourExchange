@@ -22,10 +22,10 @@ public class Field {
 
     private String name;
 
-    @OneToMany(mappedBy = "fieldOfWork")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fieldOfWork", cascade = CascadeType.ALL)
     private List<Advertisement> advertisements = new ArrayList<>();
 
-    @OneToMany(mappedBy = "field")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "field", cascade = CascadeType.ALL)
     private List<Tag> tagsOfFields = new ArrayList<>();
 
     public Field(){}
