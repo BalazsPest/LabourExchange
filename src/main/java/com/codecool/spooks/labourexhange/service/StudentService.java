@@ -36,13 +36,19 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    /*public boolean checkStudent(String userName, String eMailAddress) {
-        if (studentRepository.findByUserNameAndeMailAddress(userName, eMailAddress)!= null) {
+    public boolean checkStudent(String userName, String eMailAddress) {
+        /*if (studentRepository.findByUserNameAndEMailAddress(userName, eMailAddress)!= null) {
             return true;
         }
-        return false;
+        return false;*/
+        if (studentRepository.findByUserName(userName) != null || studentRepository.findByEMailAddress(eMailAddress) != null){
+            return true;
+        }
+        else {
+            return false;
+        }
 
-    }*/
+    }
 
 
 }
