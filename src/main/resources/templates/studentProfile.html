@@ -40,13 +40,22 @@
 				</span>
 
 
-            <!-- Enter your advertisment title -->
-            <div class="wrap-input100 validate-input bg1" data-validate="Please Type Your Name">
-                <span class="label-input100">ADVERTISEMENT TITLE *</span>
-                <input  th:for="title" th:name="title" th:required="required" class="input100" type="text" name="name" placeholder="Enter Your Advertisement Title"/>
+            <!-- Enter your company link -->
+            <div class="wrap-input100 validate-input bg1" data-validate=" Your URL">
+                <span class="label-input100">Introduce video link *</span>
+                <input  th:for="link" th:name="link" th:required="required" class="input100" type="link" name="name" placeholder="Your URL"/>
             </div>
-            <!-- end adv title -->
+            <!-- end link -->
 
+
+            <!-- Enter your photo link -->
+            <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Upload your photo">
+                <span class="label-input100">Upload your photo *</span>
+                <div>
+                    <input type="file" name="fileupload" value="fileupload" id="fileupload"/> <label for="fileupload"></label>
+                </div>
+            </div>
+            <!-- end photo -->
 
 
             <!-- choose your gender -->
