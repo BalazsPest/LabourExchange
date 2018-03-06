@@ -20,21 +20,16 @@ public class AdvertisementService {
     @Autowired
     AdvertisementRepository advertisementRepository;
 
-    public Advertisement addNewAdvert(Student studentOfAdv, Field fieldOfAdv, String title, String description, Date date, int weeklyCapacity, int requestedMoney, City cityOfAdv, List<Tag> tags) {
 
+    public Advertisement addNewAdvert(Student studentOfAdv, Field fieldOfAdv, String title, String description, Date date, int weeklyCapacity, int requestedMoney, City cityOfAdv, List<Tag> tags) {
         Advertisement newAdvertisement = new Advertisement(studentOfAdv, Status.ACTIVE, fieldOfAdv, title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags);
         return advertisementRepository.save(newAdvertisement);
     }
 
 
-
     public List<Advertisement> getAdvertsByStatus(Status status) {
         return advertisementRepository.findByStatus(status);
-
     }
-
-
-
 
 
     public List<Advertisement> getAdvertsFromStudent(Integer id) {
@@ -43,4 +38,8 @@ public class AdvertisementService {
     }
 
 
+    public List<Advertisement> getAdvertsFromStudent(Integer id) {
+        System.out.println("belép");
+        return advertisementRepository.findByStudentId(id);
+    }
 }

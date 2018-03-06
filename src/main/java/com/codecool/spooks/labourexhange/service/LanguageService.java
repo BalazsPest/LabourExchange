@@ -12,13 +12,17 @@ public class LanguageService {
     @Autowired
     LanguageRepository languageRepository;
 
+
     public List<Language> getLanguages() {
        return languageRepository.findAll();
     }
+
+
     public void addNewLanguage(String name, Language.LanguageLevel level) {
         Language newLanguage = new Language(name, level);
         languageRepository.save(newLanguage);
     }
+
 
     public Language getLanguageByName(String languageName) {
         return languageRepository.findLanguageByName(languageName);

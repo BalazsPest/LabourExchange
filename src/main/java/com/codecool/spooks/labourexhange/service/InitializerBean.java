@@ -24,8 +24,8 @@ public class InitializerBean {
         //Adding languages
         languageService.addNewLanguage("german", Language.LanguageLevel.BASIC);
         languageService.addNewLanguage("english", Language.LanguageLevel.HIGH);
-
         //Adding cities
+
         cityService.addNewCity("Miskolc");
         cityService.addNewCity("Pécs");
         cityService.addNewCity("Nyíregyháza");
@@ -36,9 +36,7 @@ public class InitializerBean {
         studentService.addStudent("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE,
                                   "2000.02.25.", cityService.getCityByName("Budapest"), Arrays.asList(languageService.getLanguageByName("english")));
         //Adding companies
-        companyService.addCompany("procter", "procter@gmail.com", "proki", "proki");
-
-
+         companyService.addCompany("procter", "procter@gmail.com", "proki", "proki");
         //Adding fields
         fieldService.addField("catering");
         fieldService.addField("housekeeping");
@@ -49,8 +47,10 @@ public class InitializerBean {
         tagService.addTag("waitressing", fieldService.getFieldByName("catering"));
         tagService.addTag("cooking", fieldService.getFieldByName("catering"));
 
-        //Adding new
+        //Adding new advertisement
         advertisementService.addNewAdvert(studentService.getStudentByUsername("Molnár Árpád"), fieldService.getFieldByName("catering"), "Cheap diswashing", "I do everything", new Date(),
                 3, 500, cityService.getCityByName("Budapest"), Arrays.asList(tagService.getTagByName("waitressing"), tagService.getTagByName("cooking")));
+
+      
     }
 }

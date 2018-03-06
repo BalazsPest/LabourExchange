@@ -12,12 +12,14 @@ public class TagService {
     @Autowired
     TagRepository tagRepository;
 
+
     public void addTag(String name, Field field) {
         Tag newTag = new Tag(name, field);
         tagRepository.save(newTag);
     }
+
+
     public Tag getTagByName(String name) {
         return tagRepository.getTagByName(name);
-
     }
 }

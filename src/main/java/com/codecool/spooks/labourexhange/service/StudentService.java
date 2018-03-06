@@ -27,9 +27,9 @@ public class StudentService {
     }
 
 
-    public Student getStudentByUsername(String username){
-       return studentRepository.findByUserName(username);
+
+    public void saveStudent(Student student) {
+        studentRepository.save(student);
     }
 
-    }
 
