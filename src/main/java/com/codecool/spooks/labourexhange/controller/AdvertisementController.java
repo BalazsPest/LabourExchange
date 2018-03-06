@@ -81,7 +81,6 @@ public class AdvertisementController {
             }
         }
         return "redirect:/404";
-
     }
 
 }

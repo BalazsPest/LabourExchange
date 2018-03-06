@@ -22,13 +22,16 @@ public class CityService {
     @Autowired
     CityRepository cityRepository;
 
+
     public City getCityByName(String name) {
         return cityRepository.findByName(name);
     }
 
+
     public List<City> getCities() {
         return cityRepository.findAll();
     }
+
 
     public void addNewCity(String name) {
         City newCity = new City(name) ;
@@ -38,8 +41,5 @@ public class CityService {
     public void saveCity(City city) {
         cityRepository.save(city);
     }
-
-
-
 
 }

@@ -24,7 +24,7 @@ public class InitializerBean {
         languageService.addNewLanguage("german", Language.LanguageLevel.BASIC);
         languageService.addNewLanguage("english", Language.LanguageLevel.HIGH);
 
-        //cityService.addNewCity("Budapest");
+        cityService.addNewCity("Budapest");
         cityService.addNewCity("Miskolc");
         cityService.addNewCity("Pécs");
         cityService.addNewCity("Nyíregyháza");
@@ -34,7 +34,19 @@ public class InitializerBean {
         //cityService.saveCity(bp);
         //cityService.getCityByName("Budapest")
         //studentService.addStudent("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", Budapest, Arrays.asList(languageService.getLanguageByName("english"), languageService.getLanguageByName("german")));
-        Student stud1 = new Student("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE, "2000.02.25.", bp, Arrays.asList(languageService.getLanguageByName("english"), languageService.getLanguageByName("german")));
+        Student stud1 = new Student(
+            "Molnár Árpád",
+            "arpi@haho.hu",
+            "arpi",
+            "haha",
+            Student.Gender.MALE,
+            "2000.02.25.",
+            cityService.getCityByName("Pécs"),
+            Arrays.asList(
+                    languageService.getLanguageByName("english"),
+                    languageService.getLanguageByName("german")
+            )
+        );
         studentService.saveStudent(stud1);
         companyService.addCompany("procter", "procter@gmail.com", "proki", "proki");
 
@@ -57,7 +69,7 @@ public class InitializerBean {
         Tag cooking = new Tag("cooking", catering);
         //Tag cooking = new Tag("cooking",  fieldService.getFieldByName("catering"));
 
-        advertisementService.addNewAdvert(stud1,  catering, "Cheap diswashing", "I do everything", new Date(), 3, 500, bp, Arrays.asList(tagService.getTagByName("waitressing"), tagService.getTagByName("cooking")));
+        advertisementService.addNewAdvert(stud1,  catering, "Cheap diswashing", "I do everything", new Date(), 3, 500, cityService.getCityByName("Pécs"), Arrays.asList(tagService.getTagByName("waitressing"), tagService.getTagByName("cooking")));
         /*Tag waitr = new Tag("waitressing", catering);
         Tag cook = new Tag("cooking", catering);
         advertisementService.addNewAdvert(stud1, Status.ACTIVE, catering, "Cheap dishwashing", "I do everything", new Date(), 3, 500, Bp, Arrays.asList(cook, waitr))

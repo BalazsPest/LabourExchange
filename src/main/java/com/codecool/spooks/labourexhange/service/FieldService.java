@@ -13,27 +13,26 @@ import java.util.List;
 @Service
 public class FieldService {
 
+
     @Autowired
     FieldRepository fieldRepository;
+
 
     public Field getFieldByName(String fieldName) {
          return fieldRepository.findByName(fieldName);
     }
 
+
     public List<Field> getFields() {
         return fieldRepository.findAll();
-        /*try {
-            List<Field> fieldList = em.createNamedQuery("getFields", Field.class).getResultList();
-            return fieldList;
-        } catch (NoResultException e) {
-            return null;
-        }*/
     }
+
 
     public void addField(String fieldName) {
         Field newField = new Field(fieldName);
         fieldRepository.save(newField);
     }
+
 
     public void saveField(Field field) {
         fieldRepository.save(field);
