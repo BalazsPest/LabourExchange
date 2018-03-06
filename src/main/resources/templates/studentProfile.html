@@ -43,7 +43,7 @@
             <!-- Enter your company link -->
             <div class="wrap-input100 validate-input bg1" data-validate=" Your URL">
                 <span class="label-input100">Introduce video link *</span>
-                <input  th:for="link" th:name="link" th:required="required" class="input100" type="link" name="name" placeholder="Your URL"/>
+                <input  th:for="URL" th:name="URL" th:id="URL" th:required="required" class="input100" type="link" name="name" placeholder="Your URL"/>
             </div>
             <!-- end link -->
 
@@ -52,7 +52,7 @@
             <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Upload your photo">
                 <span class="label-input100">Upload your photo *</span>
                 <div>
-                    <input type="file" name="fileupload" value="fileupload" id="fileupload"/> <label for="fileupload"></label>
+                    <input th:for="image" th:name="image" th:id="image" type="file" name="fileupload" value="fileupload" id="fileupload"/> <label for="fileupload"></label>
                 </div>
             </div>
             <!-- end photo -->
