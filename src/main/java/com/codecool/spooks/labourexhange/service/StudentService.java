@@ -21,17 +21,22 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
-    public void addStudent(String userName, String name, String eMailAddress, String password, Student.Gender gender, String birthdate, City city, List< Language > languages) {
+    public void addStudent(String userName, String name, String eMailAddress, String password, Student.Gender gender, String birthdate, City city, List<Language> languages) {
         Student newStudent = new Student(name, eMailAddress, userName, password, gender, birthdate, city, languages);
         studentRepository.save(newStudent);
     }
-     public void addStudent(String userName, String name, String eMailAddress, String password) {
-         Student newStudent = new Student(name, eMailAddress, userName, password);
-         studentRepository.save(newStudent);
-     }
+
+    public void addStudentForRegistration(String userName, String name, String eMailAddress, String password) {
+        Student newStudent = new Student(name, eMailAddress, userName, password);
+        studentRepository.save(newStudent);
+    }
 
     public void saveStudent(Student student) {
         studentRepository.save(student);
     }
 
+    public Student getStudentByUsername(String name) {
+       return studentRepository.findByUserName(name);
+    }
+}
 
