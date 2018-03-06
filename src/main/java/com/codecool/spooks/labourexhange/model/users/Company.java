@@ -18,7 +18,7 @@ public class Company extends User {
     public Company() { }
 
     public Company(String name, String eMailAddress, String userName, String password) {
-        super(name, eMailAddress, userName, password);
+        super(name, eMailAddress, userName, password, UserRole.COMPANY);
     }
 
     public void setDescription(String description) {

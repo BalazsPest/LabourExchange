@@ -23,8 +23,8 @@ public class Student extends User {
     private String URL;
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    //@Enumerated(EnumType.STRING)
+    //private UserRole userRole;
 
     @ManyToOne //(cascade = CascadeType.ALL)
     private City city;
@@ -35,17 +35,18 @@ public class Student extends User {
     public Student() {}
 
     public Student(String name, String userName, String eMailAddress, String password) {
-        super(name, userName, eMailAddress, password);
+        super(name, userName, eMailAddress, password, UserRole.STUDENT);
     }
 
 
     public Student(String name, String userName, String eMailAddress, String password,
-                   Gender gender, String birthdate, City city, List<Language> languages) {
-        super(name, userName, eMailAddress, password);
+                   Gender gender, String birthdate, City city,
+                   List<Language> languages) {
+        super(name, userName, eMailAddress, password, UserRole.STUDENT);
         this.gender = gender;
         this.birthdate = birthdate;
         this.status = UserStatus.ACTIVE;
-        this.userRole = UserRole.STUDENT;
+        //this.userRole = UserRole.STUDENT;
         this.city = city;
         this.languagesSpoken = languages;
         //city.addStudents(this);
@@ -86,11 +87,11 @@ public class Student extends User {
 
     @Override
     public void checkUserStatus(UserStatus userStatus) throws IllegalArgumentException {
-        if (userRole != UserRole.ADMINISTRATOR) {
+        /*if (userRole != UserRole.ADMINISTRATOR) {
             setUserStatus(userStatus);
         } else {
             throw new IllegalArgumentException("Student cannot be in this status");
-        }
+        }*/
     }
 
     public String getBirthdate() {

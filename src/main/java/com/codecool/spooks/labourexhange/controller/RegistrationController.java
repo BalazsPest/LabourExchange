@@ -22,9 +22,7 @@ public class RegistrationController {
 
 
     @GetMapping(value = "/registration")
-    public String getRegistrationPage() {
-        return "oldRegistration";
-    }
+    public String getRegistrationPage() { return "oldRegistration"; }
 
 
     @PostMapping(value = "/registrateuser")
@@ -35,33 +33,36 @@ public class RegistrationController {
                            @RequestParam("userRole") String role,
                            Model model) {
 
-        //todo userRole-t küldjük tovább valahogy, valami ilyesmi lesz
+        //todo userRole-t küldjük tovább valahogy, valami ilyesmi lesz (update: sztem nem kell)
         /*if (userRole == STUDENT) {
             studentService.checkStudent(userName, eMailAddress);
         } else if (userRole == COMPANY) {
             companyService.checkCompany(userName, eMailAddress);*/
-        if (role == "Student") {
+        System.out.println(role);
+        if (role.equals("Student")) {
+            System.out.println(role);
             if (!studentService.checkStudent(userName, eMailAddress)) {
                 studentService.addStudent(userName, eMailAddress, name, password);
                 return "redirect:/login";
 
             } else {
+                System.out.println(role);
                 model.addAttribute("notManagedToRegistrate", true);
-                return "registration";
+                return "oldRegistration";
             }
 
         } else {
-            if(!companyService.checkCompany(userName, eMailAddress)) {
+
+            if (!companyService.checkCompany(userName, eMailAddress)) {
+                System.out.println("not already used");
                 companyService.addCompany(userName, eMailAddress, name, password);
                 return "nextCompanyRegistration";
 
             } else {
                 System.out.println("nono");
                 model.addAttribute("notManagedToRegistrate", true);
-                return "registration";
+                return "oldRegistration";
             }
         }
-        /*model.addAttribute("notManagedToRegistrate", true);
-        return "oldRegistration";*/
     }
 }

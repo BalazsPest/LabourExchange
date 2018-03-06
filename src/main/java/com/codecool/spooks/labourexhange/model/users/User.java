@@ -42,11 +42,12 @@ public abstract class User {
 
 
 
-    public User(String name, String eMailAddress, String userName, String password) {
+    public User(String name, String eMailAddress, String userName, String password, UserRole role) {
         this.name = name;
         this.userName = userName;
         this.eMailAddress = eMailAddress;
         this.password = password;
+        this.userRole = role;
     }
 
     public User() {
