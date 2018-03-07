@@ -36,7 +36,7 @@ public class StudentService {
     }
 
     public boolean checkStudent(String userName, String eMailAddress) {
-        if (studentRepository.findByUserName(userName) != null || studentRepository.findByEMailAddress(eMailAddress) != null){
+        if (studentRepository.findByUserName(userName) != null || studentRepository.findByeMailAddress(eMailAddress) != null){
             return true;
         }
         else {
@@ -45,7 +45,11 @@ public class StudentService {
 
     }
 
-   public Student getStudentByUsername(String name) {
+    public List<Student.Gender> getAllGenders(){
+        return studentRepository.getAllByGender();
+    }
+
+    public Student getStudentByUsername(String name) {
        return studentRepository.findByUserName(name);
     }
 

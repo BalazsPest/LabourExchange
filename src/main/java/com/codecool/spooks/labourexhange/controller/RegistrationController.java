@@ -42,7 +42,7 @@ public class RegistrationController {
         if (role.equals("Student")) {
             System.out.println(role);
             if (!studentService.checkStudent(userName, eMailAddress)) {
-                studentService.addStudent(userName, eMailAddress, name, password);
+                studentService.addStudentForRegistration(userName, eMailAddress, name, password);
                 return "redirect:/login";
 
             } else {

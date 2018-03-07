@@ -49,7 +49,7 @@ public class AdvertisementController {
         model.addAttribute("cities",cities);
         model.addAttribute("languages",languages);
         model.addAttribute("fields",fields);
-        return "advertisement";
+        return "oldAdvertisement";
     }
 
     @PostMapping(value = "/make-advertisement")
