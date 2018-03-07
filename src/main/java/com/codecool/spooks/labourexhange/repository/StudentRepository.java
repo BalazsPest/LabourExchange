@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
    Student findById (Integer id);
-
+   //Student findByUserNameAndEMailAddress(String userName, String eMailAddress);
+   Student findByUserName(String userName);
+   Student findByEMailAddress(String eMailAddress);
    Student findByUserNameAndEMailAdress(String userName, String eMailAdress);
-   Student findByUserName(String username);
 
 }

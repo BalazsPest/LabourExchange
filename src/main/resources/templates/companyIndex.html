@@ -5,14 +5,23 @@
 
   <body>
 
-  <div th:replace="userNavBar :: copy"></div>
+  <div th:replace="companyNavBar :: copy"></div>
 
     <div class="container">
       <div class="row">
         <div class="col-lg-3">
 
-          <h1 class="my-4">Spooks</h1>
+          <h1 class="my-4"><img src="/img/spooks.png"/></h1>
           <div class="list-group">
+
+
+              <div class="selectpicker">
+                  <label for="exampleSelect1">Type</label>
+                  <select class="form-control" id="exampleSelect1">
+                      <option>Student</option>
+                      <option>Advertisement</option>
+                  </select>
+              </div>
 
 
             <div class="selectpicker">
@@ -44,6 +53,11 @@
             <p></p>
             <button type="button" class="btn btn-info">Search</button>
           </div>
+
+
+
+
+
         </div>
         <!-- /.col-lg-3 -->
 
@@ -75,10 +89,11 @@
             </a>
           </div>
 
+
           <div class="row">
             <div th:each="adv,iterStat : ${advertisement}" class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="/img/student.jpg" alt=""/></a>
+                <a href="#"><img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt=""/></a>
                 <div class="card-body">
                   <h4 class="card-title" th:text="${adv.titleOfAdvert}"></h4>
                   <h5 th:text="${adv.FieldOfWork}"></h5>
@@ -86,7 +101,7 @@
                   <h6 th:text="${adv.student.name}" ></h6>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <a href="#" class="card-link">Read more</a>
                 </div>
               </div>
             </div>
@@ -109,6 +124,7 @@
 
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
   </body>
 </html>

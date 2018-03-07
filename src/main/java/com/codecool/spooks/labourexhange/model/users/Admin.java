@@ -3,8 +3,8 @@ package com.codecool.spooks.labourexhange.model.users;
 public class Admin extends User {
 
     public Admin(String name, String eMailAdress, String userName, String password) {
-        super(name, eMailAdress, userName, password);
-        setUserRole(UserRole.ADMINISTRATOR);
+        super(name, eMailAdress, userName, password, UserRole.ADMINISTRATOR);
+        //setUserRole(UserRole.ADMINISTRATOR);
     }
 
     @Override

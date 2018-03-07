@@ -24,4 +24,12 @@ public class CompanyService {
         Company newCompany = new Company(name, eMailAddress, userName, password);
         companyRepository.save(newCompany);
     }
+
+    public boolean checkCompany(String userName, String eMailAddress) {
+        if (companyRepository.findByUserName(userName)!= null || companyRepository.findByEMailAddress(eMailAddress)!= null){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @NamedQueries({@NamedQuery( name = "findUser", query = "SELECT u FROM User u WHERE u.userName = :userName"),
-        @NamedQuery(name="checkUserPassword", query = "SELECT u FROM User u WHERE u.eMailAdress = :eMailAddress")})
+        @NamedQuery(name="checkUserPassword", query = "SELECT u FROM User u WHERE u.eMailAddress = :eMailAddress")})
 @Entity
 @Table(name = "USERS")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,7 +24,7 @@ public abstract class User {
     private String name;
     private String userName;
     private String phoneNumber;
-    private String eMailAdress;
+    private String eMailAddress;
     private String password;
 
 
@@ -42,11 +42,12 @@ public abstract class User {
 
 
 
-    public User(String name, String eMailAdress, String userName, String password) {
+    public User(String name, String eMailAddress, String userName, String password, UserRole role) {
         this.name = name;
         this.userName = userName;
-        this.eMailAdress = eMailAdress;
+        this.eMailAddress = eMailAddress;
         this.password = password;
+        this.userRole = role;
     }
 
     public User() {
@@ -89,8 +90,8 @@ public abstract class User {
         return phoneNumber;
     }
 
-    public String geteMailAdress() {
-        return eMailAdress;
+    public String geteEMailAddress() {
+        return eMailAddress;
     }
 
     public String getUserName() {
@@ -101,8 +102,8 @@ public abstract class User {
         this.name = name;
     }
 
-    public void setEMailAdress(String eMailAdress) {
-        this.eMailAdress = eMailAdress;
+    public void setEMailAddress(String eMailAddress) {
+        this.eMailAddress = eMailAddress;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -135,7 +136,7 @@ public abstract class User {
                 ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", eMailAdress='" + eMailAdress + '\'' +
+                ", eMailAddress='" + eMailAddress + '\'' +
                 ", userStatus=" + userStatus +
                 ", userRole=" + userRole +
                 ", reviewsOfSender=" + reviewsOfSender +

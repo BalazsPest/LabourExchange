@@ -26,4 +26,9 @@ public class CompanyController {
         model.addAttribute("advertisement", adverts);
         return "companyIndex";
     }
+
+    @GetMapping(value = "/nextCompanyRegistration")
+    public String getCompanyPackages(Model model){
+        return "nextCompanyRegistration";
+    }
 }
