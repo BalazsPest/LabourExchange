@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Controller
@@ -25,6 +24,25 @@ public class StudentController {
         List<Advertisement> adverts =advertisementService.getAdvertsFromStudent(id);
         model.addAttribute("advertisement", adverts);
         return "studentIndex";
+    }
+
+    @GetMapping("/studentProfile")
+    public String getStudentProfile(Model model){ return "studentProfile";}
+
+
+    @GetMapping("/studentReview")
+    public String getStudentReviews(Model model) { return "studentReview";}
+
+
+    @GetMapping("/edit-advertisement")
+    public String editAdvertisement (Model model) {
+
+
+        //TODO edit advertisment - megcsináltam a root helyét (studentIndex.html) úgy kell
+        //TODO behozni a form ot hogy már benne legyenek az előző kitöltött dolgok és azt Update eled
+        //TODO ha editáltad POST al kell tovább küldeni
+
+        return "advertisement";
     }
 
 }

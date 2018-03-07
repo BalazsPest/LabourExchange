@@ -15,10 +15,10 @@
                         <a class="nav-link" href="/OurStudents">Our Students</a>
                     </li>
                     <li class="nav-item">
-                        <p class="nav-link" th:text="${user}"></p>
+                        <p class="nav-link" th:object="${user}" th:text="${user}">Hello Company!</p>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
+                        <a class="nav-link" href="/index">Logout</a>
                     </li>
 
                 </ul>
