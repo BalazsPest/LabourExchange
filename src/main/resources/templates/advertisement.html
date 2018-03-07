@@ -93,7 +93,7 @@
 				<!-- choose salary -->
 				<div class="wrap-input100 bg1 rs1-wrap-input100">
 					<span th:for="requestedMoney" class="label-input100">Salary</span>
-					<input th:required="required" min="600" type="number" th:name="requestedMoney" class="input100" th:id="requestedMoney" placeholder="salary/hour"/>
+					<input th:required="required" min="600" max="2000" step="50" type="number" th:name="requestedMoney" class="input100" th:id="requestedMoney" placeholder="salary/hour"/>
 				</div>
 				<!-- end choose salary -->
 

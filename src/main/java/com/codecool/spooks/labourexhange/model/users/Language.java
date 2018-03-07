@@ -1,6 +1,10 @@
 package com.codecool.spooks.labourexhange.model.users;
 
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NamedQueries({@NamedQuery(name= "getLanguages", query = "SELECT l FROM Language l")})
 
@@ -26,6 +30,9 @@ public class Language {
     private String name;
 
     private LanguageLevel level;
+
+    //@ManyToMany(mappedBy = "language")
+    //List<Advertisement> advertisements = new ArrayList<>();
 
     public Language() {}
 

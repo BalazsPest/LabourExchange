@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Date;
 
-@Component
+//@Component
 public class InitializerBean {
 
 
@@ -22,8 +22,20 @@ public class InitializerBean {
 
 
         //Adding languages
-        languageService.addNewLanguage("german", Language.LanguageLevel.BASIC);
-        languageService.addNewLanguage("english", Language.LanguageLevel.HIGH);
+        //languageService.addNewLanguage("german", Language.LanguageLevel.BASIC);
+        languageService.addNewLanguage("german", Language.LanguageLevel.INTERMEDIATE);
+        //languageService.addNewLanguage("german", Language.LanguageLevel.HIGH);
+        languageService.addNewLanguage("english", Language.LanguageLevel.INTERMEDIATE);
+        //languageService.addNewLanguage("english", Language.LanguageLevel.HIGH);
+        //languageService.addNewLanguage("english", Language.LanguageLevel.BASIC);
+        languageService.addNewLanguage("spanish", Language.LanguageLevel.INTERMEDIATE);
+        //languageService.addNewLanguage("spanish", Language.LanguageLevel.HIGH);
+        //languageService.addNewLanguage("spanish", Language.LanguageLevel.BASIC);
+        languageService.addNewLanguage("russian", Language.LanguageLevel.BASIC);
+        languageService.addNewLanguage("polish", Language.LanguageLevel.BASIC);
+        languageService.addNewLanguage("italian", Language.LanguageLevel.BASIC);
+        //languageService.addNewLanguage("chinese", Language.LanguageLevel.INTERMEDIATE);
+        languageService.addNewLanguage("chinese", Language.LanguageLevel.BASIC);
         //Adding cities
 
         cityService.addNewCity("Miskolc");
@@ -31,6 +43,19 @@ public class InitializerBean {
         cityService.addNewCity("Nyíregyháza");
         cityService.addNewCity("Szeged");
         cityService.addNewCity("Budapest");
+        cityService.addNewCity("Debrecen");
+        cityService.addNewCity("Veszprém");
+        cityService.addNewCity("Szolnok");
+        cityService.addNewCity("Kecskemét");
+        cityService.addNewCity("Győr");
+        cityService.addNewCity("Szentes");
+        cityService.addNewCity("Székesfehérvár");
+        cityService.addNewCity("Szombathely");
+        cityService.addNewCity("Békéscsaba");
+        cityService.addNewCity("Kaposvár");
+        cityService.addNewCity("Mohács");
+        cityService.addNewCity("Baja");
+        cityService.addNewCity("Salgótarján");
 
         //Adding students
         studentService.addStudent("Molnár Árpád", "arpi@haho.hu", "arpi", "haha", Student.Gender.MALE,
@@ -38,14 +63,25 @@ public class InitializerBean {
         //Adding companies
          companyService.addCompany("procter", "procter@gmail.com", "proki", "proki");
         //Adding fields
-        fieldService.addField("catering");
-        fieldService.addField("housekeeping");
-        fieldService.addField("it-related");
-        fieldService.addField("ecology-related");
+        fieldService.addField("Catering");
+        fieldService.addField("Housekeeping");
+        fieldService.addField("Computers and Technology");
+        fieldService.addField("Ecology-related");
+        fieldService.addField("Education and Social Services");
+        fieldService.addField("Arts");
+        fieldService.addField("Communications");
+        fieldService.addField("Trades and Transportation");
+        fieldService.addField("Finance");
+        fieldService.addField("Business");
+        fieldService.addField("Architecture");
+        fieldService.addField("Engineering");
+        fieldService.addField("Science");
+        fieldService.addField("Tourism");
+        fieldService.addField("Law");
 
         //Adding tags
-        tagService.addTag("waitressing", fieldService.getFieldByName("catering"));
-        tagService.addTag("cooking", fieldService.getFieldByName("catering"));
+        tagService.addTag("waitressing", fieldService.getFieldByName("Catering"));
+        tagService.addTag("cooking", fieldService.getFieldByName("Catering"));
 
         //Adding new advertisement
         advertisementService.addNewAdvert(studentService.getStudentByUsername("Molnár Árpád"), fieldService.getFieldByName("catering"), "Cheap diswashing", "I do everything", new Date(),

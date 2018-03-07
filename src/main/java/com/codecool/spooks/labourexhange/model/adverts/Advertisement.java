@@ -7,6 +7,7 @@ import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @NamedQueries({@NamedQuery(name= "selectAllAdvert", query = "SELECT a FROM Advertisement a"),
@@ -49,7 +50,7 @@ public class Advertisement {
 
     //TODO
     //@ManyToMany
-    //private List<Language> spokenLanguages;
+    //private List<Language> spokenLanguages = new ArrayList<>();
 
     @ManyToOne
     private City cityOfWorking;
@@ -151,13 +152,13 @@ public class Advertisement {
         this.requestedMoneyPerHour = requestedMoneyPerHour;
     }
 
-    //public List<Language> getSpokenLanguages() {
-      //  return spokenLanguages;
-    //}
+    /*public List<Language> getSpokenLanguages() {
+        return spokenLanguages;
+    }
 
-    //public void setSpokenLanguages(List<Language> languages) {
-        //this.spokenLanguages = languages;
-   // }
+    public void setSpokenLanguages(List<Language> languages) {
+        this.spokenLanguages = languages;
+    }*/
 
     public void setCityOfWorking(City cityOfWorking) {
         this.cityOfWorking = cityOfWorking;
