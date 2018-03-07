@@ -98,7 +98,7 @@
                   <h4 class="card-title" th:text="${adv.titleOfAdvert}"></h4>
                   <h5 th:text="${adv.FieldOfWork}"></h5>
                   <p class="card-text" th:text="${adv.descriptionOfAdvert}"></p>
-                  <a href="/" ><h6 th:text="${adv.student.name}"></h6></a>
+                  <a href="@{/completedProfile/(id=adv.student.id)}" ><h6 th:text="${adv.student.name}"></h6></a>
                 </div>
                 <div class="card-footer">
                     <a class="card-link">Viewers: 0</a>
