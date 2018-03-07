@@ -24,19 +24,19 @@ public class CompanyController {
     public String getCompanyIndex(Model model) {
         List<Advertisement> adverts =advertisementService.getAdvertsByStatus(Status.ACTIVE);
         model.addAttribute("advertisement", adverts);
-        return "companyIndex";
+        return "/company/companyIndex";
     }
 
     @GetMapping(value = "/nextCompanyRegistration")
     public String getCompanyPackages(Model model){
-        return "nextCompanyRegistration";
+        return "/company/nextCompanyRegistration";
     }
 
     @GetMapping(value = "/companyProfile")
-    public String editCompanyProfile(Model model){ return "companyProfile";}
+    public String editCompanyProfile(Model model){ return "/company/companyProfile";}
 
     @GetMapping("/companyReview")
-    public String getCompanyReviews(Model model) { return "companyReview";}
+    public String getCompanyReviews(Model model) { return "/company/companyReview";}
 
 
 

@@ -23,15 +23,15 @@ public class StudentController {
         Integer id = 1;
         List<Advertisement> adverts =advertisementService.getAdvertsFromStudent(id);
         model.addAttribute("advertisement", adverts);
-        return "studentIndex";
+        return "/student/studentIndex";
     }
 
     @GetMapping("/studentProfile")
-    public String getStudentProfile(Model model){ return "studentProfile";}
+    public String getStudentProfile(Model model){ return "/student/studentProfile";}
 
 
     @GetMapping("/studentReview")
-    public String getStudentReviews(Model model) { return "studentReview";}
+    public String getStudentReviews(Model model) { return "/student/studentReview";}
 
 
     @GetMapping("/edit-advertisement")
@@ -42,7 +42,7 @@ public class StudentController {
         //TODO behozni a form ot hogy már benne legyenek az előző kitöltött dolgok és azt Update eled
         //TODO ha editáltad POST al kell tovább küldeni
 
-        return "advertisement";
+        return "/advertisement/advertisement";
     }
 
 }

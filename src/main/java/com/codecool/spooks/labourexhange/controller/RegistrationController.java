@@ -1,6 +1,5 @@
 package com.codecool.spooks.labourexhange.controller;
 
-import com.codecool.spooks.labourexhange.model.users.UserRole;
 import com.codecool.spooks.labourexhange.service.CompanyService;
 import com.codecool.spooks.labourexhange.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class RegistrationController {
 
 
     @GetMapping(value = "/registration")
-    public String getRegistrationPage() { return "oldRegistration"; }
+    public String getRegistrationPage() { return "/registration_login/oldRegistration"; }
 
 
     @PostMapping(value = "/registrateuser")
@@ -43,12 +42,12 @@ public class RegistrationController {
             System.out.println(role);
             if (!studentService.checkStudent(userName, eMailAddress)) {
                 studentService.addStudentForRegistration(userName, eMailAddress, name, password);
-                return "redirect:/login";
+                return "redirect:/registration_login/login";
 
             } else {
                 System.out.println(role);
                 model.addAttribute("notManagedToRegistrate", true);
-                return "oldRegistration";
+                return "/registration_login/oldRegistration";
             }
 
         } else {
@@ -56,12 +55,12 @@ public class RegistrationController {
             if (!companyService.checkCompany(userName, eMailAddress)) {
                 System.out.println("not already used");
                 companyService.addCompany(userName, eMailAddress, name, password);
-                return "nextCompanyRegistration";
+                return "/company/nextCompanyRegistration";
 
             } else {
                 System.out.println("nono");
                 model.addAttribute("notManagedToRegistrate", true);
-                return "oldRegistration";
+                return "/registration_login/oldRegistration";
             }
         }
     }

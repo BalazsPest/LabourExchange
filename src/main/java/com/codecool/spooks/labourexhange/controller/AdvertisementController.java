@@ -49,7 +49,7 @@ public class AdvertisementController {
         model.addAttribute("cities",cities);
         model.addAttribute("languages",languages);
         model.addAttribute("fields",fields);
-        return "advertisement";
+        return "/advertisement/advertisement";
     }
 
     @PostMapping(value = "/make-advertisement")
@@ -75,7 +75,7 @@ public class AdvertisementController {
             try {
                 Advertisement newAdvert = advertisementService.addNewAdvert(studentOfAdv, fieldOfAdv,
                                           title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags);
-                return "redirect:/studentIndex";
+                return "redirect:/student/studentIndex";
             } catch (NullPointerException e) {
                 System.out.println("cant make advert");
                 return "redirect:/404";
