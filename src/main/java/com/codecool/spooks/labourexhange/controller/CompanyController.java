@@ -35,6 +35,9 @@ public class CompanyController {
     @GetMapping(value = "/companyProfile")
     public String editCompanyProfile(Model model){ return "companyProfile";}
 
+    @GetMapping("/companyReview")
+    public String getCompanyReviews(Model model) { return "companyReview";}
+
 
 
 

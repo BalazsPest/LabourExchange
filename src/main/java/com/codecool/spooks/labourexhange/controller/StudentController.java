@@ -31,7 +31,7 @@ public class StudentController {
     public String getStudentProfile(Model model){ return "studentProfile";}
 
 
-    @GetMapping("/reviews")
+    @GetMapping("/studentReview")
     public String getStudentReviews(Model model) { return "studentReview";}
 
 
