@@ -1,52 +1,56 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="/vendor/jquery/reg.js"></script>
 <!--Include the above in your HEAD tag -->
+<div th:replace="head :: copy"></div>
+<div th:replace="navBar :: copy"></div>
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <legend>Mr. Sosa:</legend>
+        <div class="col-sm-12"><br/><br/>
+            <legend>Company Registration Step 2:</legend>
         </div>
         <!-- panel preview -->
         <div class="col-sm-5">
-            <h4>Add payment:</h4>
+            <h4>Select your package:</h4>
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
-                    <div class="form-group">
-                        <label for="concept" class="col-sm-3 control-label">Concept</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="concept" name="concept"/>
-                        </div>
+
+
+
+                    <!-- select your package -->
+                    <div class="form-group" align="center">
+                        <select th:for="package" th:id="package" class="js-select2" name="service">
+                            <option> Standard </option>
+                            <option> Ultimate </option>
+                        </select>
                     </div>
+                    <!-- end package -->
+
+
+                    <!-- add comment -->
                     <div class="form-group">
-                        <label for="description" class="col-sm-3 control-label">Description</label>
+                        <label for="description" class="col-sm-3 control-label">Comment: </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="description" name="description"/>
                         </div>
                     </div>
+                    <!-- end comment -->
+
+
+
+                   <!-- amount (need if statement for the packages) -->
                     <div class="form-group">
-                        <label for="amount" class="col-sm-3 control-label">Amount</label>
+                        <label for="date" class="col-sm-3 control-label">Amount:</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount"/>
+                            <input type="number" class="form-control" id="date" name="amount"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Status</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="status" name="status">
-                                <option>Paid</option>
-                                <option>Unpaid</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="date" class="col-sm-3 control-label">Date</label>
-                        <div class="col-sm-9">
-                            <input type="date" class="form-control" id="date" name="date"/>
-                        </div>
-                    </div>
+                    <!-- end amount -->
+
+                    <!-- add button -->
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
                             <button type="button" class="btn btn-default preview-add-button">
@@ -54,9 +58,16 @@
                             </button>
                         </div>
                     </div>
+                    <!-- end add button -->
+
+
                 </div>
             </div>
+
+
+
         </div> <!-- / panel preview -->
+        <form action="/companyIndex" method="GET">
         <div class="col-sm-7">
             <h4>Preview:</h4>
             <div class="row">
@@ -65,11 +76,8 @@
                         <table class="table preview-table">
                             <thead>
                             <tr>
-                                <th>Concept</th>
-                                <th>Description</th>
+                                <th>Package</th>
                                 <th>Amount</th>
-                                <th>Status</th>
-                                <th>Date</th>
                             </tr>
                             </thead>
                             <tbody></tbody> <!-- preview content goes here-->
@@ -85,9 +93,12 @@
             <div class="row">
                 <div class="col-xs-12">
                     <hr style="border:1px dashed #dddddd;"/>
-                    <button type="button" class="btn btn-primary btn-block">Submit all and finish</button>
+                    <input type="submit" class="btn btn-primary btn-block">Submit all and finish</input>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 </div>
+<div th:replace="footer :: copy"></div>
+</html>
