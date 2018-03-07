@@ -27,4 +27,23 @@ public class StudentController {
         return "studentIndex";
     }
 
+    @GetMapping("/studentProfile")
+    public String getStudentProfile(Model model){ return "studentProfile";}
+
+
+    @GetMapping("/reviews")
+    public String getStudentReviews(Model model) { return "studentReview";}
+
+
+    @GetMapping("/edit-advertisement")
+    public String editAdvertisement (Model model) {
+
+
+        //TODO edit advertisment - megcsináltam a root helyét (studentIndex.html) úgy kell
+        //TODO behozni a form ot hogy már benne legyenek az előző kitöltött dolgok és azt Update eled
+        //TODO ha editáltad POST al kell tovább küldeni
+
+        return "advertisement";
+    }
+
 }

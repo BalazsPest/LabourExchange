@@ -31,4 +31,14 @@ public class CompanyController {
     public String getCompanyPackages(Model model){
         return "nextCompanyRegistration";
     }
+
+    @GetMapping(value = "/companyProfile")
+    public String editCompanyProfile(Model model){ return "companyProfile";}
+
+
+
+
+
+
+
 }
