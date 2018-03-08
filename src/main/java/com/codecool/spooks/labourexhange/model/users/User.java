@@ -5,12 +5,17 @@ import javax.persistence.NamedQuery;
 
 
 import com.codecool.spooks.labourexhange.model.users.review.Review;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @NamedQueries({@NamedQuery( name = "findUser", query = "SELECT u FROM User u WHERE u.userName = :userName"),
         @NamedQuery(name="checkUserPassword", query = "SELECT u FROM User u WHERE u.eMailAddress = :eMailAddress")})
+
+
 @Entity
 @Table(name = "USERS")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -42,12 +47,14 @@ public abstract class User {
 
 
 
-    public User(String name, String eMailAddress, String userName, String password, UserRole role) {
+
+    public User(String name,String userName, String eMailAddress,  String password, UserRole role) {
         this.name = name;
         this.userName = userName;
         this.eMailAddress = eMailAddress;
         this.password = password;
         this.userRole = role;
+        this.userStatus = UserStatus.ACTIVE;
     }
 
     public User() {
