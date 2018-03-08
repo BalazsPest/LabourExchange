@@ -1,9 +1,12 @@
 package com.codecool.spooks.labourexhange.controller;
 
 
+import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.users.Company;
 import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.model.users.UserRole;
+import com.codecool.spooks.labourexhange.service.AdvertisementService;
 import com.codecool.spooks.labourexhange.service.CompanyService;
 import com.codecool.spooks.labourexhange.service.StudentService;
 import com.codecool.spooks.labourexhange.service.UserService;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -31,14 +35,17 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AdvertisementService advertisementService;
+
 
 
     @GetMapping(value = "/registration")
-    public String getRegistrationPage() { return "oldRegistration"; }
+    public String getRegistrationPage() { return "/registration_login/oldRegistration"; }
 
     @GetMapping(value = "/login")
     public String getLoginPage() {
-        return "login";
+        return "/registration_login/login";
     }
 
     @GetMapping("/logout")
@@ -53,14 +60,15 @@ public class UserController {
                                    Model model, HttpSession session) {
         if (userService.getUserRoleToLogin(email, password) == null) {
             model.addAttribute("msg", "Wrong email or password");
-            return "login";
+            return "/registration_login/login";
         } else {
             if (userService.getUserRoleToLogin(email, password) == UserRole.STUDENT) {
                 session.setAttribute("user",userService.getLoginUser(Student.class, email));
-                return "studentIndex";
+                return "/student/studentIndex";
             } else if (userService.getUserRoleToLogin(email, password) == UserRole.COMPANY) {
                 session.setAttribute("user",userService.getLoginUser(Company.class, email));
-                return "companyIndex";
+                System.out.println(session.getAttribute("user").toString());
+                return "redirect:/companyIndex";
             }
             return "index";
         }
@@ -88,7 +96,7 @@ public class UserController {
         }
         else {
             model.addAttribute("msg","Username or email address is already taken");
-            return "oldRegistration";
+            return "/registration_login/oldRegistration";
         }
     }
 }

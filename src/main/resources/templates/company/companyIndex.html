@@ -100,7 +100,7 @@
                   <h4 class="card-title" th:text="${adv.titleOfAdvert}"></h4>
                   <h5 th:text="${adv.FieldOfWork}"></h5>
                   <p class="card-text" th:text="${adv.descriptionOfAdvert}"></p>
-                  <a href="/studentProfile/id"><h6 th:text="${adv.student.userName}" ></h6></a>
+                  <!--<a href="/studentProfile/id"><h6 th:text="${adv.student.userName}" ></h6></a>-->
                 </div>
                 <div class="card-footer">
                     <!--<p class="card-link"> Viewers: </p>-->
@@ -180,7 +180,7 @@
 
           <div class="form-group">
             <h6>Student: </h6>
-            <label th:text="${adv.student.name}"><span class="glyphicon glyphicon-eye-open"></span></label>
+            <label th:text="${adv.student}"><span class="glyphicon glyphicon-eye-open"></span></label>
           </div>
         </div>
         <div class="modal-footer">
@@ -192,12 +192,12 @@
   <!-- end modal -->
 
 
-  <!-- student Modal -->
+  <!-- student Modal
   <div class="modal fade" id="studentModal" role="dialog">
     <div class="modal-dialog">
 
 
-      <!-- Modal content-->
+
       <div th:each="stud,iterStat : ${students}" class="modal-content">
         <div class="modal-header">
           <h4 align="center">Students List:</h4>
@@ -211,7 +211,7 @@
       </div>
     </div>
   </div>
-  <!-- end modal -->
+  -->
 
 
   </body>
