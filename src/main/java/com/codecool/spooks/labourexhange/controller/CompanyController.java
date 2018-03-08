@@ -6,6 +6,11 @@ import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import com.codecool.spooks.labourexhange.model.users.City;
 import com.codecool.spooks.labourexhange.model.users.Language;
 import com.codecool.spooks.labourexhange.service.*;
+import com.codecool.spooks.labourexhange.model.users.Student;
+import com.codecool.spooks.labourexhange.service.AdvertisementService;
+import com.codecool.spooks.labourexhange.service.CompanyService;
+import com.codecool.spooks.labourexhange.service.StudentService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,24 +33,31 @@ public class CompanyController {
     @Autowired
     CityService cityService;
 
-    @Autowired
-    LanguageService languageService;
+    //@Autowired
+    //LanguageService languageService;
 
     @Autowired
     FieldService fieldService;
 
+    @Autowired
+    StudentService studentService;
+
+
     @GetMapping(value = "/companyIndex")
     public String getCompanyIndex(Model model) {
         List<City> cities = cityService.getCities();
-        List<Language> languages = languageService.getLanguages();
+        //List<Language> languages = languageService.getLanguages();
         List<Advertisement> adverts =advertisementService.getAdvertsByStatus(Status.ACTIVE);
+
         List<Field> fields = fieldService.getFields();
+        List<Student> students = studentService.getStudents();
         model.addAttribute("advertisement", adverts);
         model.addAttribute("cities", cities);
-        model.addAttribute("languages", languages);
+        //model.addAttribute("languages", languages);
         model.addAttribute("fields", fields);
+        model.addAttribute("students", students);
+        return "/company/companyIndex";
 
-        return "companyIndex";
     }
 
     @GetMapping(value = "/filtered_advertisements")
@@ -74,12 +86,25 @@ public class CompanyController {
         model.addAttribute("cities", cities);
         model.addAttribute("fields", fields);
 
-        return "companyIndex";
+        return "/company/companyIndex";
     }
 
 
     @GetMapping(value = "/nextCompanyRegistration")
     public String getCompanyPackages(Model model){
-        return "nextCompanyRegistration";
+        return "/company/nextCompanyRegistration";
     }
+
+    @GetMapping(value = "/companyProfile")
+    public String editCompanyProfile(Model model){ return "/company/companyProfile";}
+
+    @GetMapping("/companyReview")
+    public String getCompanyReviews(Model model) { return "/company/companyReview";}
+
+
+
+
+
+
+
 }

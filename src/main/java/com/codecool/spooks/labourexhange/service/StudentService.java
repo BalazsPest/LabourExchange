@@ -36,17 +36,20 @@ public class StudentService {
     }
 
     public boolean checkStudent(String userName, String eMailAddress) {
-        if (studentRepository.findByUserName(userName) != null || studentRepository.findByEMailAddress(eMailAddress) != null){
+        if (studentRepository.findByUserName(userName) != null || studentRepository.findByEMailAddress(eMailAddress) != null) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
-
     }
+
 
    public Student getStudentByUsername(String name) {
        return studentRepository.findByUserName(name);
+    }
+
+    public List<Student> getStudents() {
+        return studentRepository.findAll();
     }
 
 }
