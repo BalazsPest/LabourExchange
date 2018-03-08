@@ -202,7 +202,7 @@
         <div class="modal-header">
           <h4 align="center">Students List:</h4>
         </div>
-        <div class="modal-body">
+        <div th:each="stud,iterStat : ${students}" class="modal-body">
           <div class="form-group">
             <label th:text="${stud.userName}"><span class="glyphicon glyphicon-eye-open"></span></label>
           </div>
