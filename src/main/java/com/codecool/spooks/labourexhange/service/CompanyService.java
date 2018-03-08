@@ -5,6 +5,7 @@ import com.codecool.spooks.labourexhange.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -31,5 +32,8 @@ public class CompanyService {
         } else {
             return false;
         }
+    }
+    public List<Company> getAllCompanies(){
+        return companyRepository.findAll();
     }
 }

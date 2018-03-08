@@ -101,6 +101,14 @@ public class CompanyController {
     @GetMapping("/companyReview")
     public String getCompanyReviews(Model model) { return "/company/companyReview";}
 
+    @GetMapping("/allCompanies")
+    public String getAllCompanies(Model model){
+        model.addAttribute("companies", companyService.getAllCompanies());
+        return "allCompanies";
+
+
+    }
+
 
 
 
