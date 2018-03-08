@@ -27,6 +27,7 @@ public class StudentController {
         int id= student.getId();
         List<Advertisement> adverts =advertisementService.getAdvertsFromStudent(id);
         model.addAttribute("advertisement", adverts);
+        model.addAttribute("user", student.getName());
         return "/student/studentIndex";
     }
 

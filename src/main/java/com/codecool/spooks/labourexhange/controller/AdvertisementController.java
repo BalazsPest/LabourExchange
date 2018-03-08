@@ -43,13 +43,16 @@ public class AdvertisementController {
     StudentService studentService;
 
     @GetMapping(value = "/new-advertisement")
-    public String makeNewAdvertisement(Model model){
+    public String makeNewAdvertisement(Model model, HttpSession session){
+        Student student = (Student)session.getAttribute("user");
+
         List <City> cities = cityService.getCities();
         List <Language> languages = languageService.getLanguages();
         List<Field> fields = fieldService.getFields();
         model.addAttribute("cities",cities);
         model.addAttribute("languages",languages);
         model.addAttribute("fields",fields);
+        model.addAttribute("user", student.getName());
         return "/advertisement/advertisement";
     }
 

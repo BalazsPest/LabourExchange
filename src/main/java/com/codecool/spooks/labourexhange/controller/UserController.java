@@ -51,6 +51,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("user");
+        System.out.println(session.getAttribute("user") + "in session");
         return "index";
     }
 

@@ -4,6 +4,7 @@ import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
 import com.codecool.spooks.labourexhange.model.adverts.Status;
 import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 import com.codecool.spooks.labourexhange.model.users.City;
+import com.codecool.spooks.labourexhange.model.users.Company;
 import com.codecool.spooks.labourexhange.model.users.Language;
 import com.codecool.spooks.labourexhange.service.*;
 import com.codecool.spooks.labourexhange.model.users.Student;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -44,7 +46,9 @@ public class CompanyController {
 
 
     @GetMapping(value = "/companyIndex")
-    public String getCompanyIndex(Model model) {
+    public String getCompanyIndex(Model model, HttpSession session) {
+        Company company = (Company) session.getAttribute("user");
+
         List<City> cities = cityService.getCities();
         //List<Language> languages = languageService.getLanguages();
         List<Advertisement> adverts =advertisementService.getAdvertsByStatus(Status.ACTIVE);
@@ -56,6 +60,7 @@ public class CompanyController {
         //model.addAttribute("languages", languages);
         model.addAttribute("fields", fields);
         model.addAttribute("students", students);
+        model.addAttribute("user", company.getName());
         return "/company/companyIndex";
 
     }
@@ -64,11 +69,13 @@ public class CompanyController {
     public String getFilteredAdverts(@ModelAttribute("city") String cityName,
                                     @ModelAttribute("field") String fieldName,
                                     @ModelAttribute("money") String moneyString,
-                                     Model model) {
+                                     Model model, HttpSession session) {
+
+        Company company = (Company) session.getAttribute("user");
+
         cityName = (cityName.equals("all") ? null : cityName);
 
         fieldName = (fieldName.equals("all")) ? null : fieldName;
-
 
         Integer money= null;
         if (!moneyString.equals("")) {
@@ -85,6 +92,8 @@ public class CompanyController {
         model.addAttribute("advertisement", adverts);
         model.addAttribute("cities", cities);
         model.addAttribute("fields", fields);
+        model.addAttribute("user", company.getName());
+
 
         return "/company/companyIndex";
     }

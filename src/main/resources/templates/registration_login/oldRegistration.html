@@ -18,22 +18,22 @@
 
                     <div class="form-group col-md-6">
                         <label th:for="name">Full name:</label>
-                        <input type="text" class="form-control" th:name="name" placeholder="Full name"/>
+                        <input type="text" class="form-control" required="true" th:name="name" placeholder="Full name"/>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label th:for="userName">Username:</label>
-                        <input type="text" class="form-control" th:name="userName" placeholder="Username"/>
+                        <input type="text" class="form-control" required= "true" th:name="userName" placeholder="Username"/>
                     </div>
 
                     <div class="form-group col-md-12">
                         <label th:for="email">Email</label>
-                        <input type="email" class="form-control" th:name="eMailAddress" placeholder="Email"/>
+                        <input type="email" class="form-control" required = "true" th:name="eMailAddress" placeholder="Email"/>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label th:for="password">Password</label>
-                        <input type="password" class="form-control" th:name="password" placeholder="Password"/>
+                        <input type="password" class="form-control" required = "true" th:name="password" placeholder="Password"/>
                     </div>
                 </fieldset>
 
