@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,11 +59,10 @@ public class AdvertisementController {
                                    @RequestParam("field")String fieldName,
                                    @RequestParam("city")String cityName,
                                    @RequestParam("weeklyCapacity")int weeklyCapacity,
-                                   @RequestParam("requestedMoney")int requestedMoney){
-            // int id = Integer.parseInt(req.session().attribute("userId"));
-        //Todo
-        Integer id = 1;
-        System.out.println(title + " " + description + " " + fieldName);
+                                   @RequestParam("requestedMoney")int requestedMoney,
+                                   HttpSession session){
+        Student studentInSession = (Student)session.getAttribute("user");
+        Integer id = studentInSession.getId();
         Field fieldOfAdv = fieldService.getFieldByName(fieldName);
         City cityOfAdv = cityService.getCityByName(cityName);
         Student studentOfAdv = studentService.getStudentById(id);

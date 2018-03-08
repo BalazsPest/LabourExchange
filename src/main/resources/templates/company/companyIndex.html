@@ -13,45 +13,69 @@
 
           <h1 class="my-4"><img src="/img/spooks.png"/></h1>
           <div class="list-group">
+            <form action="/filtered_advertisements" method="get">
 
 
               <div class="selectpicker">
-                  <label for="exampleSelect1">Type</label>
-                  <select class="form-control" id="exampleSelect1">
-                      <option>Student</option>
-                      <option>Advertisement</option>
-                  </select>
+                  <label for="exampleSelect1">Requested money</label>
+                  <!--<select class="form-control" id="exampleSelect1" name="money">
+                      <option>600-700</option>
+                      <option>701-800</option>
+                      <option>801-900</option>
+                      <option>901-1000</option>
+                    <option value="null" selected="selected">All</option>
+
+                  </select>-->
+                <input th:for="money" th:name="money" class="input100" type="text" name="money" value="" placeholder="Requested maximum money"/>
+                <!--<input  th:for="title" th:name="title" th:required="required" class="input100" type="text" name="name" placeholder="Enter Your Advertisement Title"/>-->
+
               </div>
 
 
-            <div class="selectpicker">
-              <label for="exampleSelect1">Sort by</label>
-              <select class="form-control" id="exampleSelect1">
-                <option>Top Rated</option>
-                <option>Most Recent</option>
-                <option> -- ! --</option>
-              </select>
-            </div>
+            <!--<div class="selectpicker">
+              <label for="exampleSelect1">Weekly capacity in hours</label>
+              <input th:for="hours" th:name="hours" class="input100" type="text" name="hours" value = "" placeholder="Capacity in hours"/>
+
+              --><!--</select>-->
+            <!--</div>-->
+
 
             <div class="selectpicker">
-              <label for="exampleSelect1">Location:</label>
-              <select th:object="${cities}" class="form-control" id="exampleSelect2">
+              <label for="exampleSelect1">Location</label>
+              <select th:object="${cities}" class="form-control" id="exampleSelect2" name ="city">
+                <option th:each="city : ${cities}"
+                        th:value="${city.name}"
+                        th:text="${city.name}"></option>
+                <option value="all" selected="selected">All</option>
+
+              </select>
+              <!--<div class="selectpicker" th:object ="${cities}">
+              <label th:for="exampleSelect1">Location</label>
+              <select class="form-control" id="exampleSelect2" name ="city">
                 <option th:each="cit : ${cities}"
                         th:value="${cit.name}"
                         th:text="${cit.name}"></option>
-              </select>
+              </select>-->
+
             </div>
 
             <div class="selectpicker">
               <label for="exampleSelect1">Field:</label>
-              <select class="form-control" th:object="${fields}" id="exampleSelect1">
+              <select class="form-control" th:object="${fields}" id="exampleSelect1" name="field">
                 <option th:each="field : ${fields}"
                         th:value="${field.name}"
                         th:text="${field.name}"></option>
+                <option value="all" selected="selected">All</option>
               </select>
             </div>
             <p></p>
-            <button type="button" class="btn btn-info">Search</button>
+
+            <!--<button type="submit" class="btn btn-info">Search</button>-->
+              <input type="submit" class="btn btn-info center-block" value="Submit"/><p></p>
+
+            </form>
+
+            <!--<button type="button" class="btn btn-info">Search</button>-->
             <a data-toggle="modal" href="#studentModal">Students List:</a>
 
           </div>

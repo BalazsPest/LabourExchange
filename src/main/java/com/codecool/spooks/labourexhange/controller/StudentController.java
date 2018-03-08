@@ -1,6 +1,7 @@
 package com.codecool.spooks.labourexhange.controller;
 
 import com.codecool.spooks.labourexhange.model.adverts.Advertisement;
+import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.service.AdvertisementService;
 import com.codecool.spooks.labourexhange.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,9 +20,11 @@ public class StudentController {
     AdvertisementService advertisementService;
 
     @GetMapping("/studentIndex")
-    public String getStudentIndex(Model model) {
+    public String getStudentIndex(Model model, HttpSession session) {
+
         //Integer id = Integer.parseInt(req.session().attribute("userId"));
-        Integer id = 1;
+        Student student = (Student)session.getAttribute("user");
+        int id= student.getId();
         List<Advertisement> adverts =advertisementService.getAdvertsFromStudent(id);
         model.addAttribute("advertisement", adverts);
         return "/student/studentIndex";

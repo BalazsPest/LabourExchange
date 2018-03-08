@@ -64,7 +64,7 @@ public class UserController {
         } else {
             if (userService.getUserRoleToLogin(email, password) == UserRole.STUDENT) {
                 session.setAttribute("user",userService.getLoginUser(Student.class, email));
-                return "/student/studentIndex";
+                return "redirect:/studentIndex";
             } else if (userService.getUserRoleToLogin(email, password) == UserRole.COMPANY) {
                 session.setAttribute("user",userService.getLoginUser(Company.class, email));
                 System.out.println(session.getAttribute("user").toString());

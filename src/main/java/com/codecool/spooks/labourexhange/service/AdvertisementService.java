@@ -10,6 +10,7 @@ import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.repository.AdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Date;
 
@@ -35,6 +36,11 @@ public class AdvertisementService {
     public List<Advertisement> getAdvertsFromStudent(Integer id) {
         System.out.println("belép");
         return advertisementRepository.findByStudentId(id);
+    }
+
+    public List<Advertisement> getAdvertsByCityFieldAndLanguage(String cityName, String fieldName, Integer money) {
+
+        return advertisementRepository.findByFiltered(cityName, fieldName, money);
     }
 
 }
