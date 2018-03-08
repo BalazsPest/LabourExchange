@@ -36,6 +36,7 @@ public class Student extends User {
 
     public Student(String name, String userName, String eMailAddress, String password) {
         super(name, userName, eMailAddress, password, UserRole.STUDENT);
+        this.status = UserStatus.ACTIVE;
     }
 
 
@@ -112,7 +113,7 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Student{" + super.toString() +
                 "gender=" + gender +
                 ", birthdate='" + birthdate + '\'' +
                 ", image='" + image + '\'' +

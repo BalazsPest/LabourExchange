@@ -27,28 +27,10 @@ public class StudentService {
         studentRepository.save(newStudent);
     }
 
-    public void addStudent(String userName, String name, String eMailAddress, String password) {
-        Student newStudent = new Student(name, eMailAddress, userName, password);
-        studentRepository.save(newStudent);
-    }
-
     public void saveStudent(Student student) {
         studentRepository.save(student);
     }
 
-    public boolean checkStudent(String userName, String eMailAddress) {
-        /*if (studentRepository.findByUserNameAndEMailAddress(userName, eMailAddress)!= null) {
-            return true;
-        }
-        return false;*/
-        if (studentRepository.findByUserName(userName) != null || studentRepository.findByEMailAddress(eMailAddress) != null){
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
 
 
 }
