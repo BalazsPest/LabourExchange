@@ -49,5 +49,9 @@ public class StudentService {
        return studentRepository.findByUserName(name);
     }
 
+    public List<Student> getStudents() {
+        return studentRepository.findAll();
+    }
+
 }
 
