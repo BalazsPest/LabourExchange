@@ -64,10 +64,11 @@ public class UserController {
         } else {
             if (userService.getUserRoleToLogin(email, password) == UserRole.STUDENT) {
                 session.setAttribute("user",userService.getLoginUser(Student.class, email));
+                model.addAttribute("loggedInUser",((Student)session.getAttribute("user")).getUserName());
                 return "/student/studentIndex";
             } else if (userService.getUserRoleToLogin(email, password) == UserRole.COMPANY) {
                 session.setAttribute("user",userService.getLoginUser(Company.class, email));
-                System.out.println(session.getAttribute("user").toString());
+                model.addAttribute("loggedInUser",((Company)session.getAttribute("user")).getUserName());
                 return "redirect:/companyIndex";
             }
             return "index";
