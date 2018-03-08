@@ -49,7 +49,7 @@ public class Company extends User {
 
     @Override
     public String toString() {
-        return "Company{" +
+        return "Company{" + super.toString() +
                 "description='" + description + '\'' +
                 ", link='" + link + '\'' +
                 ", verified=" + verified +
