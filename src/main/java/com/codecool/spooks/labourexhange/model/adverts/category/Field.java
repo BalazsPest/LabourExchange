@@ -61,7 +61,7 @@ public class Field {
 
     @Override
     public String toString() {
-        return "Field: "+name;
+        return name;
     }
 
     public void addTagForField(Tag tagForField) {

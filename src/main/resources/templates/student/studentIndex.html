@@ -26,9 +26,7 @@
                         </div>
                     </div>
                 </div>
-
                 <p></p>
-
             </div>
         </div>
         <!-- /.col-lg-3 -->
@@ -66,9 +64,6 @@
             </div>
 
             <div class="row">
-
-
-
                 <div class="row">
                     <div th:each="adv,iterStat : ${advertisement}" class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
@@ -80,19 +75,11 @@
                                 <h6 th:text="${adv.student.name}" ></h6>
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="card-link">Edit</a>
+                                <a href="/edit-advertisement" class="card-link">Edit</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
             </div>
             <!-- /.row -->
 

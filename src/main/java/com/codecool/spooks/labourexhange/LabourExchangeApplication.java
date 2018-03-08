@@ -5,9 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class LabourExchangeApplication {
-    public static void main(String[] args) {
+        public static void main(String[] args) {
             SpringApplication.run(LabourExchangeApplication.class, args);
         }
-
 
 }

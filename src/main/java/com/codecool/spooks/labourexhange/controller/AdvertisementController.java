@@ -49,7 +49,7 @@ public class AdvertisementController {
         model.addAttribute("cities",cities);
         model.addAttribute("languages",languages);
         model.addAttribute("fields",fields);
-        return "advertisement";
+        return "/advertisement/advertisement";
     }
 
     @PostMapping(value = "/make-advertisement")
@@ -62,6 +62,7 @@ public class AdvertisementController {
             // int id = Integer.parseInt(req.session().attribute("userId"));
         //Todo
         Integer id = 1;
+        System.out.println(title + " " + description + " " + fieldName);
         Field fieldOfAdv = fieldService.getFieldByName(fieldName);
         City cityOfAdv = cityService.getCityByName(cityName);
         Student studentOfAdv = studentService.getStudentById(id);
