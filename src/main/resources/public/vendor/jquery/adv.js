@@ -1,0 +1,1 @@
+$("#fullAdvModal").modal()

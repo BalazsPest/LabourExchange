@@ -5,7 +5,7 @@
 
   <body>
 
-  <div th:replace="companyNavbar :: copy"></div>
+  <div th:replace="/company/companyNavbar :: copy"></div>
 
     <div class="container">
       <div class="row">
@@ -52,6 +52,8 @@
             </div>
             <p></p>
             <button type="button" class="btn btn-info">Search</button>
+            <a data-toggle="modal" href="#studentModal">Students List:</a>
+
           </div>
 
 
@@ -101,7 +103,8 @@
                   <a href="/studentProfile/id"><h6 th:text="${adv.student.userName}" ></h6></a>
                 </div>
                 <div class="card-footer">
-                    <p class="card-link"> Viewers: </p>
+                    <!--<p class="card-link"> Viewers: </p>-->
+                    <a data-toggle="modal" href="#myModal">Read more:</a>
                 </div>
               </div>
             </div>
@@ -124,6 +127,91 @@
 
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+  <!-- Adv Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+
+      <!-- Modal content-->
+      <div th:each="adv,iterStat : ${advertisement}" class="modal-content">
+        <div class="modal-header">
+          <h4 align="center">Advertisement details</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+              <h6>Title: </h6>
+              <label><span class="glyphicon glyphicon-user" th:align="center" th:text="${adv.titleOfAdvert}"></span></label>
+            </div>
+
+            <div class="form-group">
+              <h6>Description: </h6>
+              <label th:text="${adv.descriptionOfAdvert}"><span class="glyphicon glyphicon-eye-open"></span></label>
+            </div>
+
+          <div class="form-group">
+            <h6>Field: </h6>
+            <label th:text="${adv.fieldOfWork}"><span class="glyphicon glyphicon-eye-open"></span></label>
+          </div>
+
+
+          <div class="form-group">
+            <h6>Date: </h6>
+            <label th:text="${adv.creationTime}"><span class="glyphicon glyphicon-eye-open"></span></label>
+          </div>
+
+
+          <div class="form-group">
+            <h6>Requested money: </h6>
+            <label th:text="${adv.requestedMoneyPerHour}"><span class="glyphicon glyphicon-eye-open"></span></label>
+          </div>
+
+
+          <div class="form-group">
+            <h6>Location: </h6>
+            <label th:text="${adv.cityOfWorking.name}"><span class="glyphicon glyphicon-eye-open"></span></label>
+          </div>
+
+
+          <div class="form-group">
+            <h6>Student: </h6>
+            <label th:text="${adv.student.name}"><span class="glyphicon glyphicon-eye-open"></span></label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p>tags: #student #advertisement </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal -->
+
+
+  <!-- student Modal -->
+  <div class="modal fade" id="studentModal" role="dialog">
+    <div class="modal-dialog">
+
+
+      <!-- Modal content-->
+      <div th:each="stud,iterStat : ${students}" class="modal-content">
+        <div class="modal-header">
+          <h4 align="center">Students List:</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label th:text="${stud.userName}"><span class="glyphicon glyphicon-eye-open"></span></label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal -->
 
 
   </body>

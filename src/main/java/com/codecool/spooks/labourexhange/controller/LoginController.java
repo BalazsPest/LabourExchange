@@ -20,7 +20,7 @@ public class LoginController {
     public String getLoginPage(Model model) {
         model.addAttribute("login", true);
         //params.put("studentId", req.session().attribute("userId"));
-        return "login";
+        return "/registration_login/login";
     }
 
     //get("/logout", controller::logout, new ThymeleafTemplateEngine());

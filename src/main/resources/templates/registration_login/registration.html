@@ -28,69 +28,79 @@
     <link rel="stylesheet" type="text/css" href="/ContactFrom_v5/css/main.css"/>
     <!--===============================================================================================-->
 </head>
+
 <body>
 <div th:replace="emptyNavbar :: copy"></div>
 
 <div class="container-contact100">
     <div class="wrap-contact100">
-        <form class="contact100-form validate-form" action="/make-advertisement" method="post">
+        <form action="/registrateuser" method="post">
 				<span class="contact100-form-title">
 					Registration
 				</span>
-
-
             <!-- Enter your Full name -->
             <div class="wrap-input100 validate-input bg1" data-validate=" Full Name">
-                <span th:for="name" class="label-input100">Full name *</span>
-                <input th:name="name" th:id="name" th:required="required" class="input100" type="text" placeholder="Full name"/>
+                <span class="label-input100">Full name *</span>
+                <label th:for="name"></label>
+                <input th:name="name" th:required="required" class="input100" type="text" placeholder="Full name"/>
             </div>
             <!-- end full name -->
 
-            <!-- Enter your Full name -->
+
+            <!-- Enter your Username -->
             <div class="wrap-input100 validate-input bg1" data-validate="Username">
-                <span th:for="username" class="label-input100">Username *</span>
-                <input th:name="username" th:id="username" th:required="required" class="input100" type="text" placeholder="Username"/>
+                <span class="label-input100">Username *</span>
+                <label th:for="userName"></label>
+                <input th:name="username" th:required="required" class="input100" type="text" placeholder="Username"/>
             </div>
-            <!-- end full name -->
+            <!-- end UserName -->
+
 
 
             <!-- Enter your email -->
             <div class="wrap-input100 validate-input bg1" data-validate="Email">
-                <span th:for="email" class="label-input100">Email *</span>
+                <span class="label-input100">Email *</span>
+                <label th:for="email"></label>
                 <input   th:name="eMailAddress" th:required="required" class="input100" type="email" placeholder="Email"/>
             </div>
             <!-- end email -->
 
+
+            <!-- password -->
             <div class="wrap-input100 validate-input bg1" data-validate="Email">
-                <span th:for="password" class="label-input100">Password *</span>
+                <span class="label-input100">Password *</span>
+                <label th:for="password"></label>
                 <input   th:name="password" th:required="required" class="input100" type="password" placeholder="Password"/>
             </div>
+            <!-- end password -->
 
 
 
-            <!-- choose your type
+
+            <!-- choose your type -->
             <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Select your gender">
                 <span class="label-input100">Type *</span>
                 <div>
-                    <select th:for="userRole" th:id="userRole" class="js-select2" name="service">
-                        <option> Company </option>
-                        <option> Student </option>
+                 <label for="found_site"></label>
+                    <select th:for="userRole" th:id="userRole"  th:name="userRole" id="found_site" class="js-select2">
+                        <option>Company</option>
+                        <option>Student</option>
                     </select>
                     <div class="dropDownSelect2"></div>
                 </div>
             </div>
-            end choose your type-->
+            <!-- end choose your type-->
 
             <div class="container-contact100-form-btn">
-                <input type="submit" value="Submit" class="contact100-form-btn">
-                </input>
+                <button type="submit" value="Submit" class="contact100-form-btn">
+                </button>
             </div>
         </form>
     </div>
+
 </div>
 
 <div class="form-group">
-
     <div class="col-md-12">
         <div class="checkbox">
             <label>
@@ -99,7 +109,6 @@
             </label>
         </div>
     </div>
-
 </div>
 
 <div class="form-group">
@@ -108,8 +117,9 @@
         <!--<a href="/login">Already have an account?</a>-->
     </div>
 </div>
-</form>
-</div>
+
+
+
 
 
 <!-- Checkbox Modal -->
@@ -196,11 +206,6 @@
 </div>
 
 
-<div th:replace="footer :: copy"></div>
-
-</body>
-</html>
-
 <!--===============================================================================================-->
 <script src="/ContactFrom_v5/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -273,5 +278,10 @@
 
     gtag('config', 'UA-23581568-13');
 </script>
+
+
+<div th:replace="footer :: copy"></div>
+</body>
+</html>
 
 
