@@ -75,7 +75,7 @@ public class AdvertisementController {
             try {
                 Advertisement newAdvert = advertisementService.addNewAdvert(studentOfAdv, fieldOfAdv,
                                           title, description, date, weeklyCapacity, requestedMoney, cityOfAdv, tags);
-                return "redirect:/student/studentIndex";
+                return "redirect:/studentIndex";
             } catch (NullPointerException e) {
                 System.out.println("cant make advert");
                 return "redirect:/404";
