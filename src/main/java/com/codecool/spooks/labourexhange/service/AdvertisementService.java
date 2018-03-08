@@ -6,11 +6,11 @@ import com.codecool.spooks.labourexhange.model.adverts.category.Field;
 
 import com.codecool.spooks.labourexhange.model.adverts.category.Tag;
 import com.codecool.spooks.labourexhange.model.users.City;
-import com.codecool.spooks.labourexhange.model.users.Language;
 import com.codecool.spooks.labourexhange.model.users.Student;
 import com.codecool.spooks.labourexhange.repository.AdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Date;
 
@@ -38,9 +38,9 @@ public class AdvertisementService {
         return advertisementRepository.findByStudentId(id);
     }
 
-    public List<Advertisement> getAdvertsByCityFieldAndLanguage(String cityName, String fieldName, Language language) {//String language){ //, String languageName) {
-                                                                //if (cityName.equals("all"))
-        return advertisementRepository.findBycityOfWorkingNameAndFieldOfWorkName(cityName, fieldName, language);
+    public List<Advertisement> getAdvertsByCityFieldAndLanguage(String cityName, String fieldName, Integer money) {
+
+        return advertisementRepository.findByFiltered(cityName, fieldName, money);
     }
 
 }

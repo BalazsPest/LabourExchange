@@ -51,27 +51,32 @@ public class CompanyController {
     @GetMapping(value = "/filtered_advertisements")
     public String getFilteredAdverts(@ModelAttribute("city") String cityName,
                                     @ModelAttribute("field") String fieldName,
-                                    @ModelAttribute("language") String languageName,
-                                    @ModelAttribute("money") String moneyString, Model model) {
-        System.out.println(cityName);
-        System.out.println(fieldName);
-        fieldName = null;
-        Language language = null;
-        if(!languageName.equals("null")) {
-            language = languageService.getLanguageByName(languageName);
-        }
-        System.out.println(moneyString);
-        System.out.println(languageName);
-        List<Advertisement> adverts = advertisementService.getAdvertsByCityFieldAndLanguage(cityName, fieldName, language);
+                                    @ModelAttribute("money") String moneyString,
+                                     Model model) {
+        cityName = (cityName.equals("all") ? null : cityName);
 
-        /*if (!cityName.equals("null") && !fieldName.equals("null") &&
-                !languageName.equals("null") && !moneyString.equals("null") ) {
-            System.out.println("NOT NULL");
-            //List<Advertisement> adverts = advertisementService.getAdvertsByCityFieldAndLanguage(cityName, fieldName);
+        fieldName = (fieldName.equals("all")) ? null : fieldName;
+
+
+        Integer money= null;
+        if (!moneyString.equals("")) {
+             money = Integer.parseInt(moneyString);
+        }
+
+        /*int capacity = null;
+        if (!capacityString.equals("")) {
+            capacity = (int)Integer.parseInt(capacityString);
         }*/
+        List<Advertisement> adverts = advertisementService.getAdvertsByCityFieldAndLanguage(cityName, fieldName, money);
+        List<City> cities = cityService.getCities();
+        List<Field> fields = fieldService.getFields();
         model.addAttribute("advertisement", adverts);
+        model.addAttribute("cities", cities);
+        model.addAttribute("fields", fields);
+
         return "companyIndex";
     }
+
 
     @GetMapping(value = "/nextCompanyRegistration")
     public String getCompanyPackages(Model model){

@@ -18,26 +18,26 @@
 
               <div class="selectpicker">
                   <label for="exampleSelect1">Requested money</label>
-                  <select class="form-control" id="exampleSelect1" name="money">
+                  <!--<select class="form-control" id="exampleSelect1" name="money">
                       <option>600-700</option>
                       <option>701-800</option>
                       <option>801-900</option>
                       <option>901-1000</option>
                     <option value="null" selected="selected">All</option>
 
-                  </select>
+                  </select>-->
+                <input th:for="money" th:name="money" class="input100" type="text" name="money" value="" placeholder="Requested maximum money"/>
+                <!--<input  th:for="title" th:name="title" th:required="required" class="input100" type="text" name="name" placeholder="Enter Your Advertisement Title"/>-->
+
               </div>
 
 
-            <div class="selectpicker">
-              <label for="exampleSelect1">Language</label>
-              <select th:object="${languages}" class="form-control" id="exampleSelect2" name="language">
-                <option th:each="lang : ${languages}"
-                        th:value="${lang.name}"
-                        th:text="${lang.name}"></option>
-                <option value="null" selected="selected">All</option>
-              </select>
-            </div>
+            <!--<div class="selectpicker">
+              <label for="exampleSelect1">Weekly capacity in hours</label>
+              <input th:for="hours" th:name="hours" class="input100" type="text" name="hours" value = "" placeholder="Capacity in hours"/>
+
+              --><!--</select>-->
+            <!--</div>-->
 
 
             <div class="selectpicker">
@@ -46,7 +46,7 @@
                 <option th:each="city : ${cities}"
                         th:value="${city.name}"
                         th:text="${city.name}"></option>
-                <option value="null" selected="selected">All</option>
+                <option value="all" selected="selected">All</option>
 
               </select>
               <!--<div class="selectpicker" th:object ="${cities}">
@@ -65,7 +65,7 @@
                 <option th:each="field : ${fields}"
                         th:value="${field.name}"
                         th:text="${field.name}"></option>
-                <option value="null" selected="selected">All</option>
+                <option value="all" selected="selected">All</option>
               </select>
             </div>
             <p></p>

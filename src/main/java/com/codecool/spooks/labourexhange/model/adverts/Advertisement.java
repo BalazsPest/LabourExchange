@@ -43,6 +43,7 @@ public class Advertisement {
     @Temporal(TemporalType.DATE)
     private Date creationTime;
 
+
     private int weeklyCapacity;
 
     @Column(name = "money_per_hour")
